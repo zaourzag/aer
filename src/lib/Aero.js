@@ -16,7 +16,7 @@ module.exports = class Aero extends Client {
 				verbose: !production
 			},
 			createPiecesFolders: false,
-			prefix: process.env.NODE_ENV === 'production' ? 'a!' : 'ad!',
+			prefix: production ? 'a!' : 'ad!',
 			providers: {
 				default: 'mongodb',
 				mongodb: {
