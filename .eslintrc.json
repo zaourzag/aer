@@ -1,0 +1,6 @@
+{
+	"extends": "aero",
+	"rules": {
+		"no-process-env": "off"
+	}
+}

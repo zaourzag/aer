@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "name": "aero",
+  "version": "0.0.1",
+  "description": "Aero is an intuitive Discord bot perfect for your server.",
+  "main": "src/index",
+  "repository": "https://github.com/aerodiscord/aero",
+  "author": "Aero Team",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "dev": "node .",
+    "start": "NODE_ENV=production node ."
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "discord.js": "discordjs/discord.js",
+    "eslint-config-aero": "aerodiscord/eslint-config-aero",
+    "klasa": "dirigeants/klasa",
+    "mongodb": "^3.2.7"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
