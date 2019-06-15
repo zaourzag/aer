@@ -15,7 +15,7 @@
     "axios": "^0.19.0",
     "discord.js": "discordjs/discord.js",
     "eslint-config-aero": "aerodiscord/eslint-config-aero",
-    "klasa": "dirigeants/klasa",
+    "klasa": "dirigeants/klasa#v1.0.0-alpha",
     "mongodb": "^3.2.7"
   },
   "devDependencies": {
