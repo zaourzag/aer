@@ -1,7 +1,7 @@
 const { host, port } = require('./mongodb');
 const { prefix, devPrefix, production } = require('./aero');
 
-const { NODE_ENV, MONGO_USER: user, MONGO_PASS: pass } = process.env;
+const { MONGO_USER: user, MONGO_PASS: pass } = process.env;
 
 module.exports = {
 	commandEditing: true,
@@ -13,7 +13,7 @@ module.exports = {
 	},
 	createPiecesFolders: false,
 	disabledCorePieces: ['providers'],
-	owners: config.owners,
+	owners: ['102102717165506560', '292571834770128906', '254892085000405004', '207500411907735552'],
 	prefix: production ? prefix : devPrefix,
 	providers: {
 		default: 'mongodb',
@@ -23,4 +23,4 @@ module.exports = {
 		}
 	},
 	typing: true
-}
+};
