@@ -1,4 +1,4 @@
+require('dotenv').config();
 const Aero = require('./lib/Aero');
-const config = require('../config');
 
-new Aero().login(config.token);
+new Aero().login();
