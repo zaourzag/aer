@@ -18,7 +18,7 @@ module.exports = class Aero extends Client {
 	}
 
 	login () {
-		const token = process.env[`DISCORD_TOKEN${aero.production ? '' : '_DEV'}`;
+		const token = process.env[`DISCORD_TOKEN${aero.production ? '' : '_DEV'}`];
 		super.login(token); 
 	}
 

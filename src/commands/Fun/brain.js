@@ -1,8 +1,6 @@
 const { Command } = require('klasa');
 const superagent = require('superagent');
 
-const { imgflip } = require('../../../config');
-
 module.exports = class extends Command {
 
 	constructor(...args) {
@@ -18,7 +16,7 @@ module.exports = class extends Command {
 
 	async run(msg, [...sentences]) {
 		sentences = sentences.slice(0, 4);
-		let url = `https://api.imgflip.com/caption_image?username=${imgflip.username}&password=${imgflip.password}&template_id=${BRAIN_MEME_ID}`;
+		let url = `https://api.imgflip.com/caption_image?username=${process.env.IMGFLIP_USER}&password=${process.env.IMGFLIP_PASS}&template_id=${BRAIN_MEME_ID}`;
 		for (let i = 0; i < sentences.length; i++) {
 			url += `&boxes[${i}][text]=${encodeURIComponent(sentences[i])}`;
 		}

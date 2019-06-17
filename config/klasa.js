@@ -1,5 +1,5 @@
 const { host, port } = require('./mongodb');
-const { prefix, devPrefix, production } = require('./aero');
+const { prefix, devPrefix, production, owners } = require('./aero');
 
 const { NODE_ENV, MONGO_USER: user, MONGO_PASS: pass } = process.env;
 
@@ -13,7 +13,7 @@ module.exports = {
 	},
 	createPiecesFolders: false,
 	disabledCorePieces: ['providers'],
-	owners: config.owners,
+	owners,
 	prefix: production ? prefix : devPrefix,
 	providers: {
 		default: 'mongodb',
