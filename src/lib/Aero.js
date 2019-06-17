@@ -1,6 +1,6 @@
 const { Client } = require('klasa');
 
-const { clientOptions } = require('../../config/index');
+const { klasa, discord } = require('../../config');
 const Permissions = require('./Permissions');
 require('./extensions/Message');
 
@@ -8,7 +8,7 @@ require('./extensions/Message');
 module.exports = class Aero extends Client {
 
 	constructor() {
-		super(clientOptions);
+		super(...klasa, ...discord);
 
 		this.permissions = new Permissions(this);
 	}
