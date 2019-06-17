@@ -3,4 +3,4 @@ module.exports = {
 	prefix: 'a!',
 	devPrefix: 'ad!',
 	production: process.env.NODE_ENV === 'production'
-}
+};
