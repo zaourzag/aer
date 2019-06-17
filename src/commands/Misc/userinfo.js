@@ -8,7 +8,6 @@ module.exports = class extends Command {
 			aliases: ['user', 'ui'],
 			description: 'Shows information about the mentioned user.',
 			requiredPermissions: ['EMBED_LINKS'],
-			runIn: ['text'],
 			usage: '[user:username]'
 		});
 
