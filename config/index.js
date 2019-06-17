@@ -1,5 +1,5 @@
-const klasa = require('./klasa');
-const discord = require('./discord');
+const { readdirSync } = require('fs');
+const { join } = require('path');
 
 for (const file of readdirSync(join(process.cwd(), 'config'))) {
 	if (!(file === 'index.js')) {

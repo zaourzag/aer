@@ -14,7 +14,7 @@ module.exports = class extends Command {
 		const { body } = await superagent
 			.get('http://icanhazdadjoke.com')
 			.set('Accept', 'application/json')
-			.catch(() => { throw 'The API appears to be down. Try again later!' });
+			.catch(() => { throw 'The API appears to be down. Try again later!'; });
 		return msg.sendMessage(`Random pun: **${body.joke}**`);
 	}
 
