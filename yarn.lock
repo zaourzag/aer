@@ -100,6 +100,11 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
+breadtags@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/breadtags/-/breadtags-2.1.0.tgz#3317aaa24c5b68c355d46463088f8b2393ff498d"
+  integrity sha512-xDdmV5fxQbhDIrq+PLIymUGJbnnQU6bRkbkX7nwj6hS6T0ldT/X/7TiIhaV1+pG3xrN0FQNYexWHie226RvLhw==
+
 bson@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.1.tgz#4330f5e99104c4e751e7351859e2d408279f2f13"
