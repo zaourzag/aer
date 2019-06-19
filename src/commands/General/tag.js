@@ -2,6 +2,7 @@
 // derived from https://github.com/KlasaCommunityPlugins/tags
 const { Command, util } = require('klasa');
 const { Util } = require('discord.js');
+const { trimString } = require('../../lib/util/util');
 
 module.exports = class extends Command {
 
@@ -32,6 +33,17 @@ module.exports = class extends Command {
 		const emote = msg.guild.settings.get('tags').find(([name]) => name === tag.toLowerCase());
 		if (!emote) throw `The tag \`${tag}\` doesn't exist.`;
 		return msg.send(util.codeBlock('', emote[1]));
+	}
+
+	list(msg) {
+		if (!msg.guild.settings.get('tags').length) throw 'no tags, rip';
+		const { tags } = msg.guild.settings;
+		const output = [`**${msg.guild.name} Tags** (Total ${tags.length})`, '```asciidoc'];
+		for (const [index, [tag, value]] of tags.entries()) {
+			output.push(`${index + 1}. ${tag} :: ${trimString(value, 30)}`);
+		}
+		output.push('```');
+		return msg.send(output.join('\n'));
 	}
 
 };
