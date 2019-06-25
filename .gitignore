@@ -2,6 +2,6 @@ node_modules
 .vscode
 config.json
 *.log
-.env
 .idea
 yarn.lock
+.env*

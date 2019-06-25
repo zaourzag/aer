@@ -18,6 +18,7 @@
     "start": "NODE_ENV=production node ."
   },
   "dependencies": {
+    "breadtags": "^2.1.0",
     "discord-md-tags": "^0.0.6",
     "discord.js": "discordjs/discord.js",
     "dotenv": "^8.0.0",
