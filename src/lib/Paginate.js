@@ -20,8 +20,8 @@ module.exports = class Paginator {
 	}
 
 	// pads multiple digit numbers with leading whitespaces so they're in a line
-	static padLeft(number, n = 2) {
-		return new Array(n).join(' ').slice(n * -1) + number;
+	static padLeft(number, num = 2) {
+		return new Array(num).join(' ').slice(num * -1) + number;
 	}
 
 };
