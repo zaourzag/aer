@@ -1,10 +1,10 @@
 {
   "type": "module",
   "name": "aero",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Aero is an intuitive Discord bot perfect for your server.",
   "main": "src/index",
-  "repository": "https://github.com/aerodiscord/aero",
+  "repository": "git+https://git.farfrom.earth/aero/aero.git",
   "author": "The Aero Team <team@aero.bot> (https://aero.bot)",
   "contributors": [
     "Ravy <ravy@aero.bot> (https://ravy.xyz)",
@@ -34,6 +34,6 @@
   },
   "devDependencies": {
     "eslint": "^5.16.0",
-    "eslint-config-aero": "aerodiscord/eslint-config-aero"
+    "eslint-config-aero": "git+https://git.farfrom.earth/aero/forks/eslint-config-aero.git"
   }
 }
