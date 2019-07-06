@@ -20,17 +20,18 @@
   "dependencies": {
     "breadtags": "^2.1.0",
     "canvas": "^2.5.0",
-    "canvas-constructor": "^3.0.3",
+    "canvas-constructor": "^3.1.0",
     "discord-md-tags": "^0.0.6",
-    "discord.js": "discordjs/discord.js",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.0.0",
     "fast-html-parser": "^1.0.1",
     "html-entities": "^1.2.1",
-    "klasa": "dirigeants/klasa#v1.0.0-alpha",
+    "klasa": "github:dirigeants/klasa#v1.0.0-alpha",
     "klasa-member-gateway": "github:dirigeants/klasa-member-gateway",
     "mongodb": "^3.2.7",
-    "superagent": "^5.0.9",
-    "tinycolor2": "^1.4.1"
+    "superagent": "^5.1.0",
+    "tinycolor2": "^1.4.1",
+    "ws": "^7.0.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

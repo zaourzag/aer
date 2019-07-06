@@ -1,6 +1,6 @@
 require('dotenv').config({
-	path: process.env.NODE_ENV === 'production' ? '.env' : '.env.dev'
+	path: process.env.NODE_ENV === 'production' ? '.env' : 'dev.env'
 });
-const Aero = require('./lib/Aero');
+const Manager = require('../lib/Manager');
 
-new Aero().login();
+new Manager().init();
