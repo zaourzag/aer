@@ -5,3 +5,4 @@ config.json
 .idea
 yarn.lock
 .env*
+*.env
