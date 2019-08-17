@@ -16,6 +16,19 @@ build:
     - docker build --pull -t $IMAGE .
     - docker push $IMAGE
 
+stage:
+  stage: stage
+  image: lwolf/helm-kubectl-docker:v152_213
+  before_script:
+    - mkdir -p /etc/deploy
+    - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
+    - kubectl config use-context default
+  script:
+    - kubectl -n aero-staging patch statefulset aero-staging -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"aero-staging\",\"image\":\"${IMAGE}\"}]}}}}"
+  only:
+    - develop
+
+
 deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v152_213
