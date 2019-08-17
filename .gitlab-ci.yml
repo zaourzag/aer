@@ -25,6 +25,7 @@ deploy:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl config use-context default
   script:
+    - echo $PATCH
     - kubectl -n aero patch statefulset aero --patch $PATCH
   only:
     - master
