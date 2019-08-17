@@ -6,7 +6,7 @@ stages:
 - build
 
 variables:
-  TEST_IMAGE: registry.farfrom.earth:5555/aero/aero:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
+  IMAGE: registry.farfrom.earth:5555/aero/aero:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.farfrom.earth:5555
@@ -14,5 +14,10 @@ before_script:
 build:
   stage: build
   script:
-    - docker build --pull -t $TEST_IMAGE .
-    - docker push $TEST_IMAGE
+    - docker build --pull -t $IMAGE .
+    - docker push $IMAGE
+
+deploy:
+  stage: deploy
+  script:
+    - kubectl -n aero patch statefulset aero --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value": "$IMAGE"}]'
