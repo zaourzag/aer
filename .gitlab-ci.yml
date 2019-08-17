@@ -22,7 +22,6 @@ stage:
   image: lwolf/helm-kubectl-docker:v152_213
   before_script:
     - mkdir -p /etc/deploy
-    - echo ${kubeconfig}
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl config use-context default
   script:
