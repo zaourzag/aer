@@ -6,7 +6,7 @@ stages:
 - build
 
 variables:
-  TEST_IMAGE: registry.farfrom.earth:5555/aero/aero:$CI_COMMIT_REF_NAME-CI_COMMIT_SHA
+  TEST_IMAGE: registry.farfrom.earth:5555/aero/aero:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHA
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.farfrom.earth:5555
