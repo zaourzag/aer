@@ -24,6 +24,6 @@ deploy:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl config use-context default
   script:
-    - kubectl -n aero patch statefulset aero --patch $'spec:\n template:\n   spec:\n     containers:\n     - name:aero\n       image:$IMAGE'
+    - kubectl -n aero patch statefulset aero --patch $'spec:\n template:\n   spec:\n     containers:\n     - name: aero\n       image: $IMAGE'
   only:
     - master
