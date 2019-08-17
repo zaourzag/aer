@@ -24,6 +24,6 @@ deploy:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl config use-context default
   script:
-    - kubectl -n aero patch statefulset aero --type='json' -p='[{"op":"replace", "path":"/spec/template/spec/containers/0/image", "value":"$IMAGE"}]'
+    - kubectl -n aero patch statefulset aero --type='json' -p='[{"op":"replace", "path":"/spec/template/spec/containers/0/image", "value":"${IMAGE}"}]'
   only:
     - master
