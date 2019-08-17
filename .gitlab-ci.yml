@@ -7,11 +7,11 @@ stages:
 - release
 
 variables:
-  TEST_IMAGE: git.farfrom.earth:5555/aero/aero:$CI_COMMIT_REF_NAME
-  RELEASE_IMAGE: git.farfrom.earth:5555/aero/aero:latest
+  TEST_IMAGE: registry.farfrom.earth:5555/aero/aero:$CI_COMMIT_REF_NAME
+  RELEASE_IMAGE: registry.farfrom.earth:5555/aero/aero:latest
 
 before_script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.farfrom.earth:5555
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.farfrom.earth:5555
 
 build:
   stage: build
