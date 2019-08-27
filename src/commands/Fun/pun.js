@@ -5,8 +5,9 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Sends a random pun.',
-			extendedHelp: 'Powered by http://icanhazdadjoke.com'
+			aliases: ['dadjoke'],
+			description: language => language.get('COMMAND_PUN_DESCRIPTION'),
+			extendedHelp: language => language.get('COMMAND_PUN_EXTENDEDHELP')
 		});
 	}
 
@@ -14,8 +15,8 @@ module.exports = class extends Command {
 		const { body } = await superagent
 			.get('http://icanhazdadjoke.com')
 			.set('Accept', 'application/json')
-			.catch(() => { throw 'The API appears to be down. Try again later!'; });
-		return msg.sendMessage(`Random pun: **${body.joke}**`);
+			.catch(() => { throw msg.language.get('COMMAND_PUN_APIDOWN'); });
+		return msg.sendMessage(msg.language.get('COMMAND_PUN_REPLY'), body.joke);
 	}
 
 };

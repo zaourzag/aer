@@ -6,7 +6,7 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['user', 'ui'],
-			description: 'Shows information about the mentioned user.',
+			description: language => language.get('COMMAND_USERINFO_DESCRIPTION'),
 			requiredPermissions: ['EMBED_LINKS'],
 			usage: '[user:username]'
 		});
@@ -21,25 +21,19 @@ module.exports = class extends Command {
 			.setAuthor(`${user.tag} [${user.id}]`, user.avatarURL())
 			.setThumbnail(user.avatarURL())
 			.setColor(member ? member.displayColor : 'RANDOM')
-			.setDescription(`Joined Discord on ${this.timestamp.display(user.createdAt)} (${Duration.toNow(user.createdAt)} ago)`)
+			.setDescription(msg.language.get('COMMAND_USERINFO_JOINED_DISCORD', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt)))
 			.setFooter(this.client.user.username, this.client.user.avatarURL())
 			.setTimestamp();
 		// add guild specific info if in a guild
 		if (member) {
-			embed.description += `\nJoined ${msg.guild.name} on ${this.timestamp.display(member.joinedAt)} (${Duration.toNow(member.joinedAt)} ago)`;
+			embed.description += msg.language.get('COMMAND_USERINFO_JOINED_GUILD', msg.guild.name, this.timestamp.display(member.joinedAt), Duration.toNow(member.joinedAt));
 			embed.addField('• Role(s)', member.roles.map(role => role.name).slice(0, -1).sort().join(', ') || 'No roles');
 		}
 		// add activity specific info
 		if (activity) {
-			embed.addField('• Other', `Activity: ${ACTIVITY_TYPES[activity.type]} ${activity}`);
+			embed.addField('• Other', `Activity: ${msg.language.get(`ACTIVITY_${activity.type}`)} ${activity}`);
 		}
 		return msg.sendEmbed(embed);
 	}
 
-};
-
-const ACTIVITY_TYPES = {
-	PLAYING: 'Playing',
-	LISTENING: 'Listening to',
-	STREAMING: 'Streaming'
 };

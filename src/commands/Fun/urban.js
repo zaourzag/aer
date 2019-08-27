@@ -6,7 +6,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Searches the urban dictionary for the definition to a search term.',
+			description: language => language.get('COMMAND_URBAN_DESCRIPTION'),
 			usage: '<searchTerm:str> [result:int]',
 			usageDelim: ', ',
 			cooldown: 5,
@@ -16,7 +16,7 @@ module.exports = class extends Command {
 		});
 
 		this
-			.customizeResponse('searchTerm', 'What would you like to search?');
+			.customizeResponse('searchTerm', (message) => message.language.get('COMMAND_URBAN_MISSINGTERM'));
 	}
 
 	splitText(str, length) {

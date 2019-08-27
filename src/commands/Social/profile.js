@@ -7,7 +7,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Shows a profile card of a user.',
+			description: language => language.get('COMMAND_PROFILE_DESCRIPTION'),
 			usage: '[user:username]'
 		});
 
@@ -19,7 +19,7 @@ module.exports = class extends Command {
 		await member.settings.sync(true);
 
 		const { db } = this.client.providers.default;
-		if (!member) return msg.responder.error("That user isn't in the server!");
+		if (!member) return msg.responder.error(msg.language.get('COMMAND_PROFILE_NOTMEMBER'));
 		const { points, level } = member.settings;
 		const nextLevel = Math.floor(((level + 1) / 0.2) ** 2);
 		const currLevel = Math.floor((level / 0.2) ** 2);

@@ -4,8 +4,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Claim your daily points!',
-			extendedHelp: 'Add a --reminder flag at the end of the command to be reminded of next dailies in 12 hours.',
+			description: language => language.get('COMMAND_DAILY_DESCRIPTION'),
+			extendedHelp: language => language.get('COMMAND_DAILY_EXTENDEDHELP'),
 
 			runIn: ['text']
 		});
@@ -17,7 +17,7 @@ module.exports = class extends Command {
 		const member = await msg.guild.members.fetch(msg.author);
 		await member.settings.sync(true);
 		if (Date.now() - member.settings.dailyTime < TIME.HOUR * 12) {
-			return msg.send(`You've already collected your daily reward. You can collect it again in ${Duration.toNow(member.settings.dailyTime + (TIME.HOUR * 12))}`);
+			return msg.send(msg.language.get('COMMAND_DAILY_COOLDOWN', Duration.toNow(member.settings.dailyTime + (TIME.HOUR * 12))));
 		}
 		// WIP: double points for upvotes?
 		const points = 50;
@@ -29,11 +29,11 @@ module.exports = class extends Command {
 				data: {
 					channel: msg.channel.id,
 					user: msg.author.id,
-					text: 'Collect daily reward.'
+					text: msg.language.get('COMMAND_DAILY_REMINDER')
 				}
 			});
 		}
-		return msg.responder.success('You succesfully collected your daily reward!');
+		return msg.responder.success(msg.language.get('COMMAND_DAILY_REPLY'));
 	}
 
 };

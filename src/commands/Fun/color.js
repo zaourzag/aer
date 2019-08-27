@@ -9,8 +9,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Outputs the chosen color from hex.',
-
+			description: language => language.get('COMMAND_COLOR_DESCRIPTION'),
 			usage: '[random|display] [color:str] [...]',
 			usageDelim: ' '
 		});
@@ -25,14 +24,16 @@ module.exports = class extends Command {
 	}
 
 	async display(msg, hexCode) {
-		if (!hexCode) return msg.responder.error('You need to provide a valid color to display.');
+		if (!hexCode) return msg.responder.error(msg.language.get('COMMAND_COLOR_NOCOLOR'));
 		const colorData = color(hexCode);
-		if (colorData._format === false) return msg.responder.error('You provided an invalid color!');
+		if (colorData._format === false) return msg.responder.error(msg.language.get('COMMAND_COLOR_INVALIDCOLOR'));
 		const img = await this.draw(colorData.toHex());
-		return msg.channel.sendFile(img, 'color.png', `**${colorData.toName() ? toTitleCase(colorData.toName()) : 'Unnamed'}**
-Hex: ${colorData.toHexString()}
-RGB: ${colorData.toRgbString()}
-HSV: ${colorData.toHsvString()}`);
+		return msg.channel.sendFile(img, 'color.png', [
+			`**${colorData.toName() ? toTitleCase(colorData.toName()) : 'Unnamed'}**`,
+			`Hex: ${colorData.toHexString()}`,
+			`RGB: ${colorData.toRgbString()}`,
+			`HSV: ${colorData.toHsvString()}`
+		].join('\n'));
 	}
 
 	random(msg) {
@@ -41,7 +42,7 @@ HSV: ${colorData.toHsvString()}`);
 	}
 
 	async draw(hex) {
-		const { body } = await superagent.get('http://localhost:3002/color')
+		const { body } = await superagent.get(this.client.config.imagegenURL)
 			.query({ color: encodeURIComponent(hex) });
 		return body;
 	}

@@ -4,7 +4,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: 'Play a game of connect 4.',
+			description: language => language.get('COMMAND_C4_DESCRIPTION'),
 			usage: '<opponent:username>',
 			cooldown: 15,
 			aliases: ['c4'],
@@ -47,7 +47,7 @@ module.exports = class extends Command {
 			.then(async (reactions) => {
 				const res = reactions.first();
 				if (res._emoji.name === '⏹') {
-					await msg.channel.send(`${await this.client.users.fetch(usr)} has decided to quit. He loses!`);
+					await msg.channel.send(msg.language.get('COMMAND_C4_QUIT', await this.client.users.fetch(usr)));
 					c4.reset();
 					msg.reactions.removeAll();
 					this.channels.delete(msg.channel.id);

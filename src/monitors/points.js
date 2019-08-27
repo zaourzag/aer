@@ -1,5 +1,5 @@
 const { Monitor } = require('klasa');
-const util = require('../lib/util/util');
+const util = require('../../lib/util/util');
 
 module.exports = class extends Monitor {
 
