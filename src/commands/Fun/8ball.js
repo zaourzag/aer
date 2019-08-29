@@ -17,9 +17,9 @@ module.exports = class extends Command {
 
 	async run(msg, [question]) {
 		const answers = msg.language.get('COMMAND_8BALL_ANSWERS');
-		return msg.send(question.endsWith('?') ?
-			`${msg.author} | 🎱 ${answers[Math.floor(Math.random() * answers.length)]}` :
-			msg.language.get('COMMAND_8BALL_NOQUESTION'));
+		return msg.send(question.endsWith('?')
+			? `${msg.author} | 🎱 ${answers[Math.floor(Math.random() * answers.length)]}`
+			: msg.language.get('COMMAND_8BALL_NOQUESTION'));
 	}
 
 };

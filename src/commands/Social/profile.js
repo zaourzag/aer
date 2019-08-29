@@ -29,7 +29,7 @@ module.exports = class extends Command {
 		const bg = await readFile(`${process.cwd()}/assets/backgrounds/default.jpg`);
 
 		const list = await db.collection('members').find({ id: { $regex: `^${msg.guild.id}` } }).toArray();
-		const rank = list.indexOf(list.find(l => l.id === `${msg.guild.id}.${msg.author.id}`));
+		const rank = list.indexOf(list.find(item => item.id === `${msg.guild.id}.${msg.author.id}`));
 
 		canvas.addImage(bg, 0, 0, 500, 200)
 			.save()

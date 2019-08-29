@@ -5,7 +5,6 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			description: language => language.get('COMMAND_DAILY_DESCRIPTION'),
-			extendedHelp: language => language.get('COMMAND_DAILY_EXTENDEDHELP'),
 
 			runIn: ['text']
 		});

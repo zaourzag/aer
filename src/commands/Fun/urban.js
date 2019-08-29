@@ -32,9 +32,9 @@ module.exports = class extends Command {
 
 		const result = body.list[resultNum];
 		if (!result) throw msg.language.get('COMMAND_URBAN_MAX', body.list.length);
-		const wdef = result.definition.length > 1000 ?
-			`${this.splitText(result.definition, 1000)}...` :
-			result.definition;
+		const wdef = result.definition.length > 1000
+			? `${this.splitText(result.definition, 1000)}...`
+			: result.definition;
 		return msg.sendEmbed(new MessageEmbed()
 			.setTitle(result.word)
 			.setDescription(`${wdef}\n\n\`👍\` ${result.thumbs_up}\n\`👎\` ${result.thumbs_down}`)

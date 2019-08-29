@@ -9,7 +9,7 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [user=msg.author]) {
+	async run(msg, [user = msg.author]) {
 		const percentage = Math.round(Math.random() * 100);
 		return msg.send(msg.language.get('COMMAND_RATE_REPLY', user, percentage));
 	}

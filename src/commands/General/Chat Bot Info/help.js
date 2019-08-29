@@ -21,13 +21,14 @@ module.exports = class extends Command {
 
 	async run(msg, [command]) {
 		const embed = new MessageEmbed()
-			.setAuthor(this.client.user.username, this.client.user.avatarURL())
 			.setColor(msg.member ? msg.member.displayColor : 'RANDOM');
 
 		if (command) {
 			return msg.sendEmbed(embed
-				.addField(`${command.name} ${command.runIn.includes('dm') ? '' : '(Server only)'}`, [isFunction(command.description) ? command.description(msg.language) : command.description,
-					isFunction(command.extendedHelp) ? command.extendedHelp(msg.language) : command.extendedHelp].join('\n'))
+				.addField(`${command.name} ${command.runIn.includes('dm') ? '' : '(Server only)'}`,
+					isFunction(command.description)
+						? command.description(msg.language)
+						: command.description)
 				.addField('• Usage', command.usage.fullUsage(msg))
 				.addField('• Permission Node', code`${command.category.toLowerCase()}.${command.name}`));
 		}

@@ -43,7 +43,7 @@ module.exports = class extends Command {
 		const usr = players[choice % 2];
 
 		await msg.edit(c4.turnTable());
-		msg.awaitReactions((r, user) => user.id === usr && this.numbers.includes(r.emoji.toString()), { time: 60000, max: 1, errors: ['time'] })
+		msg.awaitReactions((reaction, user) => user.id === usr && this.numbers.includes(reaction.emoji.toString()), { time: 60000, max: 1, errors: ['time'] })
 			.then(async (reactions) => {
 				const res = reactions.first();
 				if (res._emoji.name === '⏹') {

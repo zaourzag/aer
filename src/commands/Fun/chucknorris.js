@@ -8,8 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			bucket: 2,
 			cooldown: 4,
-			description: language => language.get('COMMAND_CHUCKNORRIS_DESCRIPTION'),
-			extendedHelp: language => language.get('COMMAND_CHUCKNORRIS_EXTENDEDHELP')
+			description: language => language.get('COMMAND_CHUCKNORRIS_DESCRIPTION')
 		});
 	}
 

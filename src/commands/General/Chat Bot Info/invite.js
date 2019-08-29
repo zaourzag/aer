@@ -11,9 +11,9 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		return !message.guild.me.permissions.has(FLAGS.EMBED_LINKS) ?
-			message.sendLocale('COMMAND_INVITE') :
-			message.sendEmbed(new MessageEmbed()
+		return !message.guild.me.permissions.has(FLAGS.EMBED_LINKS)
+			? message.sendLocale('COMMAND_INVITE')
+			: message.sendEmbed(new MessageEmbed()
 				.setAuthor(this.client.user.username, this.client.user.avatarURL())
 				.setDescription(`[Invite Aero](${this.client.invite}) | [Support Server](https://discord.gg/7fv73Sw)`)
 			);
