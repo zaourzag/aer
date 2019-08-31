@@ -6,7 +6,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['commands'],
+			aliases: ['commands', 'h'],
 			guarded: true,
 			description: language => language.get('COMMAND_HELP_DESCRIPTION'),
 			requiredPermissions: ['EMBED_LINKS'],

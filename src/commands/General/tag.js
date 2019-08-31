@@ -12,7 +12,8 @@ module.exports = class extends Command {
 			runIn: ['text'],
 			subcommands: true,
 			usage: '<add|remove|list|view> [tag:string] [content:string] [...]',
-			usageDelim: ' '
+			usageDelim: ' ',
+			aliases: ['t']
 		});
 	}
 
