@@ -15,7 +15,7 @@ module.exports = class extends Command {
 			.get('http://icanhazdadjoke.com')
 			.set('Accept', 'application/json')
 			.catch(() => { throw msg.language.get('COMMAND_PUN_APIDOWN'); });
-		return msg.sendMessage(msg.language.get('COMMAND_PUN_REPLY'), body.joke);
+		return msg.sendMessage(msg.language.get('COMMAND_PUN_REPLY', body.joke));
 	}
 
 };
