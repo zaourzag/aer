@@ -14,3 +14,9 @@ WS_URL=
 # Imgflip credentials
 IMGFLIP_USER=
 IMGFLIP_PASS=
+
+# Discord Bot Token
+DISCORD_TOKEN=
+
+# Chatwatch Token
+CHATWATCH_TOKEN=
