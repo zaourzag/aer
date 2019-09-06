@@ -25,11 +25,15 @@ module.exports = class extends Command {
 
 		if (command) {
 			return msg.sendEmbed(embed
-				.addField(`${command.name} ${command.runIn.includes('dm') ? '' : '(Server only)'}`,
-					isFunction(command.description)
-						? command.description(msg.language)
-						: command.description)
-				.addField('• Usage', command.usage.fullUsage(msg))
+				.addField(`${command.name} ${command.aliases.length ? `(${command.aliases.join(', ')})` : ''}`,
+					(
+						isFunction(command.description)
+							? command.description(msg.language)
+							: command.description
+					) + (
+						command.runIn.includes('dm') ? '' : ` (${msg.language.get('COMMAND_HELP_SERVERONLY')})`
+					))
+				.addField('• Usage', this.buildUsage(command, msg.guild.settings.prefix))
 				.addField('• Permission Node', code`${command.category.toLowerCase()}.${command.name}`));
 		}
 
@@ -48,6 +52,18 @@ module.exports = class extends Command {
 				else categories[command.category].push(command.name);
 				return categories;
 			}, {});
+	}
+
+	buildUsage(command, prefix) {
+		const usage = command.usage.parsedUsage;
+
+		return `${prefix}${command.name}${usage.map(tag => {
+			const brackets = tag.required > 1
+				? '{}'
+				: '[]';
+			const options = tag.possibles.map(possible => possible.name).join(' | ');
+			return `  ${brackets[0]} ${options} ${brackets[1]}`;
+		}).join('')}`;
 	}
 
 };

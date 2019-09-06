@@ -41,7 +41,8 @@ module.exports = class extends Monitor {
 
 };
 
-const LEVEL_MESSAGES = ['Hey, you levelled up! You\'re now level {level}!',
+const LEVEL_MESSAGES = [
+	"Hey, you levelled up! You're now level {level}!",
 	"You've been doing excellent, so here's a level up! You're now level {level}!",
 	"Oh, come on, you're not hacking, are you? You're level {level} already!",
 	"Oh, how time flies. You're already level {level}!",

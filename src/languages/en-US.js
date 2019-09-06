@@ -50,6 +50,7 @@ module.exports = class extends Language {
 			COMMAND_C4_QUIT: user => `${user} has quit. They lose!`,
 
 			// general commands
+			COMMAND_HELP_SERVERONLY: 'Server only',
 			COMMAND_TAG_DESCRIPTION: 'Allows you to create, remove or list tags (custom commands).',
 			COMMAND_TAG_ADDED: (tag, content) => `Added the tag \`${tag}\` with content: \`\`\`${content}\`\`\``,
 			COMMAND_TAG_REMOVED: tag => `Removed the tag \`${tag}\``,
