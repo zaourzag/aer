@@ -140,30 +140,19 @@ module.exports = class extends Language {
 				`<${this.client.invite}>`,
 				util.codeBlock('', [
 					'The above link is generated requesting the minimum permissions required to use every command currently.',
-					'I know not all permissions are right for every guild, so don\'t be afraid to uncheck any of the boxes.',
+					"I know not all permissions are right for every guild, so don't be afraid to uncheck any of the boxes.",
 					'If you try to use a command that requires more permissions than the bot is granted, it will let you know.'
-				].join(' ')),
-				'Please file an issue at <https://github.com/dirigeants/klasa> if you find any bugs.'
+				].join(' '))
 			],
 			COMMAND_INVITE_DESCRIPTION: 'Displays the invite link of the bot, to invite it to your guild.',
-			COMMAND_INFO: [
-				"Klasa is a 'plug-and-play' framework built on top of the Discord.js library.",
-				'Most of the code is modularized, which allows developers to edit Klasa to suit their needs.',
+			COMMAND_INFO: () => [
+				`${this.client.user.username} is a bot for intuitive community management.`,
 				'',
-				'Some features of Klasa include:',
-				'• 🐇💨 Fast loading times with ES2017 support (`async`/`await`)',
-				'• 🎚🎛 Per-client/guild/user settings that can be extended with your own fields',
-				'• 💬 Customizable command system with automated parameter resolving and the ability to load/reload commands on-the-fly',
-				'• 👀 "Monitors", which can watch messages and edits (for swear filters, spam protection, etc.)',
-				'• ⛔ "Inhibitors", which can prevent commands from running based on any condition you wish to apply (for permissions, blacklists, etc.)',
-				'• 🗄 "Providers", which simplify usage of any database of your choosing',
-				'• ✅ "Finalizers", which run after successful commands (for logging, collecting stats, cleaning up responses, etc.)',
-				'• ➕ "Extendables", which passively add methods, getters/setters, or static properties to existing Discord.js or Klasa classes',
-				'• 🌐 "Languages", which allow you to localize your bot\'s responses',
-				'• ⏲ "Tasks", which can be scheduled to run in the future, optionally repeating',
+				'It features 🛠 extensive moderation, 🎮 fun games, and a lot of other useful things.',
+				`If you have a cool idea, feel free to share it on our [support server](${this.client.config.supportServer}) or directly [PR it](${this.client.config.repoURL}).`,
 				'',
-				'We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.',
-				"If you're interested in us, check us out at https://klasa.js.org"
+				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
+				`Thank you for using ${this.client.user.username} ♥`
 			],
 			COMMAND_INFO_DESCRIPTION: 'Provides some information about this bot.',
 			COMMAND_HELP_DESCRIPTION: 'Display help for a command.',
@@ -193,7 +182,7 @@ module.exports = class extends Language {
 			COMMAND_STATS: (memUsage, memTotal, cpuUsage, cpuCount, cpuSpeed, uptime, klasaVersion, discordVersion, processVersion, hostname, message) => [
 				'= STATISTICS =',
 				'',
-				`• Mem Usage    :: ${memUsage} / ${memTotal} MB (${(memUsage/memTotal * 100).toFixed(1)}%)`,
+				`• Mem Usage    :: ${memUsage} / ${memTotal} MB (${(memUsage / memTotal * 100).toFixed(1)}%)`,
 				`• CPU Usage    :: ${cpuUsage}% (${cpuCount}c @ ${cpuSpeed}GHz)`,
 				`• Uptime       :: ${uptime}`,
 				`• Shard        :: ${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}`,
