@@ -56,7 +56,7 @@ module.exports = class extends Command {
 
 const PERMISSION_NODES_HELP = [
 	bold`Permission Nodes`,
-	`Aero's permissions are ${bold`node base`} allowing complete control over what commands users and roles can use.`,
+	`Aero's permissions are ${bold`node based`}, allowing complete control over what commands users and roles can use.`,
 	`Permissions have 3 levels: ${bold`User, Role, Everyone`}. Nodes take priority in that order.`,
 	'',
 	bold`Nodes`,

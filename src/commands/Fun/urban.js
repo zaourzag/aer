@@ -37,12 +37,16 @@ module.exports = class extends Command {
 			: result.definition;
 		return msg.sendEmbed(new MessageEmbed()
 			.setTitle(result.word)
-			.setDescription(`${wdef}\n\n\`👍\` ${result.thumbs_up}\n\`👎\` ${result.thumbs_down}`)
+			.setDescription(`${this.removeBrackets(wdef)}\n\n\`👍\` ${result.thumbs_up}\n\`👎\` ${result.thumbs_down}`)
 			.setURL(result.permalink)
 			.setColor(16586)
 			.setThumbnail('http://i.imgur.com/qNTzb3k.png')
 			.setFooter(`By ${result.author}`)
-			.addField('Example', `*${this.splitText(result.example, 1000)}...*`));
+			.addField('Example', `*${this.splitText(this.removeBrackets(result.example), 1000)}...*`));
+	}
+
+	removeBrackets(text) {
+		return text.replace(/\[([^\[\]]+)\]/g, '$1'); /* eslint-disable-line no-useless-escape */
 	}
 
 };
