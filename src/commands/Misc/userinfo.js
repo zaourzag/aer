@@ -27,7 +27,17 @@ module.exports = class extends Command {
 		// add guild specific info if in a guild
 		if (member) {
 			embed.description += msg.language.get('COMMAND_USERINFO_JOINED_GUILD', msg.guild.name, this.timestamp.display(member.joinedAt), Duration.toNow(member.joinedAt));
-			embed.addField('• Role(s)', member.roles.map(role => role.name).slice(0, -1).sort().join(', ') || 'No roles');
+			const roles = member.roles.sort((a,b) => b.position - a.position);
+			if (roles.size) {
+				embed.addField(
+					`• Role${roles.size > 1 ? `s (${roles.size})` : ''}`, 
+					roles
+						.array()
+						.reduce((acc, role, idx) => (acc.length + role.name.length < 1010 && role.id !== msg.guild.id)
+							? acc + (idx !== 0 ? ', ' : '') + role.name
+							: acc,
+						''));
+			}
 		}
 		// add activity specific info
 		if (activity) {
