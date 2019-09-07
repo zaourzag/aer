@@ -12,7 +12,7 @@ module.exports = {
 		verbose: !production
 	},
 	createPiecesFolders: false,
-	disabledCorePieces: ['providers', 'languages'],
+	disabledCorePieces: ['providers', 'languages', 'commands'],
 	owners,
 	prefix: production ? prefix : devPrefix,
 	providers: {
