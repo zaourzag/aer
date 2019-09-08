@@ -21,7 +21,7 @@ module.exports = class extends Command {
 
 	async run(msg, [command]) {
 		const embed = new MessageEmbed()
-			.setColor(msg.member ? msg.member.displayColor : 'RANDOM');
+			.setColor(msg.guild ? msg.guild.me.displayColor : 'RANDOM');
 
 		if (command) {
 			return msg.sendEmbed(embed

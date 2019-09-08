@@ -1,4 +1,5 @@
 const { Language, util } = require('klasa');
+const { bold, code } = require('discord-md-tags');
 
 module.exports = class extends Language {
 
@@ -21,6 +22,29 @@ module.exports = class extends Language {
 
 			MESSAGE_PROMPT_TIMEOUT: 'The prompt has timed out.',
 			TEXT_PROMPT_ABORT_OPTIONS: ['abort', 'stop', 'cancel'],
+
+			// conf commands
+			COMMAND_PERMS_DESCRIPTION: 'Configure usage permission of specific commands for a particular user, roles, or for everyone.',
+			COMMAND_PERMS_HELP: [
+				bold`Permission Nodes`,
+				`Aero's permissions are ${bold`node based`}, allowing complete control over what commands users and roles can use.`,
+				`Permissions have 3 levels: ${bold`User, Role, Everyone`}. Nodes take priority in that order.`,
+				'',
+				bold`Nodes`,
+				`Nodes are represented by ${code`<category.command>`}, such as ${code`general.ping`}.`,
+				`You can also use wildcards such as ${code`<category>.*`} which includes all commands in the category, and ${code`*`} which includes all commands,`,
+				'',
+				bold`Examples`,
+				`Allow Stitch to use the ping command: ${code`perms allow @Stitch general.ping`}`,
+				`Disallow ravy from using all configuration commands: ${code`perms remove @ravy configuration.*`}`,
+				`Allow admins to use all commands: ${code`perms allow @Admins *`}`
+			],
+			COMMAND_PERMS_MISSING: 'Invalid usage: expecting a target and a permission.',
+			COMMAND_PERMS_SUCCESS_ALLOW: (permission, target) => `Granted ${code`${permission}`} to ${target.displayName || target.username || target}`,
+			COMMAND_PERMS_SUCCESS_DENY: (permission, target) => `Denied ${code`${permission}`} from ${target.displayName || target.username || target}`,
+			COMMAND_PERMS_SUCCESS_REMOVE: (permission, target) => `Unset ${code`${permission}`} for ${target.displayName || target.username || target}`,
+			COMMAND_PERMS_SUCCESS_CLEAR: 'Cleared permission entries.',
+
 
 			// fun commands
 			COMMAND_8BALL_DESCRPTION: 'Magic 8-Ball, does exactly what the toy does.',
