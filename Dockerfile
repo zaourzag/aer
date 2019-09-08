@@ -4,7 +4,7 @@ WORKDIR /opt/aero/aero
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
