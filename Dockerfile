@@ -1,5 +1,7 @@
 FROM node:12-alpine
 
+RUN apk add git
+
 WORKDIR /opt/aero/aero
 
 COPY package*.json ./
