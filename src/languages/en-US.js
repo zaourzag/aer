@@ -267,7 +267,33 @@ module.exports = class extends Language {
 			INHIBITOR_PERMISSIONS: 'You do not have permission to use this command.',
 			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(', ')}** guild setting${settings.length !== 1 ? 's' : ''} and thus the command cannot run.`,
 			INHIBITOR_RUNIN: (types) => `This command is only available in ${types} channels.`,
-			INHIBITOR_RUNIN_NONE: (name) => `The ${name} command is not configured to run in any channel.`
+			INHIBITOR_RUNIN_NONE: (name) => `The ${name} command is not configured to run in any channel.`,
+
+			LOG_ACTION_BAN: 'user banned',
+			LOG_ACTION_UNBAN: 'user unbanned',
+			LOG_ACTION_TEMPBAN: 'user temporarily banned',
+			LOG_ACTION_TEMPBANEND: 'temporary ban released',
+			LOG_ACTION_SOFTBAN: 'user softbanned',
+			LOG_ACTION_GLOBALBAN: 'globally blacklisted user banned',
+			LOG_ACTION_GLOBALUNBAN: 'global ban appealed',
+			LOG_ACTION_KICK: 'user kicked',
+			LOG_ACTION_MUTE: 'user muted',
+			LOG_ACTION_UNMUTE: 'user unmuted',
+			LOG_ACTION_TEMPMUTE: 'user temporarily muted',
+			LOG_ACTION_TEMPMUTEEND: 'temporary mute released',
+			LOG_ACTION_WARN: 'user warned',
+
+			LOG_ACTION_MESSAGEEDITED: 'message edited',
+			LOG_ACTION_MESSAGEDELETED: 'message deleted',
+
+			LOG_ACTION_MEMBERJOINED: 'member joined',
+			LOG_ACTION_MEMBERLEFT: 'member left',
+
+			LOG_ARGS_USER: (tag, mention, id) => `**user:**\n${tag} ${mention} [${id}]`,
+			LOG_ARGS_MODERATOR: (tag, mention, id) => `**moderator:**\n${tag} ${mention} [${id}]`,
+			LOG_ARGS_REASON: (reason) => `**reason:**\n${reason}`,
+			LOG_ARGS_DURATION: (duration) => `**duration:**\n${duration}`
+
 		};
 	}
 
