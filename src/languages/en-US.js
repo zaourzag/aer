@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -115,6 +115,10 @@ module.exports = class extends Language {
 			COMMAND_SOCIAL_TOGGLE_SOCIAL: enabled => `There, **${!enabled ? 'enable' : 'disable'}d** the economy system in this server.`,
 			COMMAND_SOCIAL_TOGGLE_LEVELS: enabled => `There, level up messages in this server are now **${enabled ? 'enable' : 'disable'}d**.`,
 			COMMAND_SOCIAL_STATUS: enabled => `The economy system is **${enabled ? 'enable' : 'disable'}d** in this server.`,
+
+			// mod commands
+			COMMAND_BAN_DESCRIPTION: 'Bans one or more users with an optional timeframe and reason.',
+			COMMAND_BAN_NOPERMS: multiple => `You cannot ban ${multiple ? 'any of the specified users' : 'the specified user'}.`,
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
@@ -276,6 +280,7 @@ module.exports = class extends Language {
 			LOG_ACTION_SOFTBAN: 'user softbanned',
 			LOG_ACTION_GLOBALBAN: 'globally blacklisted user banned',
 			LOG_ACTION_GLOBALUNBAN: 'global ban appealed',
+			LOG_ACTION_BULKBAN: 'multiple users banned',
 			LOG_ACTION_KICK: 'user kicked',
 			LOG_ACTION_MUTE: 'user muted',
 			LOG_ACTION_UNMUTE: 'user unmuted',
@@ -290,9 +295,10 @@ module.exports = class extends Language {
 			LOG_ACTION_MEMBERLEFT: 'member left',
 
 			LOG_ARGS_USER: (tag, mention, id) => `**user:**\n${tag} ${mention} [${id}]`,
+			LOG_ARGS_USERS: users => `**users:**\n${users}`,
 			LOG_ARGS_MODERATOR: (tag, mention, id) => `**moderator:**\n${tag} ${mention} [${id}]`,
-			LOG_ARGS_REASON: (reason) => `**reason:**\n${reason}`,
-			LOG_ARGS_DURATION: (duration) => `**duration:**\n${duration}`
+			LOG_ARGS_REASON: reason => `**reason:**\n${reason}`,
+			LOG_ARGS_DURATION: duration => `**duration:**\n${duration}`
 
 		};
 	}
