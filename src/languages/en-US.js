@@ -218,15 +218,13 @@ module.exports = class extends Language {
 			COMMAND_CONF_SERVER: (key, list) => `**Guild Settings${key}**\n${list}`,
 			COMMAND_CONF_USER_DESCRIPTION: 'Define per-user settings.',
 			COMMAND_CONF_USER: (key, list) => `**User Settings${key}**\n${list}`,
-			COMMAND_STATS: (memUsage, memTotal, cpuUsage, cpuCount, cpuSpeed, uptime, klasaVersion, discordVersion, processVersion, hostname, message) => [
-				'= STATISTICS =',
-				'',
-				`• Mem Usage    :: ${memUsage} / ${memTotal} MB (${(memUsage / memTotal * 100).toFixed(1)}%)`,
-				`• CPU Usage    :: ${cpuUsage}% (${cpuCount}c @ ${cpuSpeed}GHz)`,
-				`• Uptime       :: ${uptime}`,
-				`• Shard        :: ${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}`,
-				`• Host         :: ${hostname}`,
-				`• Dependencies :: Klasa v${klasaVersion}, Discord.js v${discordVersion}, Node.js ${processVersion}`
+			COMMAND_STATS: (name, memUsage, memTotal, memPercentage, cpuUsage, cpuCount, cpuSpeed, uptime, klasaVersion, discordVersion, processVersion, hostname, currentShard, totalShards) => [
+				`${name} is currently using`,
+				`- ${bold`${memPercentage}% of RAM`} (${memUsage} / ${memTotal} MB) and`,
+				`- ${bold`${cpuUsage}% of CPU`} (${cpuCount}c @ ${cpuSpeed}GHz).`,
+				"It's been running",
+				`- for ${bold`${uptime}`} on ${bold`${hostname}`} (${bold`shard ${currentShard}`} / ${totalShards})`,
+				`- using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
 
@@ -306,6 +304,7 @@ module.exports = class extends Language {
 			LOG_ACTION_MEMBERLEFT: 'member left',
 
 			LOG_ARGS_USER: (tag, mention, id) => `**user:**\n${tag} ${mention} [${id}]`,
+			LOG_ARGS_MEMBER: (name, mention, id) => `**member:**\n${name} ${mention} [${id}]`,
 			LOG_ARGS_USERS: users => `**users:**\n${users}`,
 			LOG_ARGS_MODERATOR: (tag, mention, id) => `**moderator:**\n${tag} ${mention} [${id}]`,
 			LOG_ARGS_REASON: reason => `**reason:**\n${reason}`,

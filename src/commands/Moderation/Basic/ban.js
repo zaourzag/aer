@@ -48,10 +48,10 @@ module.exports = class extends Command {
 
 	async executeBans(users, duration, reason, purge, soft, guild, moderator) {
 		for (const user of users) {
-			guild.banCache.add(user.id);
+			guild.modCache.add(user.id);
 			await guild.members.ban(user.id, { reason: `${duration ? `[temp]` : ''} ${moderator.tag} | ${reason || guild.language.get('COMMAND_BAN_NOREASON')}`, days: (purge) ? 1 : 0 });
 			if (soft) {
-				guild.banCache.add(user.id);
+				guild.modCache.add(user.id);
 				await guild.members.unban(user.id, guild.language.get('COMMAND_BAN_SOFTBANRELEASED'));
 			}
 		}

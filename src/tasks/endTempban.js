@@ -6,7 +6,7 @@ module.exports = class extends Task {
 		const _guild = this.client.guilds.get(guild);
 		if (!_guild) return;
 		users.forEach(user => {
-			_guild.banCache.add(user);
+			_guild.modCache.add(user);
 			_guild.members.unban(user, _guild.language.get('COMMAND_BAN_TEMPBANRELEASED'));
 		});
 		users.length > 1
