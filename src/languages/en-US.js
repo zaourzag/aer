@@ -117,8 +117,16 @@ module.exports = class extends Language {
 			COMMAND_SOCIAL_STATUS: enabled => `The economy system is **${enabled ? 'enable' : 'disable'}d** in this server.`,
 
 			// mod commands
-			COMMAND_BAN_DESCRIPTION: 'Bans one or more users with an optional timeframe and reason.',
+			COMMAND_BAN_DESCRIPTION: [
+				'Bans one or more users with an optional timeframe and reason.',
+				"Specify p[urge] before the reason to purge the user(s)'s last 24h of messages.",
+				"Specify s[oft] before the reason to purge the user(s)'s last 24h of messages and unban them again (commonly referred to as a softban)."
+			],
 			COMMAND_BAN_NOPERMS: multiple => `You cannot ban ${multiple ? 'any of the specified users' : 'the specified user'}.`,
+			COMMAND_BAN_SOFTBANRELEASED: 'softban released',
+			COMMAND_BAN_CONFLICT: "You can't softban and tempban at the same time.",
+			COMMAND_BAN_NOREASON: 'no reason specified',
+			COMMAND_BAN_TEMPBANRELEASED: 'temporary ban released',
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
