@@ -91,7 +91,6 @@ module.exports = class extends Language {
 			COMMAND_C4_QUIT: user => `${user} has quit. They lose!`,
 
 			// general commands
-			COMMAND_HELP_SERVERONLY: 'Server only',
 			COMMAND_TAG_DESCRIPTION: 'Allows you to create, remove or list tags (custom commands).',
 			COMMAND_TAG_ADDED: (tag, content) => `Added the tag \`${tag}\` with content: \`\`\`${content}\`\`\``,
 			COMMAND_TAG_REMOVED: tag => `Removed the tag \`${tag}\``,
@@ -192,11 +191,15 @@ module.exports = class extends Language {
 			],
 			COMMAND_INFO_DESCRIPTION: 'Provides some information about this bot.',
 			COMMAND_HELP_DESCRIPTION: 'Display help for a command.',
-			COMMAND_HELP_NO_EXTENDED: 'No extended help available.',
-			COMMAND_HELP_DM: '📥 | The list of commands you have access to has been sent to your DMs.',
-			COMMAND_HELP_NODM: '❌ | You have DMs disabled, I couldn\'t send you the commands in DMs.',
-			COMMAND_HELP_USAGE: (usage) => `Usage :: ${usage}`,
-			COMMAND_HELP_EXTENDED: 'Extended Help ::',
+			COMMAND_HELP_SERVERONLY: 'Server only',
+			COMMAND_HELP_FOOTER: prefix => `for more help run ${prefix}help usage`,
+			COMMAND_HELP_USAGE: prefix => [
+				'Information about every command can be gathered directly in discord, without needing to open a command page.',
+				`To get a short overview of a specific command, you just run ${code`${prefix}help { Command }`}`,
+				'',
+				'Understanding the usage section of this is easy too:',
+				`curly brackets ${code`{}`} indicate a required argument, square brackets ${code`[]`} an optional argument.`
+			],
 			COMMAND_ENABLE: (type, name) => `+ Successfully enabled ${type}: ${name}`,
 			COMMAND_ENABLE_DESCRIPTION: 'Re-enables or temporarily enables a command/inhibitor/monitor/finalizer. Default state restored on reboot.',
 			COMMAND_DISABLE: (type, name) => `+ Successfully disabled ${type}: ${name}`,

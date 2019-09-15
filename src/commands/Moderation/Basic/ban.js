@@ -9,7 +9,7 @@ module.exports = class extends Command {
 			runIn: ['text'],
 			requiredPermissions: ['BAN_MEMBERS'],
 			aliases: ['b', 'bean', '410'],
-			description: '',
+			description: language => language.get('COMMAND_BAN_DESCRIPTION').join('\n'),
 			usage: '<user  or  users:users> [duration:time] [purge|p|soft|s] [reason:...string]',
 			usageDelim: ' '
 		});

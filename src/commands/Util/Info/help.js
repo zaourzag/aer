@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			guarded: true,
 			description: language => language.get('COMMAND_HELP_DESCRIPTION'),
 			requiredPermissions: ['EMBED_LINKS'],
-			usage: '(Command:command)'
+			usage: '(Command:command|usage)'
 		});
 
 		this.createCustomResolver('command', (arg, possible, msg) => {
@@ -24,16 +24,17 @@ module.exports = class extends Command {
 			.setColor(msg.guild ? msg.guild.me.displayColor : 'RANDOM');
 
 		if (command) {
+			if (command === 'usage') {
+				return msg.sendEmbed(embed
+					.setDescription(msg.language.get('COMMAND_HELP_USAGE', msg.guild.settings.prefix).join('\n'))
+				);
+			}
 			return msg.sendEmbed(embed
 				.addField(`${command.name} ${command.aliases.length ? `(${command.aliases.join(', ')})` : ''}`,
-					(
-						isFunction(command.description)
-							? command.description(msg.language)
-							: command.description
-					) + (
-						command.runIn.includes('dm') ? '' : ` (${msg.language.get('COMMAND_HELP_SERVERONLY')})`
-					))
-				.addField('• Usage', this.buildUsage(command, msg.guild.settings.prefix))
+					isFunction(command.description)
+						? command.description(msg.language)
+						: command.description)
+				.addField(`• Usage${command.runIn.includes('dm') ? '' : ` (${msg.language.get('COMMAND_HELP_SERVERONLY')})`}`, this.buildUsage(command, msg.guild.settings.prefix))
 				.addField('• Permission Node', code`${command.category.toLowerCase()}.${command.name}`));
 		}
 
@@ -41,6 +42,7 @@ module.exports = class extends Command {
 		for (const category in categories) {
 			embed.addField(category, categories[category].sort().map(cmd => code`${cmd}`).join(', '));
 		}
+		embed.setFooter(msg.language.get('COMMAND_HELP_FOOTER', msg.guild.settings.prefix));
 		return msg.sendEmbed(embed);
 	}
 
