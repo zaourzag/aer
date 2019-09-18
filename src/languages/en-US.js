@@ -102,6 +102,7 @@ module.exports = class extends Language {
 			COMMAND_USERINFO_DESCRIPTION: 'Shows information about the mentioned user.',
 			COMMAND_USERINFO_JOINED_DISCORD: (joinedAt, joinDuration) => `Joined Discord on ${joinedAt} (${joinDuration} ago)`,
 			COMMAND_USERINFO_JOINED_GUILD: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
+			COMMAND_USERINFO_CREATED_GUILD: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
 
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',

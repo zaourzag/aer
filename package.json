@@ -22,7 +22,7 @@
     "canvas": "^2.6.0",
     "canvas-constructor": "^3.1.0",
     "discord-md-tags": "^0.0.6",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "github:discordjs/discord.js#master",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "fast-html-parser": "^1.0.1",
