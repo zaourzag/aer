@@ -42,7 +42,7 @@ module.exports = class extends Command {
 				if (ids.has(target.id)) return false;
 				ids.add(target.id);
 				if (!member) return true;
-				return executor.roles.highest.position > target.roles.highest.position;
+				return executor.roles.highest.position > member.roles.highest.position;
 			});
 	}
 
