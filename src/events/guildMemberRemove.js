@@ -19,7 +19,8 @@ module.exports = class extends Event {
 				.filter(entry => entry.target.id === member.id)
 				.sort((a, b) => parseInt(BigInt(a.id) - BigInt(b.id)))
 				.last()
-			);
+			).catch(() => null);
+		if (!kick) return;
 		const now = new Date();
 		const then = deconstruct(kick.id).date;
 		const diff = Math.abs(now.getTime() - then.getTime());
