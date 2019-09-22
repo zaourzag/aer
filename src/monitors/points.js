@@ -28,7 +28,7 @@ module.exports = class extends Monitor {
 		this.cache.add(key);
 		setTimeout(() => this.cache.delete(key), 45 * 1000);
 		if (newLevel !== currLevel && newLevel !== 0) {
-			if (msg.guild.settings.social.levelupMessages) {
+			if (msg.guild.settings.get('social.levelupMessages')) {
 				await msg.channel.send(util.randomArray(LEVEL_MESSAGES)
 					.replace(/{level}/g, newLevel).replace(/{user}/g, msg.author.username));
 			}

@@ -7,7 +7,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['user', 'ui'],
 			description: language => language.get('COMMAND_USERINFO_DESCRIPTION'),
-			requiredPermissions: ['EMBED_LINKS'],
+			requiredPermissions: ['EMBED_LINKS', 'VIEW_AUDIT_LOG'],
 			usage: '[user:username]'
 		});
 

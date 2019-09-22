@@ -26,7 +26,7 @@ module.exports = class extends Command {
 		if (command) {
 			if (command === 'usage') {
 				return msg.sendEmbed(embed
-					.setDescription(msg.language.get('COMMAND_HELP_USAGE', msg.guild.settings.prefix).join('\n'))
+					.setDescription(msg.language.get('COMMAND_HELP_USAGE', msg.guild.settings.get('prefix')).join('\n'))
 				);
 			}
 			return msg.sendEmbed(embed
@@ -34,7 +34,7 @@ module.exports = class extends Command {
 					isFunction(command.description)
 						? command.description(msg.language)
 						: command.description)
-				.addField(`• Usage${command.runIn.includes('dm') ? '' : ` (${msg.language.get('COMMAND_HELP_SERVERONLY')})`}`, this.buildUsage(command, msg.guild.settings.prefix))
+				.addField(`• Usage${command.runIn.includes('dm') ? '' : ` (${msg.language.get('COMMAND_HELP_SERVERONLY')})`}`, this.buildUsage(command, msg.guild.settings.get('prefix')))
 				.addField('• Permission Node', code`${command.category.toLowerCase()}.${command.name}`));
 		}
 
@@ -42,7 +42,7 @@ module.exports = class extends Command {
 		for (const category in categories) {
 			embed.addField(category, categories[category].sort().map(cmd => code`${cmd}`).join(', '));
 		}
-		embed.setFooter(msg.language.get('COMMAND_HELP_FOOTER', msg.guild.settings.prefix));
+		embed.setFooter(msg.language.get('COMMAND_HELP_FOOTER', msg.guild.settings.get('prefix')));
 		return msg.sendEmbed(embed);
 	}
 

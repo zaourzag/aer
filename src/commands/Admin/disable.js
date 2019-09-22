@@ -16,11 +16,6 @@ module.exports = class extends Command {
 			return message.sendLocale('COMMAND_DISABLE_WARN');
 		}
 		piece.disable();
-		if (this.client.shard) {
-			await this.client.shard.broadcastEval(`
-				if (String(this.options.shards) !== '${this.client.options.shards}') this.${piece.store}.get('${piece.name}').disable();
-			`);
-		}
 		return message.sendLocale('COMMAND_DISABLE', [piece.type, piece.name], { code: 'diff' });
 	}
 
