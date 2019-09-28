@@ -141,6 +141,9 @@ module.exports = class extends Language {
 			COMMAND_UNBAN_NOREASON: 'no reason specified',
 			COMMAND_UNMUTE_DESCRIPTION: 'Removes the mute(s) for one or more users.',
 			COMMAND_UNMUTE_NOPERMS: multiple => `You cannot unmute ${multiple ? 'any of the specified users' : 'the specified user'}.`,
+			COMMAND_UNMUTE_NOREASON: 'no reason specified',
+			COMMAND_WARN_DESCRIPTION: 'Warn one or more users for their actions.',
+			COMMAND_WARN_NOREASON: 'no reason specified',
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
