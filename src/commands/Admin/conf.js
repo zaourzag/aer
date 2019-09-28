@@ -98,13 +98,11 @@ module.exports = class extends Command {
 				array.push(...sections.get(keyType).sort().map(key => `${` ${key} >`.padStart(longest + 3, '─')} ${this.display(message, entry.get(key), settings)}`));
 			}
 		}
-		return array.filter((obj, idx) => obj.length || idx !== array.length - 1).map((obj, idx, arr) => {
-			return idx === arr.length - 1
-				? ` └──${obj}`
-				: obj.length
-					? ` ├──${obj}`
-					: ` │`
-		}).join('\n');
+		return array.filter((obj, idx) => obj.length || idx !== array.length - 1).map((obj, idx, arr) => idx === arr.length - 1
+			? ` └──${obj}`
+			: obj.length
+				? ` ├──${obj}`
+				: ` │`).join('\n');
 	}
 
 };

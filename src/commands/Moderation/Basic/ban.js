@@ -77,8 +77,7 @@ module.exports = class extends Command {
 		const { time, data } = unbanTask;
 		this.client.schedule.delete(unbanTask.id);
 		data.users = data.users.filter(id => id !== user.id);
-		if (data.users.length !== 0)
-			this.client.schedule.create('endTempban', time, { data });
+		if (data.users.length !== 0) { this.client.schedule.create('endTempban', time, { data }); }
 	}
 
 
