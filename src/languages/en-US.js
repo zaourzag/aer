@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -148,6 +148,16 @@ module.exports = class extends Language {
 			COMMAND_LOCK_REASON: 'Channel locked.',
 			COMMAND_UNLOCK_DESCRIPTION: 'Re-allows users to write messages in a channel.',
 			COMMAND_UNLOCK_REASON: 'Channel unlocked.',
+			COMMAND_LOG_DESCRIPTION: [
+				'Configures logging. Possible types:',
+				'- messages',
+				'- moderation',
+				'- members',
+			],
+			COMMAND_LOG_REASON: 'Initializing logging',
+			COMMAND_LOG_SUCCESS: (type, channel) => `Now logging ${bold`${type}`} in ${channel}.`,
+			COMMAND_LOG_DISPLAY_NOCHANNEL: type => `Not logging ${bold`${type}`}.`,
+			COMMAND_LOG_DISPLAY_ONE: (type, channel) => `Currently logging ${bold`${type}`} in ${channel}.`,
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
