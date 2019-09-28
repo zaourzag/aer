@@ -43,6 +43,7 @@ module.exports = class extends Command {
 		for (const member of users) {
 			guild.modCache.add(member.id);
 			member.mute(`${moderator.tag} | ${reason || guild.language.get('COMMAND_MUTE_NOREASON')}`, muterole);
+			if (!duration) this.updateSchedule(member);
 		}
 		if (duration) this.client.schedule.create('endTempmute', duration, { data: { users: users.map(user => user.id), guild: guild.id } });
 	}
@@ -54,6 +55,16 @@ module.exports = class extends Command {
 			reason, moderator,
 			duration
 		});
+	}
+
+	updateSchedule(user) {
+		const unmuteTask = this.client.schedule.tasks.find(task => task.data.users.includes(user.id) && task.taskName === 'endTempmute');
+		if (!unmuteTask) return;
+		const { time, data } = unmuteTask;
+		this.client.schedule.delete(unmuteTask.id);
+		data.users = data.users.filter(id => id !== user.id);
+		if (data.users.length !== 0)
+			this.client.schedule.create('endTempmute', time, { data });
 	}
 
 

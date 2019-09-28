@@ -139,6 +139,8 @@ module.exports = class extends Language {
 			COMMAND_UNBAN_DESCRIPTION: 'Removes the ban(s) for one or more users.',
 			COMMAND_UNBAN_NOPERMS: multiple => `You cannot unban ${multiple ? 'any of the specified users' : 'the specified user'}.`,
 			COMMAND_UNBAN_NOREASON: 'no reason specified',
+			COMMAND_UNMUTE_DESCRIPTION: 'Removes the mute(s) for one or more users.',
+			COMMAND_UNMUTE_NOPERMS: multiple => `You cannot unmute ${multiple ? 'any of the specified users' : 'the specified user'}.`,
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
