@@ -1,42 +1,43 @@
 {
-  "type": "module",
-  "name": "aero",
-  "version": "1.0.0",
-  "description": "Aero is an intuitive Discord bot perfect for your server.",
-  "main": "src/index",
-  "repository": "git+https://git.farfrom.earth/aero/aero.git",
-  "author": "The Aero Team <team@aero.bot> (https://aero.bot)",
-  "contributors": [
-    "Ravy <ravy@aero.bot> (https://ravy.xyz)",
-    "Stitch <stitch@aero.bot>",
-    "Rxsto <rxsto@aero.bot>  (https://rxsto.me)",
-    "Stu <stu@aero.bot> (https://stu-dev.me)"
-  ],
-  "license": "BSD-3-Clause",
-  "scripts": {
-    "dev": "node .",
-    "start": "NODE_ENV=production node ."
-  },
-  "dependencies": {
-    "breadtags": "^2.1.0",
-    "canvas": "^2.6.0",
-    "canvas-constructor": "^3.1.0",
-    "discord-md-tags": "^0.0.6",
-    "discord.js": "github:discordjs/discord.js#master",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "fast-html-parser": "^1.0.1",
-    "html-entities": "^1.2.1",
-    "klasa": "github:dirigeants/klasa#settings",
-    "klasa-member-gateway": "github:dirigeants/klasa-member-gateway#settings",
-    "mongodb": "^3.3.0",
-    "superagent": "^5.1.0",
-    "tinycolor2": "^1.4.1",
-    "winston": "^3.2.1",
-    "ws": "^7.1.2"
-  },
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-aero": "git+https://git.farfrom.earth/aero/forks/eslint-config-aero.git"
-  }
+	"type": "module",
+	"name": "aero",
+	"version": "1.0.0",
+	"description": "Aero is an intuitive Discord bot perfect for your server.",
+	"main": "src/index",
+	"repository": "git+https://git.farfrom.earth/aero/aero.git",
+	"author": "The Aero Team <team@aero.bot> (https://aero.bot)",
+	"contributors": [
+		"Ravy <ravy@aero.bot> (https://ravy.xyz)",
+		"Stitch <stitch@aero.bot>",
+		"Rxsto <rxsto@aero.bot>  (https://rxsto.me)",
+		"Stu <stu@aero.bot> (https://stu-dev.me)"
+	],
+	"license": "BSD-3-Clause",
+	"scripts": {
+		"dev": "node .",
+		"lint": "eslint . --fix",
+		"start": "NODE_ENV=production node ."
+	},
+	"dependencies": {
+		"breadtags": "^2.1.0",
+		"canvas": "^2.6.0",
+		"canvas-constructor": "^3.1.0",
+		"discord-md-tags": "^0.0.6",
+		"discord.js": "github:discordjs/discord.js#master",
+		"dotenv": "^8.0.0",
+		"express": "^4.17.1",
+		"fast-html-parser": "^1.0.1",
+		"html-entities": "^1.2.1",
+		"klasa": "github:dirigeants/klasa#settings",
+		"klasa-member-gateway": "github:dirigeants/klasa-member-gateway#settings",
+		"mongodb": "^3.3.0",
+		"superagent": "^5.1.0",
+		"tinycolor2": "^1.4.1",
+		"winston": "^3.2.1",
+		"ws": "^7.1.2"
+	},
+	"devDependencies": {
+		"eslint": "^5.16.0",
+		"eslint-config-aero": "git+https://git.farfrom.earth/aero/forks/eslint-config-aero.git"
+	}
 }

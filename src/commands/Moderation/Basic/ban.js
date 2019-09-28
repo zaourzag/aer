@@ -18,7 +18,6 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [users, duration, purge = false, reason]) {
-
 		const bannable = await this.getBannable(msg.member, users);
 		if (!bannable.length) return msg.responder.error(msg.language.get('COMMAND_BAN_NOPERMS', users.length > 1));
 
@@ -30,11 +29,11 @@ module.exports = class extends Command {
 		await this.executeBans(bannable, duration, reason, purge, soft, msg.guild, moderator);
 		await this.logBans(msg.guild, bannable, duration, reason, soft, moderator);
 
-		msg.responder.success();
+		return msg.responder.success();
 	}
 
 	async getBannable(executor, targets) {
-		const ids = new Set(); // cache for filtering duplicate ids in a bulkban
+		const ids = new Set();
 		targets.forEach(async target => await executor.guild.members.fetch(target.id).catch(() => null));
 		return targets
 			.filter(target => {
@@ -49,13 +48,13 @@ module.exports = class extends Command {
 	async executeBans(users, duration, reason, purge, soft, guild, moderator) {
 		for (const user of users) {
 			guild.modCache.add(user.id);
-			await guild.members.ban(user.id, { reason: `${duration ? `[temp]` : ''} ${moderator.tag} | ${reason || guild.language.get('COMMAND_BAN_NOREASON')}`, days: (purge) ? 1 : 0 });
+			await guild.members.ban(user.id, { reason: `${duration ? `[temp]` : ''} ${moderator.tag} | ${reason || guild.language.get('COMMAND_BAN_NOREASON')}`, days: purge ? 1 : 0 });
 			if (soft) {
 				guild.modCache.add(user.id);
 				await guild.members.unban(user.id, guild.language.get('COMMAND_BAN_SOFTBANRELEASED'));
 			}
 		}
-		if (duration) this.client.schedule.create('endTempban', duration, { data: { users: users.map(u => u.id), guild: guild.id } });
+		if (duration) this.client.schedule.create('endTempban', duration, { data: { users: users.map(user => user.id), guild: guild.id } });
 	}
 
 	logBans(guild, bannable, duration, reason, soft, moderator) {
@@ -66,7 +65,7 @@ module.exports = class extends Command {
 				: soft
 					? 'softban'
 					: 'ban';
-		action === 'bulkBan'
+		return action === 'bulkBan'
 			? guild.log.bulkBan({ users: bannable, reason, duration, moderator })
 			: guild.log[action]({ user: bannable[0], reason, duration, moderator });
 	}

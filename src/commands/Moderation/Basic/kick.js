@@ -20,11 +20,13 @@ module.exports = class extends Command {
 	async run(msg, [users, reason]) {
 		const kickable = await this.getKickable(msg.member, users);
 		await this.executeKicks(kickable, reason, msg.guild, msg.author);
+		await this.logKick(msg.guild, kickable.map(member => member.user), reason, msg.author);
 
+		return msg.responder.success();
 	}
 
 	async getKickable(executor, targets) {
-		const ids = new Set(); // cache for filtering duplicate ids in a bulk kick
+		const ids = new Set();
 		return targets
 			.filter(target => {
 				if (ids.has(target.id)) return false;
@@ -45,7 +47,7 @@ module.exports = class extends Command {
 			user: users.length === 1 ? users[0] : null,
 			users: users.length > 1 ? users : null,
 			reason, moderator
-		})
+		});
 	}
 
 
