@@ -44,7 +44,22 @@ module.exports = class extends Language {
 			COMMAND_PERMS_SUCCESS_DENY: (permission, target) => `Denied ${code`${permission}`} from ${target.displayName || target.username || target}`,
 			COMMAND_PERMS_SUCCESS_REMOVE: (permission, target) => `Unset ${code`${permission}`} for ${target.displayName || target.username || target}`,
 			COMMAND_PERMS_SUCCESS_CLEAR: 'Cleared permission entries.',
-
+			COMMAND_LOG_DESCRIPTION: [
+				'Configures logging. Possible types:',
+				'- messages',
+				'- moderation',
+				'- members',
+			],
+			COMMAND_LOG_REASON: 'Initializing logging',
+			COMMAND_LOG_SUCCESS: (type, channel) => `Now logging ${bold`${type}`} in ${channel}.`,
+			COMMAND_LOG_DISPLAY_NOCHANNEL: type => `Not logging ${bold`${type}`}.`,
+			COMMAND_LOG_DISPLAY_ONE: (type, channel) => `Currently logging ${bold`${type}`} in ${channel}.`,
+			COMMAND_ANTI_DESCRIPTION: 'Configures auto moderation settings.',
+			COMMAND_ANTI_DISPLAY_ONE: (type, enabled) => `**Anti-${type}** is currently **${enabled ? 'enabled' : 'disabled'}**.`,
+			COMMAND_ANTI_NOTYPE: 'No auto moderation type specified.',
+			COMMAND_ANTI_SUCCESS: (type, enabled) => `Successfully **${enabled ? 'enabled' : 'disabled'}** filtering **${type}**.`,
+			COMMAND_EXEMPT_DESCRIPTION: 'Exempt a user/role/channel from being filtered by automod.',
+			COMMAND_UNEXEMPT_DESCRIPTION: 'Remove the exemption of a user/role/channel from automod.',
 
 			// fun commands
 			COMMAND_8BALL_DESCRPTION: 'Magic 8-Ball, does exactly what the toy does.',
@@ -148,16 +163,6 @@ module.exports = class extends Language {
 			COMMAND_LOCK_REASON: 'Channel locked.',
 			COMMAND_UNLOCK_DESCRIPTION: 'Re-allows users to write messages in a channel.',
 			COMMAND_UNLOCK_REASON: 'Channel unlocked.',
-			COMMAND_LOG_DESCRIPTION: [
-				'Configures logging. Possible types:',
-				'- messages',
-				'- moderation',
-				'- members',
-			],
-			COMMAND_LOG_REASON: 'Initializing logging',
-			COMMAND_LOG_SUCCESS: (type, channel) => `Now logging ${bold`${type}`} in ${channel}.`,
-			COMMAND_LOG_DISPLAY_NOCHANNEL: type => `Not logging ${bold`${type}`}.`,
-			COMMAND_LOG_DISPLAY_ONE: (type, channel) => `Currently logging ${bold`${type}`} in ${channel}.`,
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
