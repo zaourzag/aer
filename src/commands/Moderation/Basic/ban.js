@@ -48,6 +48,7 @@ module.exports = class extends Command {
 	async executeBans(users, duration, reason, purge, soft, guild, moderator) {
 		for (const user of users) {
 			guild.modCache.add(user.id);
+			if (!duration) this.updateSchedule(user);
 			await guild.members.ban(user.id, { reason: `${duration ? `[temp]` : ''} ${moderator.tag} | ${reason || guild.language.get('COMMAND_BAN_NOREASON')}`, days: purge ? 1 : 0 });
 			if (soft) {
 				guild.modCache.add(user.id);
@@ -68,6 +69,16 @@ module.exports = class extends Command {
 		return action === 'bulkBan'
 			? guild.log.bulkBan({ users: bannable, reason, duration, moderator })
 			: guild.log[action]({ user: bannable[0], reason, duration, moderator });
+	}
+
+	updateSchedule(user) {
+		const unbanTask = this.client.schedule.tasks.find(task => task.data.users.includes(user.id));
+		if (!unbanTask) return;
+		const { time, data } = unbanTask;
+		this.client.schedule.delete(unbanTask.id);
+		data.users = data.users.filter(id => id !== user.id);
+		if (data.users.length !== 0)
+			this.client.schedule.create('endTempban', time, { data });
 	}
 
 

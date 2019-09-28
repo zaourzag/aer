@@ -135,6 +135,10 @@ module.exports = class extends Language {
 			COMMAND_MUTE_NOREASON: 'no reason specified',
 			COMMAND_MUTE_ROLE_DEFAULT: 'Silenced',
 			COMMAND_MUTE_ROLE_REASON: 'Initializing mute functionality.',
+			COMMAND_MUTE_TEMPMUTERELEASED: 'temporary mute released',
+			COMMAND_UNBAN_DESCRIPTION: 'Removes the ban(s) for one or more users.',
+			COMMAND_UNBAN_NOPERMS: multiple => `You cannot unban ${multiple ? 'any of the specified users' : 'the specified user'}.`,
+			COMMAND_UNBAN_NOREASON: 'no reason specified',
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',

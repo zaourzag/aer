@@ -11,7 +11,7 @@ module.exports = class extends Task {
 		});
 		return users.length > 1
 			? _guild.log.tempbanEnd({ users })
-			: _guild.log.tempBanEnd({ user: users[0] });
+			: _guild.log.tempbanEnd({ user: users[0] });
 	}
 
 };
