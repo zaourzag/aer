@@ -144,6 +144,10 @@ module.exports = class extends Language {
 			COMMAND_UNMUTE_NOREASON: 'no reason specified',
 			COMMAND_WARN_DESCRIPTION: 'Warn one or more users for their actions.',
 			COMMAND_WARN_NOREASON: 'no reason specified',
+			COMMAND_LOCK_DESCRIPTION: 'Denies users from writing messages in a channel.',
+			COMMAND_LOCK_REASON: 'Channel locked.',
+			COMMAND_UNLOCK_DESCRIPTION: 'Re-allows users to write messages in a channel.',
+			COMMAND_UNLOCK_REASON: 'Channel unlocked.',
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
