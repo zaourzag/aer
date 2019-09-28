@@ -23,7 +23,7 @@ module.exports = class extends Command {
 				SEND_MESSAGES: null,
 				ADD_REACTIONS: null
 			},
-			this.guild.language.get('COMMAND_UNLOCK_REASON')
+			msg.guild.language.get('COMMAND_UNLOCK_REASON')
 		);
 		return msg.responder.unlock();
 	}

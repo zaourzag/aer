@@ -23,7 +23,7 @@ module.exports = class extends Command {
 				SEND_MESSAGES: false,
 				ADD_REACTIONS: false
 			},
-			this.guild.language.get('COMMAND_LOCK_REASON')
+			msg.guild.language.get('COMMAND_LOCK_REASON')
 		);
 		return msg.responder.lock();
 	}
