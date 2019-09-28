@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -128,7 +128,13 @@ module.exports = class extends Language {
 			COMMAND_BAN_NOREASON: 'no reason specified',
 			COMMAND_BAN_TEMPBANRELEASED: 'temporary ban released',
 			COMMAND_KICK_DESCRIPTION: 'Kicks one or more users with an optional reason.',
+			COMMAND_KICK_NOPERMS: multiple => `You cannot kick ${multiple ? 'any of the specified users' : 'the specified user'}.`,
 			COMMAND_KICK_NOREASON: 'no reason specified',
+			COMMAND_MUTE_DESCRIPTION: 'Mutes one or more users with an optional reason.',
+			COMMAND_MUTE_NOPERMS: multiple => `You cannot mute ${multiple ? 'any of the specified users' : 'the specified user'}.`,
+			COMMAND_MUTE_NOREASON: 'no reason specified',
+			COMMAND_MUTE_ROLE_DEFAULT: 'Silenced',
+			COMMAND_MUTE_ROLE_REASON: 'Initializing mute functionality.',
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',

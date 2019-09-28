@@ -31,7 +31,7 @@ module.exports = class extends Command {
 		if (entry.type === 'Folder') {
 			return message.sendLocale('COMMAND_CONF_SERVER', [
 				key ? `: ${key.split('.').map(toTitleCase).join('/')}` : '',
-				codeBlock('asciidoc', message.guild.settings.display(message, entry))
+				codeBlock('md', this.display(message, entry, message.guild.settings))
 			]);
 		}
 		return message.sendLocale('COMMAND_CONF_GET', [entry.path, message.guild.settings.display(message, entry)]);
@@ -66,6 +66,45 @@ module.exports = class extends Command {
 		} catch (__) {
 			return undefined;
 		}
+	}
+
+	display(message, path, settings) {
+		const entry = path ? typeof path === 'string' ? settings.schema.get(settings.relative(path)) : path : settings.schema;
+
+		if (entry.type !== 'Folder') {
+			const value = path ? settings.get(settings.schema.path ? entry.path.slice(settings.schema.path + 1) : entry.path) : settings;
+			if (value === null) return 'Not set';
+			if (entry.array) return value.length ? `[ ${value.map(val => entry.serializer.stringify(val, message)).join(' | ')} ]` : 'None';
+			return entry.serializer.stringify(value, message);
+		}
+
+		const array = [];
+		const folders = [];
+		const sections = new Map();
+		let longest = 0;
+		for (const [key, value] of entry.entries()) {
+			if (value.type === 'Folder') {
+				if (value.configurableKeys.length) folders.push(` <${key}>`);
+			} else if (value.configurable) {
+				if (key.length > longest) longest = key.length;
+				const values = sections.get(value.type) || [];
+				if (!values.length) sections.set(value.type, values);
+				values.push(key);
+			}
+		}
+		if (folders.length) array.push(...folders.sort(), '');
+		if (sections.size) {
+			for (const keyType of [...sections.keys()].sort()) {
+				array.push(...sections.get(keyType).sort().map(key => `${` ${key} >`.padStart(longest + 3, '─')} ${this.display(message, entry.get(key), settings)}`));
+			}
+		}
+		return array.filter((obj, idx) => obj.length || idx !== array.length - 1).map((obj, idx, arr) => {
+			return idx === arr.length - 1
+				? ` └──${obj}`
+				: obj.length
+					? ` ├──${obj}`
+					: ` │`
+		}).join('\n');
 	}
 
 };
