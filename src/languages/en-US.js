@@ -340,7 +340,20 @@ module.exports = class extends Language {
 			LOG_ARGS_USERS: users => `**users:**\n${users}`,
 			LOG_ARGS_MODERATOR: (tag, mention, id) => `**moderator:**\n${tag} ${mention} [${id}]`,
 			LOG_ARGS_REASON: reason => `**reason:**\n${reason}`,
-			LOG_ARGS_DURATION: duration => `**duration:**\n${duration}`
+			LOG_ARGS_DURATION: duration => `**duration:**\n${duration}`,
+			LOG_ARGS_MESSAGE: (content, attachments) => `**message:**\n${content}${attachments.length ? `\n${attachments.join('\n')}` : ''}`,
+			LOG_ARGS_MESSAGES: (oldContent, oldAttachments, newContent, newAttachments) => [
+				'**before:**',
+				oldContent,
+				oldAttachments.length
+					? oldAttachments.join('\n')
+					: null,
+				'**after:**',
+				newContent,
+				newAttachments.length
+					? newAttachments.join('\n')
+					: null,
+			].filter(item => item !== null).join('\n')
 
 		};
 	}

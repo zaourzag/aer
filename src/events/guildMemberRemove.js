@@ -20,7 +20,7 @@ module.exports = class extends Event {
 				.sort((a, b) => parseInt(BigInt(a.id) - BigInt(b.id)))
 				.last()
 			).catch(() => null);
-		if (!kick) return false;
+		if (!kick) return guild.log.memberLeft({ member });
 		const now = new Date();
 		const then = deconstruct(kick.id).date;
 		const diff = Math.abs(now.getTime() - then.getTime());
