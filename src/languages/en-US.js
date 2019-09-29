@@ -46,9 +46,9 @@ module.exports = class extends Language {
 			COMMAND_PERMS_SUCCESS_CLEAR: 'Cleared permission entries.',
 			COMMAND_LOG_DESCRIPTION: [
 				'Configures logging. Possible types:',
-				'- messages',
-				'- moderation',
-				'- members',
+				'• messages',
+				'• moderation',
+				'• members',
 			],
 			COMMAND_LOG_REASON: 'Initializing logging',
 			COMMAND_LOG_SUCCESS: (type, channel) => `Now logging ${bold`${type}`} in ${channel}.`,
@@ -60,6 +60,16 @@ module.exports = class extends Language {
 			COMMAND_ANTI_SUCCESS: (type, enabled) => `Successfully **${enabled ? 'enabled' : 'disabled'}** filtering **${type}**.`,
 			COMMAND_EXEMPT_DESCRIPTION: 'Exempt a user/role/channel from being filtered by automod.',
 			COMMAND_UNEXEMPT_DESCRIPTION: 'Remove the exemption of a user/role/channel from automod.',
+			COMMAND_RAID_DESCRIPTION: 'Configures raid prevention settings.',
+			COMMAND_RAID_HOWTO: (username, prefix) => [
+				`${username} features **automatic raid prevention**.`,
+				'This includes a global ban system powered by <https://api.ksoft.si> and various detection techniques.',
+				"Though, we will never ban anyone without your okay. Thus, you\'ll have to define a channel where we can ask you.",
+				`This is easily done using ${code`${prefix}raid <channel>`}.`,
+				'That channel will then receive all updates and prompts upon raids.'
+			],
+			COMMAND_RAID_SUCCESS: channel => `Raid prevention is now **enabled**. Logging raid attempts in ${channel}.`,
+			COMMAND_RAID_DISABLE: 'Raid prevention is now **disabled**.',
 
 			// fun commands
 			COMMAND_8BALL_DESCRPTION: 'Magic 8-Ball, does exactly what the toy does.',
@@ -176,10 +186,10 @@ module.exports = class extends Language {
 			COMMAND_EVAL_EXTENDEDHELP: [
 				'The eval command evaluates code as-in, any error thrown from it will be handled.',
 				'It also uses the flags feature. Write --silent, --depth=number or --async to customize the output.',
-				'The --silent flag will make it output nothing.',
-				"The --depth flag accepts a number, for example, --depth=2, to customize util.inspect's depth.",
-				'The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.',
-				'The --showHidden flag will enable the showHidden option in util.inspect.',
+				'• The --silent flag will make it output nothing.',
+				"• The --depth flag accepts a number, for example, --depth=2, to customize util.inspect's depth.",
+				'• The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.',
+				'• The --showHidden flag will enable the showHidden option in util.inspect.',
 				'If the output is too large, it\'ll send the output as a file, or in the console if the bot does not have the ATTACH_FILES permission.'
 			].join('\n'),
 			COMMAND_EVAL_ERROR: (time, output, type) => `**Error**:${output}\n**Type**:${type}\n${time}`,
@@ -257,11 +267,11 @@ module.exports = class extends Language {
 			COMMAND_CONF_USER: (key, list) => `**User Settings${key}**\n${list}`,
 			COMMAND_STATS: (name, memUsage, memTotal, memPercentage, cpuUsage, cpuCount, cpuSpeed, uptime, klasaVersion, discordVersion, processVersion, hostname, currentShard, totalShards) => [
 				`${name} is currently using`,
-				`- ${bold`${memPercentage}% of RAM`} (${memUsage} / ${memTotal} MB) and`,
-				`- ${bold`${cpuUsage}% of CPU`} (${cpuCount}c @ ${cpuSpeed}GHz).`,
+				`• ${bold`${memPercentage}% of RAM`} (${memUsage} / ${memTotal} MB) and`,
+				`• ${bold`${cpuUsage}% of CPU`} (${cpuCount}c @ ${cpuSpeed}GHz).`,
 				"It's been running",
-				`- for ${bold`${uptime}`} on ${bold`${hostname}`} (${bold`shard ${currentShard}`} / ${totalShards})`,
-				`- using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
+				`• for ${bold`${uptime}`} on ${bold`${hostname}`} (shard ${currentShard} / ${totalShards})`,
+				`• using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
 

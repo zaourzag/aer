@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			requiredPermissions: ['MANAGE_MESSAGES'],
 			aliases: ['ignore'],
 			description: language => language.get('COMMAND_EXEMPT_DESCRIPTION'),
-			usage: '<user:user|role:role|channel:textchannel>'
+			usage: '<user:user|role:role|channel:textChannel>'
 		});
 
 		this.defaultPermissions = FLAGS.ADMINISTRATOR;
