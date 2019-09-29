@@ -16,6 +16,9 @@ module.exports = class extends Monitor {
 		if (!msg.guild || !msg.guild.settings.get('mod.anti.duplicates') || msg.exempt) return;
 		if (msg.content === msg.member.lastContent) {
 			msg.delete();
+			if (msg.member.duplicateCount > 4) {
+				this.client.emit('raid', msg.guild, [msg.member]);
+			}
 			msg.member.duplicateCount++;
 		} else {
 			msg.member.lastContent = msg.content;
