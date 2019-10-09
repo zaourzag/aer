@@ -1,5 +1,5 @@
 const { Language, util } = require('klasa');
-const { bold, code } = require('discord-md-tags');
+const { bold, code, underline } = require('discord-md-tags');
 
 module.exports = class extends Language {
 
@@ -70,6 +70,8 @@ module.exports = class extends Language {
 			],
 			COMMAND_RAID_SUCCESS: channel => `Raid prevention is now **enabled**. Logging raid attempts in ${channel}.`,
 			COMMAND_RAID_DISABLE: 'Raid prevention is now **disabled**.',
+			COMMAND_PREFIX_DESCRIPTION: 'Changes the prefix.',
+			COMMAND_PREFIX_SUCCESS: prefix => `Updated this server's prefix to ${code`${prefix}`}.`,
 
 			// fun commands
 			COMMAND_8BALL_DESCRPTION: 'Magic 8-Ball, does exactly what the toy does.',
@@ -274,6 +276,17 @@ module.exports = class extends Language {
 				`• using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
+
+			// events
+			EVENT_RAID_TITLE: (success, error) => [
+				underline`Possible raid attempt detected.`,
+				`React with ${success} to ban the users.`,
+				`React with ${error} to mark this as a false alarm.`
+			].join('\n'),
+			EVENT_RAID_PREVENTED: 'Successfully prevented raid',
+			EVENT_RAID_USERS_TITLE: 'Involved users',
+			EVENT_RAID_BANREASON: 'Automatic raid prevention.',
+			EVENT_GLOBALBAN_REASON: 'Globally banned user.',
 
 			SETTING_GATEWAY_EXPECTS_GUILD: 'The parameter <Guild> expects either a Guild or a Guild Object.',
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,

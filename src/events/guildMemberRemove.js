@@ -24,7 +24,6 @@ module.exports = class extends Event {
 		const now = new Date();
 		const then = deconstruct(kick.id).date;
 		const diff = Math.abs(now.getTime() - then.getTime());
-		console.log({ now, then, diff });
 		return kick && diff < 120 * 1000
 			? guild.log.kick({ user, reason: kick.reason, moderator: kick.executor })
 			: guild.log.memberLeft({ member });

@@ -17,7 +17,8 @@ module.exports = class extends Monitor {
 		if (msg.content === msg.member.lastContent) {
 			msg.delete();
 			if (msg.member.duplicateCount > 4) {
-				this.client.emit('raid', msg.guild, [msg.member]);
+				msg.member.mute('Possible raid.');
+				this.client.emit('raid', msg.guild, [msg.member.id]);
 			}
 			msg.member.duplicateCount++;
 		} else {

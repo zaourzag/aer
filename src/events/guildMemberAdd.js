@@ -13,7 +13,10 @@ module.exports = class extends Event {
 		member.guild.joinCache.add(member.id);
 		setTimeout(() => { member.guild.joinCache.delete(member.id) }, 20000);
 		if (member.guild.joinCache.size >= 50) this.client.emit('raid', member.guild, [...member.guild.joinCache]);
-		return member.guild.log.memberJoined({ member });
+		await member.guild.log.memberJoined({ member });
+		const globalBanned = await this.client.ksoft.bans.check(member.id);
+		if (globalBanned) this.client.emit('globalBan', member);
+		return member;
 	}
 
 };

@@ -30,6 +30,7 @@
 		"html-entities": "^1.2.1",
 		"klasa": "github:dirigeants/klasa#settings",
 		"klasa-member-gateway": "github:dirigeants/klasa-member-gateway#settings",
+		"ksoft.js": "^2.1.2",
 		"mongodb": "^3.3.0",
 		"saslprep": "^1.0.3",
 		"superagent": "^5.1.0",
