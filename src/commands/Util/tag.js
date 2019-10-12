@@ -30,7 +30,7 @@ module.exports = class extends Command {
 		return msg.send(msg.language.get('COMMAND_TAG_REMOVED', tag));
 	}
 
-	view(msg, [tag]) {
+	view(msg, [tag = '']) {
 		const emote = msg.guild.settings.get('tags').find(([name]) => name === tag.toLowerCase());
 		if (!emote) throw msg.language.get('COMMAND_TAG_NOEXIST');
 		return msg.send(util.codeBlock('', emote[1]));
@@ -38,7 +38,7 @@ module.exports = class extends Command {
 
 	list(msg) {
 		if (!msg.guild.settings.get('tags').length) throw msg.language.get('COMMAND_TAG_NOTAGS');
-		const { tags } = msg.guild.settings;
+		const tags = msg.guild.settings.get('tags');
 		const output = [`**${msg.guild.name} Tags** (Total ${tags.length})`, '```asciidoc'];
 		for (const [index, [tag, value]] of tags.entries()) {
 			output.push(`${index + 1}. ${tag} :: ${trimString(value, 30)}`);
