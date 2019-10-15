@@ -22,5 +22,5 @@ module.exports = {
 			db: `aero${production ? '' : '-dev'}`
 		}
 	},
-	typing: true
+	typing: false
 };
