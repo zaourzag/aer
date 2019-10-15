@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			requiredPermissions: ['MANAGE_MESSAGES'],
 			aliases: ['automod'],
 			description: language => language.get('COMMAND_ANTI_DESCRIPTION'),
-			usage: '[invites|duplicates|copypastas] [enable|disable]',
+			usage: '[invites|duplicates|copypastas|hoisting|unmentionable] [enable|disable]',
 			usageDelim: ' '
 		});
 
@@ -21,7 +21,7 @@ module.exports = class extends Command {
 		if (!action) return this.displaySettings(msg, type);
 		if (!type) return msg.responder.error('COMMAND_ANTI_NOTYPE');
 		await msg.guild.settings.update(`mod.anti.${type}`, action === 'enable');
-		return msg.responder.success(msg.language.get('COMMAND_ANTI_SUCCESS', type, action === 'enable'));
+		return msg.responder.success(msg.language.get('COMMAND_ANTI_SUCCESS', type, action === 'enable', ['hoisting', 'unmentionable'].includes(type)));
 	}
 
 	async displaySettings(msg, type) {

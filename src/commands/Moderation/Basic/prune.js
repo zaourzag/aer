@@ -8,6 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			requiredPermissions: ['MANAGE_MESSAGES'],
 			runIn: ['text'],
+			aliases: ['p'],
 			description: 'Prunes a certain amount of messages w/o filter.',
 			usage: '[limit:integer] [link|invite|bots|you|me|upload|user:user]',
 			usageDelim: ' '
@@ -21,7 +22,7 @@ module.exports = class extends Command {
 		if (filter) {
 			const user = typeof filter !== 'string' ? filter : null;
 			const type = typeof filter === 'string' ? filter : 'user';
-			messages = messages.filter(this.getFilter(msg, type, user));
+			messages = messages.filter(this.getFilter(msg, type, user)).filter(mes => !mes.pinned);
 		}
 		if (messages.has(msg.id)) limit++;
 		messages = messages.keyArray().slice(0, limit);
