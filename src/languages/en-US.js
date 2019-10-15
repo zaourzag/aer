@@ -90,6 +90,12 @@ module.exports = class extends Language {
 			COMMAND_COLOR_NOCOLOR: 'You need to provide a valid color to display.',
 			COMMAND_COLOR_INVALIDCOLOR: 'You provided an invalid color!',
 			COMMAND_COLOR_DESCRIPTION: 'Outputs the chosen color from hex.',
+			COMMAND_CUDDLE_SELF: user => `${user} cuddled themselves. How is that even possible.`,
+			COMMAND_CUDDLE_SOMEONE: (from, to) => `${from} cuddled ${to}. How cute. 💕`,
+			COMMAND_CUDDLE_DESCRIPTION: `Cuddle with someone! Please!`,
+			COMMAND_HUG_SELF: user => `${user} hugged themselves. How awkward.`,
+			COMMAND_HUG_SOMEONE: (from, to) => `${from} hugged ${to}. How cute. 💕`,
+			COMMAND_HUG_DESCRIPTION: 'Give someone a hug! Yes. Be nice.',
 			COMMAND_KISS_DESCRIPTION: 'Kiss somebody you really like.',
 			COMMAND_KISS_SELF: user => `${user} kissed themselves. I have no idea how and why.`,
 			COMMAND_KISS_SOMEONE: (from, to) => `${from} gave ${to} a kiss. How cute. 💕`,
@@ -130,7 +136,7 @@ module.exports = class extends Language {
 			COMMAND_USERINFO_JOINED_DISCORD: (joinedAt, joinDuration) => `Joined Discord on ${joinedAt} (${joinDuration} ago)`,
 			COMMAND_USERINFO_JOINED_GUILD: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
 			COMMAND_USERINFO_CREATED_GUILD: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
-
+			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',
 			COMMAND_DAILY_COOLDOWN: time => `You've already collected your daily reward. You can collect it again in ${time}`,
