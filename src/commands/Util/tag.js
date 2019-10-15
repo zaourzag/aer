@@ -19,6 +19,7 @@ module.exports = class extends Command {
 
 	async add(msg, [tag, ...content]) {
 		if (!tag || !content) throw msg.language.get('COMMAND_TAG_EMPTY');
+		if (msg.guild.settings.get('tags').find(tuple => tuple[0] === tag.toLowerCase())) throw msg.language.get('COMMAND_TAG_EXISTS');
 		content = content.join(this.usageDelim);
 		await msg.guild.settings.update('tags', [...msg.guild.settings.get('tags'), [tag.toLowerCase(), content]], { action: 'overwrite' });
 		return msg.send(msg.language.get('COMMAND_TAG_ADDED', tag, djsUtil.escapeMarkdown(content)));

@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -130,6 +130,7 @@ module.exports = class extends Language {
 			COMMAND_TAG_EMPTY: 'Please include what the tag is supposed to do',
 			COMMAND_TAG_NOEXIST: tag => `The tag \`${tag}\` doesn't exist.`,
 			COMMAND_TAG_NOTAGS: "There don't appear to be any tags configured.",
+			COMMAND_TAG_EXISTS: 'This tag already exists.',
 
 			// misc commands
 			COMMAND_USERINFO_DESCRIPTION: 'Shows information about the mentioned user.',
