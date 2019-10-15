@@ -10,6 +10,10 @@ IMGFLIP_PASS=
 DISCORD_TOKEN=
 
 
+# KSoft.Si Token (https://api.ksoft.si/)
+KSOFT_TOKEN=
+
+
 # Whether to boot a single shard. For development, you wanna set this to true, for production to false.
 BOOT_SINGLE=
 

@@ -6,7 +6,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			description: language => language.get('COMMAND_KISS_DESCRIPTION'),
+			description: language => language.get('COMMAND_HUG_DESCRIPTION'),
 			usage: '<user:username>',
 			requiredPermissions: ['EMBED_LINKS']
 		});
@@ -14,17 +14,17 @@ module.exports = class extends Command {
 
 	async run(msg, [user]) {
 		const result = await c(util.url.NekoAPI)
-        .path('cuddle')
+        .path('hug')
         .send()
         .then(res => res.json);
 		if (user === msg.author) {
 			return msg.sendEmbed(new MessageEmbed()
-				.setDescription(msg.language.get('COMMAND_KISS_SELF', user))
+				.setDescription(msg.language.get('COMMAND_HUG_SELF', user))
 				.setImage(result.url)
 			);
 		} else {
 			return msg.sendEmbed(new MessageEmbed()
-				.setDescription(msg.language.get('COMMAND_KISS_SOMEONE', msg.author, user))
+				.setDescription(msg.language.get('COMMAND_HUG_SOMEONE', msg.author, user))
 				.setImage(result.url)
 			);
 		}

@@ -16,7 +16,7 @@ module.exports = class extends Command {
 			? message.sendLocale('COMMAND_INVITE')
 			: message.sendEmbed(new MessageEmbed()
 				.setAuthor(this.client.user.username, this.client.user.avatarURL())
-				.setDescription(`[Invite Aero](${this.client.invite}) | [Support Server](${this.client.config.supportServer})`)
+				.setDescription(`${message.guild.language.get('COMMAND_INVITE_SUCCESS', this.client.user.username, this.client.invite, this.client.config.supportServer)}`)
 			);
 	}
 

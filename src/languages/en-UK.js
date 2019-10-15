@@ -1,5 +1,5 @@
 const { Language, util } = require('klasa');
-const { bold, code, underline } = require('discord-md-tags');
+const { bold, code } = require('discord-md-tags');
 
 module.exports = class extends Language {
 
@@ -7,7 +7,7 @@ module.exports = class extends Language {
 		super(...args);
 		this.language = {
 
-			DEFAULT: (key) => `${key} has not been localized for en-US yet.`,
+			DEFAULT: (key) => `${key} has not been localised for en-UK yet.`,
 			DEFAULT_LANGUAGE: 'Default Language',
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
@@ -24,7 +24,7 @@ module.exports = class extends Language {
 			TEXT_PROMPT_ABORT_OPTIONS: ['abort', 'stop', 'cancel'],
 
 			// conf commands
-			COMMAND_PERMS_DESCRIPTION: 'Configure usage permission of specific commands for a particular user, roles, or for everyone.',
+			COMMAND_PERMS_DESCRIPTION: 'Configures usage permission of specific commands for a particular user, roles, or for everyone.',
 			COMMAND_PERMS_HELP: [
 				bold`Permission Nodes`,
 				`This permission system is ${bold`node based`}, allowing complete control over what commands users and roles can use.`,
@@ -35,9 +35,9 @@ module.exports = class extends Language {
 				`You can also use wildcards such as ${code`<category>.*`} which includes all commands in the category, and ${code`*`} which includes all commands,`,
 				'',
 				bold`Examples`,
-				`Allow Stitch to use the ping command: ${code`perms allow @Stitch general.ping`}`,
-				`Disallow ravy from using all configuration commands: ${code`perms remove @ravy configuration.*`}`,
-				`Allow admins to use all commands: ${code`perms allow @Admins *`}`
+				`To allow Stitch to use the ping command: ${code`perms allow @Stitch general.ping`}`,
+				`To disallow ravy from using all configuration commands: ${code`perms remove @ravy configuration.*`}`,
+				`To allow admins to use all commands: ${code`perms allow @Admins *`}`
 			],
 			COMMAND_PERMS_MISSING: 'Invalid usage: expecting a target and a permission.',
 			COMMAND_PERMS_SUCCESS_ALLOW: (permission, target) => `Granted ${code`${permission}`} to ${target.displayName || target.username || target}`,
@@ -50,7 +50,7 @@ module.exports = class extends Language {
 				'• moderation',
 				'• members',
 			],
-			COMMAND_LOG_REASON: 'Initializing logging',
+			COMMAND_LOG_REASON: 'Initialising logging',
 			COMMAND_LOG_SUCCESS: (type, channel) => `Now logging ${bold`${type}`} in ${channel}.`,
 			COMMAND_LOG_DISPLAY_NOCHANNEL: type => `Not logging ${bold`${type}`}.`,
 			COMMAND_LOG_DISPLAY_ONE: (type, channel) => `Currently logging ${bold`${type}`} in ${channel}.`,
@@ -59,7 +59,7 @@ module.exports = class extends Language {
 			COMMAND_ANTI_NOTYPE: 'No auto moderation type specified.',
 			COMMAND_ANTI_SUCCESS: (type, enabled) => `Successfully **${enabled ? 'enabled' : 'disabled'}** filtering **${type}**.`,
 			COMMAND_EXEMPT_DESCRIPTION: 'Exempt a user/role/channel from being filtered by automod.',
-			COMMAND_UNEXEMPT_DESCRIPTION: 'Remove the exemption of a user/role/channel from automod.',
+			COMMAND_UNEXEMPT_DESCRIPTION: 'Removes the exemption of a user/role/channel from automod.',
 			COMMAND_RAID_DESCRIPTION: 'Configures raid prevention settings.',
 			COMMAND_RAID_HOWTO: (username, prefix) => [
 				`${username} features **automatic raid prevention**.`,
@@ -70,8 +70,6 @@ module.exports = class extends Language {
 			],
 			COMMAND_RAID_SUCCESS: channel => `Raid prevention is now **enabled**. Logging raid attempts in ${channel}.`,
 			COMMAND_RAID_DISABLE: 'Raid prevention is now **disabled**.',
-			COMMAND_PREFIX_DESCRIPTION: 'Changes the prefix.',
-			COMMAND_PREFIX_SUCCESS: prefix => `Updated this server's prefix to ${code`${prefix}`}.`,
 
 			// fun commands
 			COMMAND_8BALL_DESCRIPTION: 'Magic 8-Ball, does exactly what the toy does.',
@@ -87,16 +85,16 @@ module.exports = class extends Language {
 			COMMAND_COINFLIP_DESCRIPTION: 'Flips one or more coins',
 			COMMAND_COINFLIP_REPLY_MULTIPLE: (coins, heads, tails) => `You flipped ${coins} coins. ${heads} ${heads === '1' ? 'was' : 'were'} heads, and ${tails} ${tails === '1' ? 'was' : 'were'} tails.`,
 			COMMAND_COINFLIP_REPLY_SINGLE: heads => `You flipped ${heads ? 'Heads' : 'Tails'}.`,
-			COMMAND_COLOR_NOCOLOR: 'You need to provide a valid color to display.',
-			COMMAND_COLOR_INVALIDCOLOR: 'You provided an invalid color!',
-			COMMAND_COLOR_DESCRIPTION: 'Outputs the chosen color from hex.',
+			COMMAND_COLOR_NOCOLOR: 'You need to provide a valid colour to display.',
+			COMMAND_COLOR_INVALIDCOLOR: 'You provided an invalid colour!',
+			COMMAND_COLOR_DESCRIPTION: 'Outputs the chosen colour from hex.',
+			COMMAND_KISS_DESCRIPTION: 'Kiss somebody you really like.',
 			COMMAND_CUDDLE_SELF: user => `${user} cuddled themselves. How is that even possible.`,
 			COMMAND_CUDDLE_SOMEONE: (from, to) => `${from} cuddled ${to}. How cute. 💕`,
 			COMMAND_CUDDLE_DESCRIPTION: `Cuddle with someone! Please!`,
 			COMMAND_HUG_SELF: user => `${user} hugged themselves. How awkward.`,
 			COMMAND_HUG_SOMEONE: (from, to) => `${from} hugged ${to}. How cute. 💕`,
-			COMMAND_HUG_DESCRIPTION: 'Give someone a hug! Yes. Be nice.',
-			COMMAND_KISS_DESCRIPTION: 'Kiss somebody you really like.',
+			COMMAND_HUG_DESCRIPTION: 'Give someone a hug! Yes. Be nice.',			
 			COMMAND_KISS_SELF: user => `${user} kissed themselves. I have no idea how and why.`,
 			COMMAND_KISS_SOMEONE: (from, to) => `${from} gave ${to} a kiss. How cute. 💕`,
 			COMMAND_PUN_DESCRIPTION: 'Sends a random pun. (Powered by http://icanhazdadjoke.com)',
@@ -137,6 +135,7 @@ module.exports = class extends Language {
 			COMMAND_USERINFO_JOINED_GUILD: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
 			COMMAND_USERINFO_CREATED_GUILD: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
+
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',
 			COMMAND_DAILY_COOLDOWN: time => `You've already collected your daily reward. You can collect it again in ${time}`,
@@ -167,7 +166,7 @@ module.exports = class extends Language {
 			COMMAND_MUTE_NOPERMS: multiple => `You cannot mute ${multiple ? 'any of the specified users' : 'the specified user'}.`,
 			COMMAND_MUTE_NOREASON: 'no reason specified',
 			COMMAND_MUTE_ROLE_DEFAULT: 'Silenced',
-			COMMAND_MUTE_ROLE_REASON: 'Initializing mute functionality.',
+			COMMAND_MUTE_ROLE_REASON: 'Initialising mute functionality.',
 			COMMAND_MUTE_TEMPMUTERELEASED: 'temporary mute released',
 			COMMAND_UNBAN_DESCRIPTION: 'Removes the ban(s) for one or more users.',
 			COMMAND_UNBAN_NOPERMS: multiple => `You cannot unban ${multiple ? 'any of the specified users' : 'the specified user'}.`,
@@ -193,9 +192,9 @@ module.exports = class extends Language {
 			COMMAND_EVAL_DESCRIPTION: 'Evaluates arbitrary Javascript. Reserved for bot owner.',
 			COMMAND_EVAL_EXTENDEDHELP: [
 				'The eval command evaluates code as-in, any error thrown from it will be handled.',
-				'It also uses the flags feature. Write --silent, --depth=number or --async to customize the output.',
+				'It also uses the flags feature. Write --silent, --depth=number or --async to customise the output.',
 				'• The --silent flag will make it output nothing.',
-				"• The --depth flag accepts a number, for example, --depth=2, to customize util.inspect's depth.",
+				"• The --depth flag accepts a number, for example, --depth=2, to customise util.inspect's depth.",
 				'• The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.',
 				'• The --showHidden flag will enable the showHidden option in util.inspect.',
 				'If the output is too large, it\'ll send the output as a file, or in the console if the bot does not have the ATTACH_FILES permission.'
@@ -257,9 +256,9 @@ module.exports = class extends Language {
 				`curly brackets ${code`{}`} indicate a required argument, square brackets ${code`[]`} an optional argument.`
 			],
 			COMMAND_ENABLE: (type, name) => `+ Successfully enabled ${type}: ${name}`,
-			COMMAND_ENABLE_DESCRIPTION: 'Re-enables or temporarily enables a command/inhibitor/monitor/finalizer. Default state restored on reboot.',
+			COMMAND_ENABLE_DESCRIPTION: 'Re-enables or temporarily enables a command/inhibitor/monitor/finaliser. Default state restored on reboot.',
 			COMMAND_DISABLE: (type, name) => `+ Successfully disabled ${type}: ${name}`,
-			COMMAND_DISABLE_DESCRIPTION: 'Re-disables or temporarily disables a command/inhibitor/monitor/finalizer/event. Default state restored on reboot.',
+			COMMAND_DISABLE_DESCRIPTION: 'Re-disables or temporarily disables a command/inhibitor/monitor/finaliser/event. Default state restored on reboot.',
 			COMMAND_DISABLE_WARN: 'You probably don\'t want to disable that, since you wouldn\'t be able to run any command to enable it again',
 			COMMAND_CONF_NOKEY: 'You must provide a key',
 			COMMAND_CONF_NOVALUE: 'You must provide a value',
@@ -280,20 +279,9 @@ module.exports = class extends Language {
 				`• ${bold`${cpuUsage}% of CPU`} (${cpuCount}c @ ${cpuSpeed}GHz).`,
 				"It's been running",
 				`• for ${bold`${uptime}`} on ${bold`${hostname}`} (shard ${currentShard} / ${totalShards})`,
-				`• using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
+				`• using Node.js ${processVersion}, Discord.js v${discordVersion} and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
-
-			// events
-			EVENT_RAID_TITLE: (success, error) => [
-				underline`Possible raid attempt detected.`,
-				`React with ${success} to ban the users.`,
-				`React with ${error} to mark this as a false alarm.`
-			].join('\n'),
-			EVENT_RAID_PREVENTED: 'Successfully prevented raid',
-			EVENT_RAID_USERS_TITLE: 'Involved users',
-			EVENT_RAID_BANREASON: 'Automatic raid prevention.',
-			EVENT_GLOBALBAN_REASON: 'Globally banned user.',
 
 			SETTING_GATEWAY_EXPECTS_GUILD: 'The parameter <Guild> expects either a Guild or a Guild Object.',
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,
