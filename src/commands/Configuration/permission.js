@@ -8,7 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['perms', 'permissions'],
 			runIn: ['text'],
-			usage: '[allow|deny|show|remove|clear] [target:member|target:role|everyone] [permission:string]',
+			usage: '[allow|deny|show|remove|clear] [member:member|roleid:role|rolename:rolename|everyone] [permission:string]',
 			usageDelim: ' ',
 			description: language => language.get('COMMAND_PERMS_DESCRIPTION')
 		});
