@@ -94,7 +94,7 @@ module.exports = class extends Language {
 			COMMAND_CUDDLE_DESCRIPTION: `Cuddle with someone! Please!`,
 			COMMAND_HUG_SELF: user => `${user} hugged themselves. How awkward.`,
 			COMMAND_HUG_SOMEONE: (from, to) => `${from} hugged ${to}. How cute. 💕`,
-			COMMAND_HUG_DESCRIPTION: 'Give someone a hug! Yes. Be nice.',			
+			COMMAND_HUG_DESCRIPTION: 'Give someone a hug! Yes. Be nice.',
 			COMMAND_KISS_SELF: user => `${user} kissed themselves. I have no idea how and why.`,
 			COMMAND_KISS_SOMEONE: (from, to) => `${from} gave ${to} a kiss. How cute. 💕`,
 			COMMAND_PUN_DESCRIPTION: 'Sends a random pun. (Powered by http://icanhazdadjoke.com)',
@@ -134,6 +134,7 @@ module.exports = class extends Language {
 			COMMAND_USERINFO_JOINED_DISCORD: (joinedAt, joinDuration) => `Joined Discord on ${joinedAt} (${joinDuration} ago)`,
 			COMMAND_USERINFO_JOINED_GUILD: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
 			COMMAND_USERINFO_CREATED_GUILD: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
+			COMMAND_USERINFO_NOROLES: 'none',
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 
 			// social commands

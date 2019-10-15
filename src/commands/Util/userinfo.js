@@ -34,15 +34,18 @@ module.exports = class extends Command {
 				Duration.toNow(member.joinedAt));
 
 			const roles = member.roles.sort((a, b) => b.position - a.position);
+			const roleString = roles
+				.array()
+				.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
+					? acc + (idx !== 0 ? ', ' : '') + role.name
+					: acc,
+					'');
+
+			console.log(roleString, roleString.length)
 			if (roles.size) {
 				embed.addField(
-					`• Role${roles.size > 1 ? `s (${roles.size})` : ''}`,
-					roles
-						.array()
-						.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
-							? acc + (idx !== 0 ? ', ' : '') + role.name
-							: acc,
-						''));
+					`• Role${roles.size > 2 ? `s (${roles.size - 1})` : roles.size === 2 ? '' : 's'}`, roleString.length ? roleString : msg.language.get('COMMAND_USERINFO_NOROLES'));
+
 			}
 		}
 		// add activity specific info
