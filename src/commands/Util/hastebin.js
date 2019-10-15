@@ -20,4 +20,5 @@ module.exports = class extends Command {
 			.then(res => res.json);
 		return msg.send(`${url}/${key}`);
 	}
+
 };

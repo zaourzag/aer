@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-				}`,
+			}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -48,7 +48,7 @@ module.exports = class extends Language {
 				'Configures logging. Possible types:',
 				'• messages',
 				'• moderation',
-				'• members',
+				'• members'
 			],
 			COMMAND_LOG_REASON: 'Initializing logging',
 			COMMAND_LOG_SUCCESS: (type, channel) => `Now logging ${bold`${type}`} in ${channel}.`,
@@ -64,7 +64,7 @@ module.exports = class extends Language {
 			COMMAND_RAID_HOWTO: (username, prefix) => [
 				`${username} features **automatic raid prevention**.`,
 				'This includes a global ban system powered by <https://api.ksoft.si> and various detection techniques.',
-				"Though, we will never ban anyone without your okay. Thus, you\'ll have to define a channel where we can ask you.",
+				"Though, we will never ban anyone without your okay. Thus, you'll have to define a channel where we can ask you.",
 				`This is easily done using ${code`${prefix}raid <channel>`}.`,
 				'That channel will then receive all updates and prompts upon raids.'
 			],
@@ -388,7 +388,7 @@ module.exports = class extends Language {
 				newContent,
 				newAttachments.length
 					? newAttachments.join('\n')
-					: null,
+					: null
 			].filter(item => item !== null).join('\n')
 
 		};

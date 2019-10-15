@@ -1,7 +1,8 @@
 {
 	"extends": "aero",
 	"rules": {
-		"lines-around-comment": "off"
+		"lines-around-comment": "off",
+		"no-unused-expressions": "off"
 	},
 	"globals": {
 		"BigInt": true

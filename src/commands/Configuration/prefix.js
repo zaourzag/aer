@@ -17,7 +17,7 @@ module.exports = class extends Command {
 
 	async run(msg, [prefix]) {
 		await msg.guild.settings.update('prefix', prefix);
-		return msg.responder.success(msg.language.get('COMMAND_PREFIX_SUCCESS', prefix))
+		return msg.responder.success(msg.language.get('COMMAND_PREFIX_SUCCESS', prefix));
 	}
 
 };

@@ -11,7 +11,7 @@ module.exports = class extends Event {
 
 	async run(member) {
 		member.guild.joinCache.add(member.id);
-		setTimeout(() => { member.guild.joinCache.delete(member.id) }, 20000);
+		setTimeout(() => { member.guild.joinCache.delete(member.id); }, 20000);
 		if (member.guild.joinCache.size >= 50) this.client.emit('raid', member.guild, [...member.guild.joinCache]);
 		this.dehoist(member);
 		this.cleanName(member);
@@ -23,7 +23,7 @@ module.exports = class extends Event {
 
 	dehoist(member) {
 		if (!member.guild.settings.get('mod.anti.hoisting')) return;
-		if (member.displayName[0] < "0") member.dehoist();
+		if (member.displayName[0] < '0') member.dehoist();
 	}
 
 	cleanName(member) {

@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const c = require('centra');
-const util = require('../../../lib/util/constants');
+const req = require('centra');
+const { NekoAPI } = require('../../../lib/util/constants').url;
 module.exports = class extends Command {
 
 	constructor(...args) {
@@ -13,10 +13,10 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [user]) {
-		const result = await c(util.url.NekoAPI)
-        .path('hug')
-        .send()
-        .then(res => res.json);
+		const result = await req(NekoAPI)
+			.path('hug')
+			.send()
+			.then(res => res.json);
 		if (user === msg.author) {
 			return msg.sendEmbed(new MessageEmbed()
 				.setDescription(msg.language.get('COMMAND_HUG_SELF', user))
