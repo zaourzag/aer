@@ -11,8 +11,8 @@ module.exports = class extends Event {
 
 	async run(oldMember, newMember) {
 		if (oldMember.displayName === newMember.displayName) return;
-		this.dehoist(newMember);
 		this.cleanName(newMember);
+		this.dehoist(newMember);
 	}
 
 	dehoist(member) {
