@@ -1,5 +1,5 @@
 stages:
-- dependency_scanning
+- test
 - build
 - stage
 - deploy
@@ -32,7 +32,6 @@ stage:
     - kubectl -n aero-staging patch statefulset aero-staging -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"aero-staging\",\"image\":\"${IMAGE}\"}]}}}}"
   only:
     - develop
-
 
 deploy:
   stage: deploy
