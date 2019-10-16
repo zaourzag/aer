@@ -10,7 +10,7 @@ COPY package*.json ./
 
 ENV CXXFLAGS="-w" 
 
-RUN npm ci --loglevel=error
+RUN npm ci
 
 COPY . .
 
