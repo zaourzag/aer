@@ -19,9 +19,16 @@ module.exports = class extends Command {
 
 	async run(msg, [members, reason = msg.language.get('COMMAND_WARN_NOREASON')]) {
 		for (const member of members) {
-			member.settings.update('warns', { reason, moderator: msg.member.id }, { arrayAction: 'add' });
+			member.settings.update('warnings', { reason, moderator: msg.member.id }, { arrayAction: 'add' });
 		}
 		msg.responder.success();
+		const options = {
+			reason,
+			moderator: msg.author
+		};
+		if (members.length > 1) options.users = members.map(member => member.id)
+		else options.user = members[0].user;
+		msg.guild.log.warn(options);
 	}
 
 
