@@ -1,7 +1,7 @@
 const { Command } = require('klasa');
 const { Canvas } = require('canvas-constructor');
 const { readFile } = require('fs-nextra');
-const superagent = require('superagent');
+const req = require('centra-aero');
 
 module.exports = class extends Command {
 
@@ -23,7 +23,7 @@ module.exports = class extends Command {
 		const { points, level } = member.settings;
 		const nextLevel = Math.floor(((level + 1) / 0.2) ** 2);
 		const currLevel = Math.floor((level / 0.2) ** 2);
-		const { body } = await superagent.get(user.displayAvatarURL({ format: 'png' }));
+		const { json: body } = await req(user.displayAvatarURL({ format: 'png' })).send();
 		const progBar = ((points - currLevel) / nextLevel) * 300;
 		const canvas = new Canvas(500, 200);
 		const bg = await readFile(`${process.cwd()}/assets/backgrounds/default.jpg`);

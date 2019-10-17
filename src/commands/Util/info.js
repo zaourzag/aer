@@ -30,8 +30,6 @@ module.exports = class extends Command {
 			.setThumbnail(user.avatarURL())
 			.setColor(member ? member.displayColor : 'RANDOM')
 			.setDescription(msg.language.get('COMMAND_INFO_USER_DISCORDJOIN', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt)))
-			.setFooter(this.client.user.username, this.client.user.avatarURL())
-			.setTimestamp();
 		// add guild specific info if in a guild
 		if (member) {
 			embed.description += msg.language.get(

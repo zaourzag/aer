@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const superagent = require('superagent');
+const req = require('centra-aero');
 
 module.exports = class extends Command {
 
@@ -27,7 +27,7 @@ module.exports = class extends Command {
 
 	async run(msg, [search, resultNum = 0]) {
 		const url = `http://api.urbandictionary.com/v0/define?term=${search}`;
-		const body = await superagent.get(url).then(data => data.body);
+		const body = await req(url).send().then(data => data.json);
 		if (resultNum > 1) resultNum--;
 
 		const result = body.list[resultNum];

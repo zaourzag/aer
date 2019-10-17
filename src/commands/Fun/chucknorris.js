@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { AllHtmlEntities } = require('html-entities');
-const superagent = require('superagent');
+const req = require('centra-aero');
 
 module.exports = class extends Command {
 
@@ -13,8 +13,8 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const { body } = await superagent.get('https://api.icndb.com/jokes/random');
-		return msg.sendMessage(`📢 Chuck Norris joke: **${new AllHtmlEntities().decode(body.value.joke)}**`);
+		const { json } = await req('https://api.icndb.com/jokes/random').send();
+		return msg.sendMessage(`📢 Chuck Norris joke: **${new AllHtmlEntities().decode(json.value.joke)}**`);
 	}
 
 };

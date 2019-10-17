@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const superagent = require('superagent');
+const req = require('centra-aero');
 
 module.exports = class extends Command {
 
@@ -11,11 +11,11 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const { body } = await superagent
-			.get('http://icanhazdadjoke.com')
-			.set('Accept', 'application/json')
+		const { json } = await req('http://icanhazdadjoke.com')
+			.header('Accept', 'application/json')
+			.send()
 			.catch(() => { throw msg.language.get('COMMAND_PUN_APIDOWN'); });
-		return msg.sendMessage(msg.language.get('COMMAND_PUN_REPLY', body.joke));
+		return msg.sendMessage(msg.language.get('COMMAND_PUN_REPLY', json.joke));
 	}
 
 };

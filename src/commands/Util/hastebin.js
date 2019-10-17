@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const centra = require('centra');
+const req = require('centra-aero');
 
 module.exports = class extends Command {
 
@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
 	async run(msg, [code]) {
 		const url = this.client.config.hasteURL;
-		const { key } = await centra(url, 'POST')
+		const { key } = await req(url, 'POST')
 			.path('documents')
 			.body(code)
 			.send()

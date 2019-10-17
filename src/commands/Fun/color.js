@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const superagent = require('superagent');
+const req = require('centra-aero');
 const color = require('tinycolor2');
 
 const toTitleCase = str => str.charAt(0).toUpperCase() + str.slice(1);
@@ -42,9 +42,10 @@ module.exports = class extends Command {
 	}
 
 	async draw(hex) {
-		const { body } = await superagent.get(this.client.config.imagegenURL)
-			.query({ color: encodeURIComponent(hex) });
-		return body;
+		const { json } = await req(this.client.config.imagegenURL)
+			.query({ color: encodeURIComponent(hex) })
+			.send()
+		return json;
 	}
 
 };

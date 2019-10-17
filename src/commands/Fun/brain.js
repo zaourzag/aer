@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const superagent = require('superagent');
+const req = require('centra-aero');
 const { BRAIN_MEME_ID } = require('../../../lib/util/constants');
 
 module.exports = class extends Command {
@@ -14,8 +14,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [...sentences]) {
-		const { body } = await superagent
-			.get('https://api.imgflip.com/caption_image')
+		const { json } = await req('https://api.imgflip.com/caption_image')
 			.query({
 				username: process.env.IMGFLIP_USER,
 				password: process.env.IMGFLIP_PASS,
@@ -26,9 +25,10 @@ module.exports = class extends Command {
 					obj[`boxes[${i}][text]`] = encodeURIComponent(item);
 					return obj;
 				}, {})
-			);
-		if (!body.success) throw msg.language.get('ERROR_GENERIC', body.error_message);
-		return msg.channel.sendFile(body.data.url);
+			)
+			.send();
+		if (!json.success) throw msg.language.get('ERROR_GENERIC', json.error_message);
+		return msg.channel.sendFile(json.data.url);
 	}
 
 };
