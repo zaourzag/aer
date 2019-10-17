@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const c = require('centra');
+const c = require('centra-aero');
 const util = require('../../../lib/util/constants');
 module.exports = class extends Command {
 
@@ -14,9 +14,9 @@ module.exports = class extends Command {
 
 	async run(msg, [user]) {
 		const result = await c(util.url.NekoAPI)
-        .path('feed')
-        .send()
-        .then(res => res.json);
+			.path('feed')
+			.send()
+			.then(res => res.json);
 		if (user === msg.author) {
 			return msg.sendEmbed(new MessageEmbed()
 				.setDescription(msg.language.get('COMMAND_FEED_SELF', user))

@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -140,11 +140,20 @@ module.exports = class extends Language {
 			COMMAND_TAG_EXISTS: 'This tag already exists.',
 
 			// misc commands
-			COMMAND_USERINFO_DESCRIPTION: 'Shows information about the mentioned user.',
-			COMMAND_USERINFO_JOINED_DISCORD: (joinedAt, joinDuration) => `Joined Discord on ${joinedAt} (${joinDuration} ago)`,
-			COMMAND_USERINFO_JOINED_GUILD: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
-			COMMAND_USERINFO_CREATED_GUILD: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
-			COMMAND_USERINFO_NOROLES: 'none',
+			COMMAND_INFO_DESCRIPTION: 'Get information about a user, role, the server, or this bot.',
+			COMMAND_INFO_USER_DISCORDJOIN: (joinedAt, joinDuration) => `Joined Discord on ${joinedAt} (${joinDuration} ago)`,
+			COMMAND_INFO_USER_GUILDJOIN: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
+			COMMAND_INFO_USER_GUILDRCEATE: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
+			COMMAND_INFO_USER_NOROLES: 'none',
+			COMMAND_INFO_BOT: () => [
+				`${this.client.user.username} is a bot for intuitive community management.`,
+				'',
+				'It features 🛠 extensive moderation, 🎮 fun games, and a lot of other useful things.',
+				`If you have a cool idea, feel free to share it on our [support server](${this.client.config.supportServer}) or directly [PR it](${this.client.config.repoURL}).`,
+				'',
+				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
+				`Thank you for using ${this.client.user.username} ♥`
+			],
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 
 			// social commands
@@ -246,16 +255,6 @@ module.exports = class extends Language {
 			],
 			COMMAND_INVITE_SUCCESS: (name, invite, discord) => `[Invite ${name}](${invite}) | [Support Server](${discord})`,
 			COMMAND_INVITE_DESCRIPTION: 'Displays the invite link of the bot, to invite it to your guild.',
-			COMMAND_INFO: () => [
-				`${this.client.user.username} is a bot for intuitive community management.`,
-				'',
-				'It features 🛠 extensive moderation, 🎮 fun games, and a lot of other useful things.',
-				`If you have a cool idea, feel free to share it on our [support server](${this.client.config.supportServer}) or directly [PR it](${this.client.config.repoURL}).`,
-				'',
-				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
-				`Thank you for using ${this.client.user.username} ♥`
-			],
-			COMMAND_INFO_DESCRIPTION: 'Provides some information about this bot.',
 			COMMAND_HELP_DESCRIPTION: 'Display help for a command.',
 			COMMAND_HELP_SERVERONLY: 'Server only',
 			COMMAND_HELP_FOOTER: prefix => `for more help run ${prefix}help usage`,

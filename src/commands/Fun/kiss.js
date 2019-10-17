@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const req = require('centra');
+const req = require('centra-aero');
 const { NekoAPI } = require('../../../lib/util/constants').url;
 module.exports = class extends Command {
 
