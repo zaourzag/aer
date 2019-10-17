@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2019 dirigeants. All rights reserved. MIT license.
+// Derived from klasa-pieces (c) 2017-2019 dirigeants / MIT license.
 const { Argument, util: { regExpEsc } } = require('klasa');
 const { Channel, Message } = require('discord.js');
 
@@ -33,11 +33,8 @@ module.exports = class extends Argument {
 			querySearch = results;
 		}
 
-		switch (querySearch.length) {
-			case 0: throw `${possible.name} Must be a valid name, id or channel mention`;
-			case 1: return querySearch[0];
-			default: throw `Found multiple matches: \`${querySearch.map(channel => channel.name).join('`, `')}\``;
-		}
+		if (querySearch.length) return querySearch[0];
+		throw `${possible.name} Must be a valid name, id or channel mention`;
 	}
 
 };
