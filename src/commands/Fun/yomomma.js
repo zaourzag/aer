@@ -12,7 +12,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const { json } = await req('http://api.yomomma.info').send();
+		const { json } = await req('https://api.yomomma.info').send();
 		return msg.sendMessage(bold`📢 Yomomma joke: *${json.joke}*`);
 	}
 

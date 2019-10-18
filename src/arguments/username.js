@@ -43,4 +43,4 @@ module.exports = class extends Argument {
 		throw `${possible.name} Must be a valid name, id or user mention`;
 	}
 
-}
+};

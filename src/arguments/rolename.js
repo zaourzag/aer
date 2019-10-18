@@ -33,4 +33,5 @@ module.exports = class extends Argument {
 		if (querySearch.length) return querySearch[0];
 		throw `${possible.name} Must be a valid name, id or role mention`;
 	}
-}
+
+};

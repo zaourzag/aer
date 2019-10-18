@@ -29,7 +29,7 @@ module.exports = class extends Command {
 			.setAuthor(`${user.tag} [${user.id}]`, user.avatarURL())
 			.setThumbnail(user.avatarURL())
 			.setColor(member ? member.displayColor : 'RANDOM')
-			.setDescription(msg.language.get('COMMAND_INFO_USER_DISCORDJOIN', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt)))
+			.setDescription(msg.language.get('COMMAND_INFO_USER_DISCORDJOIN', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt)));
 		// add guild specific info if in a guild
 		if (member) {
 			embed.description += msg.language.get(
@@ -44,7 +44,7 @@ module.exports = class extends Command {
 				.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
 					? acc + (idx !== 0 ? ', ' : '') + role.name
 					: acc,
-					'');
+				'');
 
 			console.log(roleString, roleString.length);
 			if (roles.size) {

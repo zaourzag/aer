@@ -13,6 +13,8 @@ module.exports = class extends Command {
 			usage: '[random|display] [color:str] [...]',
 			usageDelim: ' '
 		});
+
+		this.deprecated = 'Our ImageGen API is not online at this time.';
 	}
 
 	async run(msg, [action, ...hexCode]) {
@@ -44,7 +46,7 @@ module.exports = class extends Command {
 	async draw(hex) {
 		const { json } = await req(this.client.config.imagegenURL)
 			.query({ color: encodeURIComponent(hex) })
-			.send()
+			.send();
 		return json;
 	}
 

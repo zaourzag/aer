@@ -11,7 +11,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const { json } = await req('http://icanhazdadjoke.com')
+		const { json } = await req('https://icanhazdadjoke.com')
 			.header('Accept', 'application/json')
 			.send()
 			.catch(() => { throw msg.language.get('COMMAND_PUN_APIDOWN'); });

@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-				}`,
+			}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -359,6 +359,7 @@ module.exports = class extends Language {
 			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(', ')}** guild setting${settings.length !== 1 ? 's' : ''} and thus the command cannot run.`,
 			INHIBITOR_RUNIN: (types) => `This command is only available in ${types} channels.`,
 			INHIBITOR_RUNIN_NONE: (name) => `The ${name} command is not configured to run in any channel.`,
+			INHIBITOR_DEPRECATED: (reason) => `**This command is currently globally disabled:** ${reason}`,
 
 			LOG_ACTION_BAN: 'user banned',
 			LOG_ACTION_UNBAN: 'user unbanned',

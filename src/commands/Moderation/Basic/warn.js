@@ -26,7 +26,7 @@ module.exports = class extends Command {
 			reason,
 			moderator: msg.author
 		};
-		if (members.length > 1) options.users = members.map(member => member.id)
+		if (members.length > 1) options.users = members.map(member => member.id);
 		else options.user = members[0].user;
 		msg.guild.log.warn(options);
 	}
