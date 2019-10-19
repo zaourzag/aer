@@ -32,7 +32,7 @@
 		"html-entities": "^1.2.1",
 		"klasa": "github:dirigeants/klasa#settings",
 		"klasa-member-gateway": "github:dirigeants/klasa-member-gateway#settings",
-		"ksoft.js": "^2.2.0",
+		"ksoft.js": "^2.2.1",
 		"limax": "^2.0.0",
 		"mongodb": "^3.3.0",
 		"saslprep": "^1.0.3",
