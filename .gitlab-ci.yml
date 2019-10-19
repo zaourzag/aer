@@ -1,5 +1,4 @@
 stages:
-- test
 - build
 - stage
 - deploy
@@ -7,12 +6,6 @@ stages:
 variables:
   IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
   KUBECONFIG: /etc/deploy/config
-
-include:
-  - template: Dependency-Scanning.gitlab-ci.yml
-  - template: SAST.gitlab-ci.yml
-  - template: Code-Quality.gitlab-ci.yml
-  
 
 build:
   stage: build
