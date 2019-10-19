@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -154,6 +154,11 @@ module.exports = class extends Language {
 				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
 				`Thank you for using ${this.client.user.username} ♥`
 			],
+			COMMAND_INFO_USER_KSOFTBANNED: (reason) => `${bold`Banned`} on KSoft.Si for ${code`${reason}`} `,
+			COMMAND_INFO_USER_DREPBANNED: (reason) => `${bold`Banned`} on DiscordRep for ${code`${reason}`}`,
+			COMMAND_INFO_USER_KSOFTCLEAN: 'Not banned on KSoft.Si',
+			COMMAND_INFO_USER_DREPCLEAN: 'Not banned on DiscordRep',
+			COMMAND_INFO_USER_DREPSCORE: (score) => `Reputation of ${bold`${score}`} on DiscordRep`,
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 
 			// social commands
@@ -292,6 +297,17 @@ module.exports = class extends Language {
 				`• using Node.js ${processVersion}, Discord.js v${discordVersion} and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
+
+			EVENT_JOIN_PERSISTREASON: 'Role persistency - member had those roles before leaving.',
+			EVENT_RAID_TITLE: (success, error) => [
+				underline`Possible raid attempt detected.`,
+				`React with ${success} to ban the users.`,
+				`React with ${error} to mark this as a false alarm.`
+			].join('\n'),
+			EVENT_RAID_PREVENTED: 'Successfully prevented raid',
+			EVENT_RAID_USERS_TITLE: 'Involved users',
+			EVENT_RAID_BANREASON: 'Automatic raid prevention.',
+			EVENT_GLOBALBAN_REASON: 'Globally banned user.',
 
 			SETTING_GATEWAY_EXPECTS_GUILD: 'The parameter <Guild> expects either a Guild or a Guild Object.',
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,

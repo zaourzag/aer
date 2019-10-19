@@ -17,7 +17,8 @@ module.exports = class extends Event {
 				.filter(entry => entry.target.id === user.id)
 				.last()
 			);
-		return guild.log.unban({ user, reason: ban.reason, moderator: ban.executor });
+		console.log(ban);
+		return guild.log.unban({ user, reason: ban.reason });
 	}
 
 };

@@ -23,7 +23,7 @@ module.exports = class extends Argument {
 
 		let querySearch;
 		if (results.length > 0) {
-			const regWord = new RegExp(`\\b${regExpEsc(arg)}\\b`, 'i');
+			const regWord = new RegExp(`^${regExpEsc(arg)}$`, 'i');
 			const filtered = results.filter(role => regWord.test(role.name));
 			querySearch = filtered.length > 0 ? filtered : results;
 		} else {
