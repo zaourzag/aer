@@ -5,5 +5,6 @@ module.exports = {
 	imagegenURL: 'http://localhost:3002/color',
 	supportServer: 'https://discord.gg/7fv73Sw',
 	repoURL: 'https://git.aero.bot/aero',
-	hasteURL: 'https://haste.cloudy.gg'
+	hasteURL: 'https://haste.cloudy.gg',
+	memegenURL: 'https://imgen.aero.bot/api'
 };
