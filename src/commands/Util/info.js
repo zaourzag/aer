@@ -89,7 +89,7 @@ module.exports = class extends Command {
 		if (arg instanceof GuildMember) return this.userinfo(msg, arg.user);
 		if (arg instanceof Role) return this.roleinfo(msg, arg);
 		if (msg.guild && arg === 'server') return this.serverinfo(msg);
-		if (msg.guild && arg === msg.server.id) return this.serverinfo(msg);
+		if (msg.guild && arg === msg.guild.id) return this.serverinfo(msg);
 		return this.botinfo(msg);
 	}
 
