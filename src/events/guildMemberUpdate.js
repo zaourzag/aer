@@ -11,7 +11,7 @@ module.exports = class extends Event {
 
 	async run(oldMember, newMember) {
 		if (oldMember.displayName === newMember.displayName) return;
-		if (member.guild.modCache.has(member.id)) return;
+		if (newMember.guild.modCache.has(newMember.id)) return;
 		this.cleanName(newMember);
 		this.dehoist(newMember);
 	}

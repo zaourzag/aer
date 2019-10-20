@@ -16,7 +16,7 @@ module.exports = class extends Command {
 			none: POSITIVE,
 			minor: NEGATIVE,
 			major: VERY_NEGATIVE
-		}
+		};
 	}
 
 	async run(msg) {
@@ -30,12 +30,12 @@ module.exports = class extends Command {
 			.setColor(this.colors[overview.status.indicator] || INFORMATION);
 
 		const description = [];
-		const components = overview.components.filter(c => !c.group_id);
+		const components = overview.components.filter(comp => !comp.group_id);
 		for (const component of components) {
 			description.push(`${component.status === 'operational' ? success : error} **${component.name}:** ${component.status}`);
 		}
 
-		embed.setDescription(description.join('\n'))
+		embed.setDescription(description.join('\n'));
 
 		const incident = await req(url)
 			.path('incidents.json')
@@ -43,10 +43,9 @@ module.exports = class extends Command {
 			.then(res => res.json)
 			.then(res => res.incidents[0]);
 
-		embed.addField('Latest Incident', `[${incident.name}](${incident.shortlink}) (${incident.status})`)
+		embed.addField('Latest Incident', `[${incident.name}](${incident.shortlink}) (${incident.status})`);
 
 		return msg.sendEmbed(embed);
-
 	}
 
 };

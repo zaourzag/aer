@@ -1,4 +1,4 @@
-const { Command, Duration, Timestamp, util } = require('klasa');
+const { Command, Duration, Timestamp } = require('klasa');
 const { MessageEmbed, GuildMember, User, Role, Permissions: { FLAGS } } = require('discord.js');
 const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success } } = require('../../../lib/util/constants');
 
@@ -48,25 +48,25 @@ module.exports = class extends Command {
 
 		this.regions = {
 			'eu-central': 'Central Europe',
-			'india': 'India',
-			'london': 'London',
-			'japan': 'Japan',
-			'amsterdam': 'Amsterdam',
-			'brazil': 'Brazil',
+			india: 'India',
+			london: 'London',
+			japan: 'Japan',
+			amsterdam: 'Amsterdam',
+			brazil: 'Brazil',
 			'us-west': 'US West',
-			'hongkong': 'Hong Kong',
-			'southafrica': 'South Africa',
-			'sydney': 'Sydney',
-			'europe': 'Europe',
-			'singapore': 'Singapore',
+			hongkong: 'Hong Kong',
+			southafrica: 'South Africa',
+			sydney: 'Sydney',
+			europe: 'Europe',
+			singapore: 'Singapore',
 			'us-central': 'US Central',
 			'eu-west': 'Western Europe',
-			'dubai': 'Dubai',
+			dubai: 'Dubai',
 			'us-south': 'US South',
 			'us-east': 'US East',
-			'frankfurt': 'Frankfurt',
-			'russia': 'Russia'
-		}
+			frankfurt: 'Frankfurt',
+			russia: 'Russia'
+		};
 
 		this.verificationLevels = [
 			'None',
@@ -114,7 +114,7 @@ module.exports = class extends Command {
 				.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
 					? acc + (idx !== 0 ? ', ' : '') + role.name
 					: acc,
-					'');
+				'');
 
 			if (roles.size) {
 				embed.addField(
@@ -123,14 +123,14 @@ module.exports = class extends Command {
 		}
 		const KSoftBan = await this.client.ksoft.bans.info(user.id);
 		const DRepBan = await this.client.drep.ban(user.id);
-		const DRepScore = await this.client.drep.rep(user.id).then(r => r.reputation);
+		const DRepScore = await this.client.drep.rep(user.id).then(res => res.reputation);
 		embed.addField(`• Trust`, [
 			KSoftBan ? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason) : msg.language.get('COMMAND_INFO_USER_KSOFTCLEAN'),
 			DRepBan.banned ? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason) : msg.language.get('COMMAND_INFO_USER_DREPCLEAN'),
 			msg.language.get('COMMAND_INFO_USER_DREPSCORE', DRepScore === 0 ? '±0' : DRepScore > 0 ? `+${DRepScore}` : DRepScore.toString())
 		].join('\n'));
 
-		(DRepBan.banned || KSoftBan)
+		DRepBan.banned || KSoftBan
 			? embed.setColor(VERY_NEGATIVE)
 			: embed.setColor(POSITIVE);
 		return msg.sendEmbed(embed);

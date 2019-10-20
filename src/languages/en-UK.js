@@ -1,5 +1,5 @@
 const { Language, util } = require('klasa');
-const { bold, code } = require('discord-md-tags');
+const { bold, code, underline } = require('discord-md-tags');
 
 module.exports = class extends Language {
 
@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-				}`,
+			}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
