@@ -10,19 +10,17 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			description: language => language.get('COMMAND_COLOR_DESCRIPTION'),
-			usage: '[random|display] [color:str] [...]',
+			usage: '[random|display] [color:...str]',
 			usageDelim: ' '
 		});
-
-		this.deprecated = 'Our ImageGen API is not online at this time.';
 	}
 
-	async run(msg, [action, ...hexCode]) {
+	async run(msg, [action, hexCode]) {
 		if (!action) {
 			if (!hexCode) action = 'random';
 			else action = 'display';
 		}
-		return this[action](msg, hexCode.join(' '));
+		return this[action](msg, hexCode);
 	}
 
 	async display(msg, hexCode) {
@@ -44,10 +42,11 @@ module.exports = class extends Command {
 	}
 
 	async draw(hex) {
-		const { json } = await req(this.client.config.imagegenURL)
+		const { body } = await req(this.client.config.colorgenURL)
+			.path('color')
 			.query({ color: encodeURIComponent(hex) })
 			.send();
-		return json;
+		return body;
 	}
 
 };
