@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:alpine
 
 RUN apk add git python g++ make pkgconf cairo-dev jpeg-dev pango-dev giflib-dev
 
