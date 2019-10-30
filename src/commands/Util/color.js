@@ -32,7 +32,8 @@ module.exports = class extends Command {
 			`**${colorData.toName() ? toTitleCase(colorData.toName()) : 'Unnamed'}**`,
 			`Hex: ${colorData.toHexString()}`,
 			`RGB: ${colorData.toRgbString()}`,
-			`HSV: ${colorData.toHsvString()}`
+			`HSV: ${colorData.toHsvString()}`,
+			`HSL: ${colorData.toHslString()}`
 		].join('\n'));
 	}
 
