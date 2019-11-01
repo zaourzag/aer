@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
 	async run(msg, [user]) {
 		const result = await req(NekoAPI)
-			.path('cuddle')
+			.path('kiss')
 			.send()
 			.then(res => res.json);
 		if (user === msg.author) {
