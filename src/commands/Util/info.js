@@ -1,6 +1,7 @@
 const { Command, Duration, Timestamp } = require('klasa');
 const { MessageEmbed, GuildMember, User, Role, Permissions: { FLAGS } } = require('discord.js');
 const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success } } = require('../../../lib/util/constants');
+const req = require('centra-aero');
 
 module.exports = class extends Command {
 
@@ -114,7 +115,7 @@ module.exports = class extends Command {
 				.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
 					? acc + (idx !== 0 ? ', ' : '') + role.name
 					: acc,
-				'');
+					'');
 
 			if (roles.size) {
 				embed.addField(
@@ -161,7 +162,7 @@ module.exports = class extends Command {
 		return msg.sendEmbed(embed);
 	}
 
-	serverinfo(msg) {
+	async serverinfo(msg) {
 		const { guild } = msg;
 		const [bots, humans] = guild.members.partition(member => member.user.bot);
 		const embed = new MessageEmbed()
@@ -174,7 +175,8 @@ module.exports = class extends Command {
 				`Verification level: ${this.verificationLevels[msg.guild.verificationLevel]}`,
 				`Explicit filter: ${this.filterLevels[msg.guild.explicitContentFilter]}`
 			].join('\n'));
-
+		const icon = msg.guild.iconURL({ format: 'png' });
+		if (icon) embed.setColor(await req(this.client.config.colorgenURL).path('dominant').query('image', icon).send().then(res => res.text));
 		return msg.sendEmbed(embed);
 	}
 
