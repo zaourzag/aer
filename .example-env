@@ -2,16 +2,15 @@
 MONGO_USER=
 MONGO_PASS=
 
-# Imgflip credentials
-IMGFLIP_USER=
-IMGFLIP_PASS=
-
 # Discord Bot Token
 DISCORD_TOKEN=
 
 
 # KSoft.Si Token (https://api.ksoft.si/)
 KSOFT_TOKEN=
+
+# Meme Image Generation Token (https://imgen.aero.bot/)
+MEMEGEN_TOKEN=
 
 
 # Whether to boot a single shard. For development, you wanna set this to true, for production to false.
