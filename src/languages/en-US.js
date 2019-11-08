@@ -1,5 +1,6 @@
 const { Language, util } = require('klasa');
 const { bold, code, underline } = require('discord-md-tags');
+const { error, success } = require('../../lib/util/constants').emojis;
 
 module.exports = class extends Language {
 
@@ -156,13 +157,16 @@ module.exports = class extends Language {
 				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
 				`Thank you for using ${this.client.user.username} ♥`
 			],
-			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${bold`Banned`} on KSoft.Si for ${code`${reason}`} [[proof](${proof})]`,
-			COMMAND_INFO_USER_DREPBANNED: (reason) => `${bold`Banned`} on DiscordRep for ${code`${reason}`}`,
-			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${bold`Banned`} on Discord.Services for ${code`${reason}`} [[proof](${proof})]`,
-			COMMAND_INFO_USER_KSOFTCLEAN: 'Not banned on KSoft.Si',
-			COMMAND_INFO_USER_DREPCLEAN: 'Not banned on DiscordRep',
-			COMMAND_INFO_USER_DSERVICESCLEAN: `Not banned on Discord.Services`,
+			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si for ${code`${reason}`} [[proof](${proof})]`,
+			COMMAND_INFO_USER_DREPBANNED: (reason) => `${error} ${bold`Banned`} on DiscordRep for ${code`${reason}`}`,
+			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${error} ${bold`Banned`} on Discord.Services for ${code`${reason}`} [[proof](${proof})]`,
+			COMMAND_INFO_USER_CWBANNED: (reason) => `${error} ${bold`Blacklisted`} on ChatWatch for ${code`${reason}`}`,
+			COMMAND_INFO_USER_KSOFTCLEAN: `${success} Not banned on KSoft.Si`,
+			COMMAND_INFO_USER_DREPCLEAN: `${success} Not banned on DiscordRep`,
+			COMMAND_INFO_USER_DSERVICESCLEAN: `${success} Not banned on Discord.Services`,
+			COMMAND_INFO_USER_CWCLEAN: `${success} Not blacklisted on ChatWatch`,
 			COMMAND_INFO_USER_DREPSCORE: (score) => `Reputation of ${bold`${score}`} on DiscordRep`,
+			COMMAND_INFO_USER_CWSCORE: (score) => `Score of ${bold`${score}`} on ChatWatch`,
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 
 			// social commands

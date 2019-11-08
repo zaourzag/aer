@@ -129,7 +129,7 @@ module.exports = class extends Command {
 				for (const { moderator } of warnings) await this.client.users.fetch(moderator);
 				embed.addField(
 					`• Warnings (${warnings.filter(warn => warn.active).length})`,
-					warnings.map((warn, idx) => `${idx + 1}. ${warn.active ? '~~' : ''}**${warn.reason}** | ${this.client.users.get(warn.moderator).tag}${warn.active ? '~~' : ''}`)
+					warnings.map((warn, idx) => `${idx + 1}. ${!warn.active ? '~~' : ''}**${warn.reason}** | ${this.client.users.get(warn.moderator).tag}${!warn.active ? '~~' : ''}`)
 				);
 			}
 		}
@@ -137,7 +137,9 @@ module.exports = class extends Command {
 		const DRepBan = await this.client.drep.ban(user.id);
 		const DRepScore = await this.client.drep.rep(user.id).then(res => res.reputation);
 		const DServicesBan = DServicesBans.get(user.id);
-		const rating = KSoftBan
+		const CWBlacklisted = user.settings.get('chatwatch.blacklisted');
+		const CWScore = user.settings.get('chatwatch.score');
+		const rating = KSoftBan || CWBlacklisted
 			? 'very low'
 			: DRepBan.banned || DRepScore < 0 || DServicesBans.has(user.id)
 				? 'low'
@@ -145,13 +147,23 @@ module.exports = class extends Command {
 					? 'very high'
 					: 'high';
 		embed.addField(`• Trust (${rating})`, [
-			KSoftBan ? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason, KSoftBan.proof) : msg.language.get('COMMAND_INFO_USER_KSOFTCLEAN'),
-			DServicesBan ? msg.language.get('COMMAND_INFO_USER_DSERVICESBANNED', DServicesBan.reason, DServicesBan.proof) : msg.language.get('COMMAND_INFO_USER_DSERVICESCLEAN'),
-			DRepBan.banned ? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason) : msg.language.get('COMMAND_INFO_USER_DREPCLEAN'),
-			msg.language.get('COMMAND_INFO_USER_DREPSCORE', DRepScore === 0 ? '±0' : DRepScore > 0 ? `+${DRepScore}` : DRepScore.toString())
+			KSoftBan
+				? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason, KSoftBan.proof)
+				: msg.language.get('COMMAND_INFO_USER_KSOFTCLEAN'),
+			DServicesBan
+				? msg.language.get('COMMAND_INFO_USER_DSERVICESBANNED', DServicesBan.reason, DServicesBan.proof)
+				: msg.language.get('COMMAND_INFO_USER_DSERVICESCLEAN'),
+			CWBlacklisted
+				? msg.language.get('COMMAND_INFO_USER_CWBANNED', user.settings.get('chatwatch.blacklistedReason'))
+				: msg.language.get('COMMAND_INFO_USER_CWCLEAN'),
+			DRepBan.banned
+				? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason)
+				: msg.language.get('COMMAND_INFO_USER_DREPCLEAN'),
+			msg.language.get('COMMAND_INFO_USER_DREPSCORE', DRepScore === 0 ? '±0' : DRepScore > 0 ? `+${DRepScore}` : DRepScore.toString()),
+			msg.language.get('COMMAND_INFO_USER_CWSCORE', CWScore.toString())
 		].join('\n'));
 
-		DRepBan.banned || KSoftBan || DServicesBans.has(user.id)
+		DRepBan.banned || KSoftBan || DServicesBans.has(user.id) || CWBlacklisted
 			? embed.setColor(VERY_NEGATIVE)
 			: embed.setColor(POSITIVE);
 		return msg.sendEmbed(embed);

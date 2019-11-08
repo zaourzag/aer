@@ -22,5 +22,6 @@ module.exports = {
 			db: `aero${production ? '' : '-dev'}`
 		}
 	},
-	typing: false
+	typing: false,
+	readyMessage: 'Connected to Discord'
 };
