@@ -29,7 +29,7 @@ module.exports = class extends Command {
 		if (!messages.includes(msg.id)) messages.push(msg.id);
 		await msg.channel.bulkDelete(messages);
 		const message = await msg.responder.success(`Successfully deleted ${messages.length - 1} messages.`);
-		msg.delete().catch(() => null);
+		message.delete({ timeout: 3000 }).catch(() => null);
 	}
 
 	getFilter(msg, filter, user) {
