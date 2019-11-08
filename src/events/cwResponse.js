@@ -10,7 +10,7 @@ module.exports = class extends Event {
 	}
 
 	async run(data) {
-		if (data.scores.overall > 80)
+		if (data.scores.overall > 85)
 			this.client.channels
 				.get(data.message.channel).messages
 				.get(data.message.id)
