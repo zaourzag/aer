@@ -8,7 +8,7 @@ module.exports = class extends Event {
 	async run() {
 		await this.client.chatwatch.login();
 		this.client.chatwatch.on('response', data => this.client.emit('cwResponse', data));
-		this.client.console.log('Connected to ChatWatch');
+		this.client.console.log('Connected to ChatWatch.');
 		if (process.env.BOOT_SINGLE) return;
 		this.client.manager.ws.send(encode(new Message(READY_CLIENT, { id: this.client.manager.id })));
 	}
