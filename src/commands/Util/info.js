@@ -1,6 +1,6 @@
 const { Command, Duration, Timestamp } = require('klasa');
 const { MessageEmbed, GuildMember, User, Role, Permissions: { FLAGS } } = require('discord.js');
-const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success } } = require('../../../lib/util/constants');
+const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success }, DServicesBans } = require('../../../lib/util/constants');
 const req = require('centra-aero');
 
 module.exports = class extends Command {
@@ -119,19 +119,39 @@ module.exports = class extends Command {
 
 			if (roles.size) {
 				embed.addField(
-					`• Role${roles.size > 2 ? `s (${roles.size - 1})` : roles.size === 2 ? '' : 's'}`, roleString.length ? roleString : msg.language.get('COMMAND_INFO_USER_NOROLES'));
+					`• Role${roles.size > 2 ? `s (${roles.size - 1})` : roles.size === 2 ? '' : 's'}`,
+					roleString.length ? roleString : msg.language.get('COMMAND_INFO_USER_NOROLES')
+				);
+			}
+
+			const warnings = member.settings.get('warnings');
+			if (warnings.length) {
+				for (const { moderator } of warnings) await this.client.users.fetch(moderator);
+				embed.addField(
+					`• Warnings (${warnings.filter(warn => warn.active).length})`,
+					warnings.map((warn, idx) => `${idx + 1}. ${warn.active ? '~~' : ''}**${warn.reason}** | ${this.client.users.get(warn.moderator).tag}${warn.active ? '~~' : ''}`)
+				);
 			}
 		}
 		const KSoftBan = await this.client.ksoft.bans.info(user.id);
 		const DRepBan = await this.client.drep.ban(user.id);
 		const DRepScore = await this.client.drep.rep(user.id).then(res => res.reputation);
-		embed.addField(`• Trust`, [
-			KSoftBan ? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason) : msg.language.get('COMMAND_INFO_USER_KSOFTCLEAN'),
+		const DServicesBan = DServicesBans.get(user.id);
+		const rating = KSoftBan
+			? 'very low'
+			: DRepBan.banned || DRepScore < 0 || DServicesBans.has(user.id)
+				? 'low'
+				: this.client.owners.has(user)
+					? 'very high'
+					: 'high';
+		embed.addField(`• Trust (${rating})`, [
+			KSoftBan ? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason, KSoftBan.proof) : msg.language.get('COMMAND_INFO_USER_KSOFTCLEAN'),
+			DServicesBan ? msg.language.get('COMMAND_INFO_USER_DSERVICESBANNED', DServicesBan.reason, DServicesBan.proof) : msg.language.get('COMMAND_INFO_USER_DSERVICESCLEAN'),
 			DRepBan.banned ? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason) : msg.language.get('COMMAND_INFO_USER_DREPCLEAN'),
 			msg.language.get('COMMAND_INFO_USER_DREPSCORE', DRepScore === 0 ? '±0' : DRepScore > 0 ? `+${DRepScore}` : DRepScore.toString())
 		].join('\n'));
 
-		DRepBan.banned || KSoftBan
+		DRepBan.banned || KSoftBan || DServicesBans.has(user.id)
 			? embed.setColor(VERY_NEGATIVE)
 			: embed.setColor(POSITIVE);
 		return msg.sendEmbed(embed);

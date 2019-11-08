@@ -1,5 +1,6 @@
 const { Command } = require('klasa');
-const { Permissions: { FLAGS } } = require('discord.js');
+const { Permissions: { FLAGS }, MessageEmbed } = require('discord.js');
+const { VERY_NEGATIVE } = require('../../../../lib/util/constants').color;
 
 module.exports = class extends Command {
 
@@ -19,7 +20,13 @@ module.exports = class extends Command {
 
 	async run(msg, [members, reason = msg.language.get('COMMAND_WARN_NOREASON')]) {
 		for (const member of members) {
-			member.settings.update('warnings', { reason, moderator: msg.member.id }, { arrayAction: 'add' });
+			member.settings.update('warnings', { reason, moderator: msg.member.id, active: true }, { arrayAction: 'add' });
+			const embed = new MessageEmbed()
+				.setAuthor(msg.guild.name, msg.guild.iconURL())
+				.setDescription(msg.language.get('COMMAND_WARN_WARNED', reason))
+				.setFooter(msg.language.get('COMMAND_WARN_MODERATOR', msg.author.tag), msg.author.avatarURL())
+				.setColor(VERY_NEGATIVE);
+			member.user.send(embed).catch(() => null);
 		}
 		msg.responder.success();
 		const options = {

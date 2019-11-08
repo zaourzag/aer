@@ -12,7 +12,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
 
@@ -154,10 +154,12 @@ module.exports = class extends Language {
 				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
 				`Thank you for using ${this.client.user.username} ♥`
 			],
-			COMMAND_INFO_USER_KSOFTBANNED: (reason) => `${bold`Banned`} on KSoft.Si for ${code`${reason}`} `,
+			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${bold`Banned`} on KSoft.Si for ${code`${reason}`} [[proof](${proof})]`,
 			COMMAND_INFO_USER_DREPBANNED: (reason) => `${bold`Banned`} on DiscordRep for ${code`${reason}`}`,
+			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${bold`Banned`} on Discord.Services for ${code`${reason}`} [[proof](${proof})]`,
 			COMMAND_INFO_USER_KSOFTCLEAN: 'Not banned on KSoft.Si',
 			COMMAND_INFO_USER_DREPCLEAN: 'Not banned on DiscordRep',
+			COMMAND_INFO_USER_DSERVICESCLEAN: `Not banned on Discord.Services`,
 			COMMAND_INFO_USER_DREPSCORE: (score) => `Reputation of ${bold`${score}`} on DiscordRep`,
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 
@@ -201,10 +203,17 @@ module.exports = class extends Language {
 			COMMAND_UNMUTE_NOREASON: 'no reason specified',
 			COMMAND_WARN_DESCRIPTION: 'Warn one or more users for their actions.',
 			COMMAND_WARN_NOREASON: 'no reason specified',
+			COMMAND_WARN_WARNED: reason => `You've been warned for: ${bold`${reason}`}`,
+			COMMAND_WARN_MODERATOR: tag => `Moderator: ${tag}`,
 			COMMAND_LOCK_DESCRIPTION: 'Denies users from writing messages in a channel.',
 			COMMAND_LOCK_REASON: 'Channel locked.',
 			COMMAND_UNLOCK_DESCRIPTION: 'Re-allows users to write messages in a channel.',
 			COMMAND_UNLOCK_REASON: 'Channel unlocked.',
+			COMMAND_UNWARN_DESCRIPTION: 'Warn one or more users for their actions.',
+			COMMAND_UNWARN_NOREASON: 'no reason specified',
+			COMMAND_UNWARN_UNWARNED: (reason, pardon) => `Your warn for ${bold`${reason}`} has been pardoned for: ${bold`${pardon}`}`,
+			COMMAND_UNWARN_MODERATOR: tag => `Moderator: ${tag}`,
+
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',
@@ -378,6 +387,7 @@ module.exports = class extends Language {
 			LOG_ACTION_TEMPMUTE: 'user temporarily muted',
 			LOG_ACTION_TEMPMUTEEND: 'temporary mute released',
 			LOG_ACTION_WARN: 'user warned',
+			LOG_ACTION_UNWARN: 'warning removed',
 
 			LOG_ACTION_MESSAGEEDITED: 'message edited',
 			LOG_ACTION_MESSAGEDELETED: 'message deleted',
