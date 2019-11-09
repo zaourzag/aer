@@ -23,7 +23,7 @@ module.exports = class extends Command {
 
 		await msg.member.settings.update([['points', msg.member.settings.points + points], ['dailyTime', Date.now()]]);
 		await msg.author.settings.update('trivia', msg.author.settings.trivia + points);
-		if (msg.flags.remind || msg.flags.reminder || msg.flags.remindme) {
+		if (msg.flagArgs.remind || msg.flagArgs.reminder || msg.flagArgs.remindme) {
 			await this.client.schedule.create('reminder', Date.now() + (TIME.HOUR * 12), {
 				data: {
 					channel: msg.channel.id,

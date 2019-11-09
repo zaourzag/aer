@@ -1,6 +1,6 @@
 const { Language, util } = require('klasa');
 const { bold, code, underline } = require('discord-md-tags');
-const { error, success } = require('../../lib/util/constants').emojis;
+const { error, success, unspecified } = require('../../lib/util/constants').emojis;
 
 module.exports = class extends Language {
 
@@ -163,8 +163,8 @@ module.exports = class extends Language {
 			COMMAND_INFO_USER_DREPCLEAN: `${success} Not banned on DiscordRep`,
 			COMMAND_INFO_USER_DSERVICESCLEAN: `${success} Not banned on Discord.Services`,
 			COMMAND_INFO_USER_CWCLEAN: `${success} Not blacklisted on ChatWatch`,
-			COMMAND_INFO_USER_DREPSCORE: (score) => `Reputation of ${bold`${score}`} on DiscordRep`,
-			COMMAND_INFO_USER_CWSCORE: (score) => `Score of ${bold`${score}`} on ChatWatch`,
+			COMMAND_INFO_USER_DREPSCORE: (score, int) => `${int === 0 ? unspecified : int < 0 ? error : success} Reputation of ${bold`${score.toString()}`} on DiscordRep`,
+			COMMAND_INFO_USER_CWSCORE: (score) => `${score === 50 ? unspecified : score > 50 ? error : success} Spam likeliness of ${bold`${score.toString()}%`} on ChatWatch`,
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 
 			// social commands
@@ -230,7 +230,7 @@ module.exports = class extends Language {
 			COMMAND_EVAL_DESCRIPTION: 'Evaluates arbitrary Javascript. Reserved for bot owner.',
 			COMMAND_EVAL_EXTENDEDHELP: [
 				'The eval command evaluates code as-in, any error thrown from it will be handled.',
-				'It also uses the flags feature. Write --silent, --depth=number or --async to customise the output.',
+				'It also uses the flagArgs feature. Write --silent, --depth=number or --async to customise the output.',
 				'• The --silent flag will make it output nothing.',
 				"• The --depth flag accepts a number, for example, --depth=2, to customise util.inspect's depth.",
 				'• The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.',

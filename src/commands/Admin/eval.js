@@ -20,8 +20,7 @@ module.exports = class extends Command {
 		const footer = util.codeBlock('ts', type);
 		const output = message.language.get(success ? 'COMMAND_EVAL_OUTPUT' : 'COMMAND_EVAL_ERROR',
 			time, util.codeBlock('js', result), footer);
-
-		if ('silent' in message.flags) return null;
+		if ('silent' in message.flagArgs) return null;
 
 		// Handle too-long-messages
 		if (output.length > 2000) {
@@ -40,14 +39,14 @@ module.exports = class extends Command {
 	async eval(message, code) {
 		// eslint-disable-next-line no-unused-vars
 		const msg = message;
-		const { flags } = message;
+		const { flagArgs } = message;
 		code = code.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 		const stopwatch = new Stopwatch();
 		let success, syncTime, asyncTime, result;
 		let thenable = false;
 		let type;
 		try {
-			if (flags.async) code = `(async () => {\n${code}\n})();`;
+			if (flagArgs.async) code = `(async () => {\n${code}\n})();`;
 			result = eval(code);
 			syncTime = stopwatch.toString();
 			type = new Type(result);
@@ -70,8 +69,8 @@ module.exports = class extends Command {
 		stopwatch.stop();
 		if (typeof result !== 'string') {
 			result = inspect(result, {
-				depth: flags.depth ? parseInt(flags.depth) || 0 : 0,
-				showHidden: Boolean(flags.showHidden)
+				depth: flagArgs.depth ? parseInt(flagArgs.depth) || 0 : 0,
+				showHidden: Boolean(flagArgs.showHidden)
 			});
 		}
 		return { success, type, time: this.formatTime(syncTime, asyncTime), result: util.clean(result) };
