@@ -175,7 +175,7 @@ module.exports = class extends Language {
 			COMMAND_PROFILE_DESCRIPTION: 'Shows a profile card of a user.',
 			COMMAND_PROFILE_NOTMEMBER: "That user isn't in the server!",
 			COMMAND_SOCIAL_DESCRIPTION: 'Configure the economy system of your server, and toggle level up messages.',
-			COMMAND_SOCIAL_TOGGLE_SOCIAL: enabled => `There, **${!enabled ? 'enable' : 'disable'}d** the economy system in this server.`,
+			COMMAND_SOCIAL_TOGGLE_SOCIAL: enabled => `There, **${enabled ? 'enable' : 'disable'}d** the economy system in this server.`,
 			COMMAND_SOCIAL_TOGGLE_LEVELS: enabled => `There, level up messages in this server are now **${enabled ? 'enable' : 'disable'}d**.`,
 			COMMAND_SOCIAL_STATUS: enabled => `The economy system is **${enabled ? 'enable' : 'disable'}d** in this server.`,
 
@@ -417,7 +417,9 @@ module.exports = class extends Language {
 				newAttachments.length
 					? newAttachments.join('\n')
 					: null
-			].filter(item => item !== null).join('\n')
+			].filter(item => item !== null).join('\n'),
+
+			LEVEL_MESSAGES
 
 		};
 	}
@@ -449,4 +451,12 @@ const COMMAND_8BALL_ANSWERS = [
 	'Never, ever, ever.',
 	'There is a small chance.',
 	'Yes!'
+];
+
+const LEVEL_MESSAGES = [
+	"Hey, **{user}**, you levelled up! You're now level {level}!",
+	"You've been doing excellent, **{user}**. Here's a level up! You're now level {level}!",
+	"Oh come on, you're not hacking, are you **{user}**? You're level {level} already!",
+	"Oh, how time flies, **{user}**. You're already level {level}!",
+	"It's a bird! No, it's a plane! No, it's a level up! **{user}**, you're now level {level}!"
 ];

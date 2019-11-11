@@ -7,26 +7,38 @@ module.exports = class extends Command {
 		super(...args, {
 			description: language => language.get('COMMAND_SOCIAL_DESCRIPTION'),
 			runIn: ['text'],
-			usage: '[toggle|levelmessages]',
+			usage: '[toggle|enable|disable|levelmessages]',
 			subcommands: true
 		});
 
 		this.defaultPermissions = FLAGS.ADMINISTRATOR;
 	}
 
-	async toggle(msg) {
-		const { enabled } = msg.guildSettings.social;
-		await msg.guildSettings.update('social.enabled', !enabled);
-		return msg.responder.success(msg.language.get('COMMAND_SOCIAL_TOGGLE_SOCIAL', enabled));
+	toggle(msg) {
+		const { enabled } = msg.guild.settings.get('social');
+		return this.update(msg, !enabled);
+	}
+
+	enable(msg) {
+		return this.update(msg, true);
+	}
+
+	disable(msg) {
+		return this.update(msg, false);
+	}
+
+	async update(msg, state) {
+		await msg.guild.settings.update('social.enabled', state).catch(() => null);
+		return msg.responder.success(msg.language.get('COMMAND_SOCIAL_TOGGLE_SOCIAL', state));
 	}
 
 	async levelmessages(msg) {
-		await msg.guildSettings.update('social.levelupMessages', !msg.guildSettings.social.levelupMessages);
-		return msg.responder.success(msg.language.get('COMMAND_SOCIAL_TOGGLE_LEVELS', msg.guildSettings.social.levelupMessages));
+		await msg.guild.settings.update('social.levelupMessages', !msg.guild.settings.get('social.levelupMessages'));
+		return msg.responder.success(msg.language.get('COMMAND_SOCIAL_TOGGLE_LEVELS', msg.guild.settings.get('social.levelupMessages')));
 	}
 
 	async run(msg) {
-		const { enabled } = msg.guildSettings.social;
+		const { enabled } = msg.guild.settings.get('social');
 		return msg.send(msg.language.get('COMMAND_SOCIAL_STATUS', enabled));
 	}
 

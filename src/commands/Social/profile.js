@@ -20,10 +20,11 @@ module.exports = class extends Command {
 
 		const { db } = this.client.providers.default;
 		if (!member) return msg.responder.error(msg.language.get('COMMAND_PROFILE_NOTMEMBER'));
-		const { points, level } = member.settings;
+		const points = member.settings.get('points');
+		const level = member.settings.get('level');
 		const nextLevel = Math.floor(((level + 1) / 0.2) ** 2);
 		const currLevel = Math.floor((level / 0.2) ** 2);
-		const { json: body } = await req(user.displayAvatarURL({ format: 'png' })).send();
+		const { body } = await req(user.displayAvatarURL({ format: 'png' })).send();
 		const progBar = ((points - currLevel) / nextLevel) * 300;
 		const canvas = new Canvas(500, 200);
 		const bg = await readFile(`${process.cwd()}/assets/backgrounds/default.jpg`);

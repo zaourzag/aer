@@ -8,7 +8,7 @@ module.exports = class extends Command {
 			enabled: true,
 			runIn: ['text'],
 			requiredPermissions: ['BAN_MEMBERS'],
-			aliases: ['b', 'bean', '410'],
+			aliases: ['b', 'bean', '410', 'yeet', 'banish', 'begone'],
 			description: language => language.get('COMMAND_BAN_DESCRIPTION').join('\n'),
 			usage: '<user  or  users:users> [duration:time] [purge|p|soft|s] [reason:...string]',
 			usageDelim: ' '
