@@ -17,7 +17,7 @@ module.exports = class extends Command {
 	}
 
 	async run(message, [action, target, permission]) {
-		if (!action) return message.sendLocale('COMMAND_PERMS_HELP', msg.guild.settings.get('prefix'));
+		if (!action) return message.send(message.language.get('COMMAND_PERMS_HELP', message.guild.settings.get('prefix')));
 
 		if (action === 'show') {
 			if (!target) target = message.member;
