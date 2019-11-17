@@ -26,19 +26,19 @@ module.exports = class extends Language {
 
 			// conf commands
 			COMMAND_PERMS_DESCRIPTION: 'Configures usage permission of specific commands for a particular user, roles, or for everyone.',
-			COMMAND_PERMS_HELP: [
+			COMMAND_PERMS_HELP: prefix => [
 				bold`Permission Nodes`,
 				`This permission system is ${bold`node based`}, allowing complete control over what commands users and roles can use.`,
 				`Permissions have 3 levels: ${bold`User, Role, Everyone`}. Nodes take priority in that order.`,
 				'',
 				bold`Nodes`,
-				`Nodes are represented by ${code`<category.command>`}, such as ${code`general.ping`}.`,
+				`Nodes are represented by ${code`<category>.<command>`}, such as ${code`general.ping`}.`,
 				`You can also use wildcards such as ${code`<category>.*`} which includes all commands in the category, and ${code`*`} which includes all commands,`,
 				'',
 				bold`Examples`,
-				`To allow Stitch to use the ping command: ${code`perms allow @Stitch general.ping`}`,
-				`To disallow ravy from using all configuration commands: ${code`perms remove @ravy configuration.*`}`,
-				`To allow admins to use all commands: ${code`perms allow @Admins *`}`
+				`Allow ravy to use the ban command: ${code`perms allow @ravy mod.ban`}`,
+				`Disallow dragonblitz10 from using all configuration commands: ${code`perms remove @dragonblitz10 configuration.*`}`,
+				`Allow admins to use all commands: ${code`perms allow @Admins *`}`
 			],
 			COMMAND_PERMS_MISSING: 'Invalid usage: expecting a target and a permission.',
 			COMMAND_PERMS_SUCCESS_ALLOW: (permission, target) => `Granted ${code`${permission}`} to ${target.displayName || target.username || target}`,

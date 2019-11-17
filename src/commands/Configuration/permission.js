@@ -17,12 +17,11 @@ module.exports = class extends Command {
 	}
 
 	async run(message, [action, target, permission]) {
-		if (!action) return message.sendLocale('COMMAND_PERMS_HELP');
+		if (!action) return message.sendLocale('COMMAND_PERMS_HELP', msg.guild.settings.get('prefix'));
 
 		if (action === 'show') {
 			if (!target) target = message.member;
 			const tree = await this.client.permissions.handle({ action, message, target });
-			// return message.send(`\`\`\`js\n${JSON.stringify(res, null, 3)}\n\`\`\``)
 			return message.send(this.buildOverview(tree));
 		}
 
@@ -45,7 +44,7 @@ module.exports = class extends Command {
 					? success
 					: error
 				: success
-			} ${category}`);
+				} ${category}`);
 			let i = 0;
 			const keys = Object.keys(tree[category]).length;
 			for (const key in tree[category]) {
@@ -54,7 +53,7 @@ module.exports = class extends Command {
 				out.push(`  ${i === keys ? '└──' : '├──'}${tree[category][key]
 					? success
 					: error
-				} ${key}`);
+					} ${key}`);
 			}
 		}
 		return out.join('\n');
