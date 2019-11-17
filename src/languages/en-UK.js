@@ -84,6 +84,11 @@ module.exports = class extends Language {
 			COMMAND_AUTOROLE_NOROLE_WRONG: 'This role isn\'t being automatically assigned',
 			COMMAND_AUTOROLE_LIST: names => `Currently automatically assigning:\n${names}`,
 			COMMAND_AUTOROLE_NOLIST: `Currently not automatically assigning any roles.`,
+			COMMAND_BOTROLE_DESCRIPTION: 'Sets up an automatic role given to bots upon join.',
+			COMMAND_BOTROLE_SET: name => `Now automatically assigning ${bold`${name}`} to bots.`,
+			COMMAND_BOTROLE_DISABLE: 'No longer automatically assigning a role to bots.',
+			COMMAND_BOTROLE_NONE: 'No bot role set up',
+			COMMAND_BOTROLE_DISPLAY: `Bots are currently automatically assigned ${bold`${name}`} upon joining.`,
 
 			// fun commands
 			COMMAND_8BALL_DESCRIPTION: 'Magic 8-Ball, does exactly what the toy does.',
@@ -334,7 +339,8 @@ module.exports = class extends Language {
 			EVENT_RAID_USERS_TITLE: 'Involved users',
 			EVENT_RAID_BANREASON: 'Automatic raid prevention.',
 			EVENT_GLOBALBAN_REASON: 'Globally banned user.',
-			EVENT_AUTOROLE_REASON: 'Autorole - configured to be automatically assigned to each member',
+			EVENT_AUTOROLE_REASON: 'Autorole - configured to be automatically assigned to each member upon joining.',
+			EVENT_BOTROLE_REASON: 'Botrole - configured to be automatically assigned to each bot upon joining.',
 
 			SETTING_GATEWAY_EXPECTS_GUILD: 'The parameter <Guild> expects either a Guild or a Guild Object.',
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,

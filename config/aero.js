@@ -2,6 +2,7 @@ module.exports = {
 	prefix: 'a!',
 	devPrefix: 'ad!',
 	production: process.env.NODE_ENV === 'production',
+	inviteURL: 'https://get.aero.bot',
 	supportServer: 'https://discord.gg/7fv73Sw',
 	repoURL: 'https://git.aero.bot/aero',
 	hasteURL: 'https://haste.cloudy.gg',

@@ -14,7 +14,13 @@ module.exports = class extends Event {
 
 		// autoroles
 		const autoroles = await member.guild.settings.get('mod.roles.auto');
-		if (autoroles.length) await member.roles.add(autoroles, member.guild.language.get('EVENT_AUTOROLE_REASON'));
+		if (member.user.bot) {
+			const botrole = await member.guild.settings.get('mod.roles.bots');
+			if (botrole) member.roles.add(botrole, member.guild.language.get('EVENT_BOTROLE_REASON'));
+		}
+		else {
+			if (autoroles.length) await member.roles.add(autoroles, member.guild.language.get('EVENT_AUTOROLE_REASON'));
+		}
 
 		// persistency
 		const persistroles = member.settings.get('persistRoles').filter(id => !autoroles.includes(id));
