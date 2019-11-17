@@ -11,18 +11,35 @@ module.exports = class extends Event {
 
 	async run(member) {
 		await member.settings.sync();
-		await member.roles.add(member.settings.get('persistRoles'), member.guild.language.get('EVENT_JOIN_PERSISTREASON'));
-		if (member.settings.get('persistNick')) await member.setNickname(member.settings.get('persistNick'));
+
+		// autoroles
+		const autoroles = await member.guild.settings.get('mod.roles.auto');
+		if (autoroles.length) await member.roles.add(autoroles, member.guild.language.get('EVENT_AUTOROLE_REASON'));
+
+		// persistency
+		const persistroles = member.settings.get('persistRoles').filter(id => !autoroles.includes(id));
+		if (persistroles.length) await member.roles.add(persistroles), member.guild.language.get('EVENT_JOIN_PERSISTREASON');
+		const persistnick = member.settings.get('persistNick');
+		if (persistnick) await member.setNickname(persistnick);
+
+		// raid prevention
 		member.guild.joinCache.add(member.id);
 		setTimeout(() => { member.guild.joinCache.delete(member.id); }, 20000);
 		if (member.guild.joinCache.size >= 50) this.client.emit('raid', member.guild, [...member.guild.joinCache]);
+
+		// username cleanup
 		member.guild.modCache.add(member.id);
 		await this.dehoist(member);
 		await this.cleanName(member);
 		member.guild.modCache.delete(member.id);
+
+		// logging
 		await member.guild.log.memberJoined({ member });
+
+		// global ban check
 		const globalBanned = await this.client.ksoft.bans.check(member.id);
 		if (globalBanned) this.client.emit('globalBan', member);
+
 		return member;
 	}
 

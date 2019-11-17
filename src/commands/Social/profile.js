@@ -16,63 +16,75 @@ module.exports = class extends Command {
 
 	async run(msg, [user = msg.author]) {
 		const member = await msg.guild.members.fetch(user.id);
-		await member.settings.sync(true);
 
-		const { db } = this.client.providers.default;
 		if (!member) return msg.responder.error(msg.language.get('COMMAND_PROFILE_NOTMEMBER'));
+		await member.settings.sync(true);
+		const avatar = user.displayAvatarURL({ format: 'png' });
 		const points = member.settings.get('points');
 		const level = member.settings.get('level');
-		const nextLevel = Math.floor(((level + 1) / 0.2) ** 2);
-		const currLevel = Math.floor((level / 0.2) ** 2);
-		const { body } = await req(user.displayAvatarURL({ format: 'png' })).send();
-		const progBar = ((points - currLevel) / nextLevel) * 300;
+		const nextLevel = this.client.monitors.get('points').xpNeeded(level + 1);
+
+		const { body } = await req(avatar).send();
+		const progBar = Math.max((points / nextLevel) * 296, 10);
 		const canvas = new Canvas(500, 200);
-		const bg = await readFile(`${process.cwd()}/assets/backgrounds/default.jpg`);
+		const bg = await readFile(`${process.cwd()}/assets/backgrounds/clouds.jpg`);
 
-		const list = await db.collection('members').find({ id: { $regex: `^${msg.guild.id}` } }).toArray();
-		const rank = list.indexOf(list.find(item => item.id === `${msg.guild.id}.${msg.author.id}`));
+		const dominant = await req(this.client.config.colorgenURL)
+			.path('dominant')
+			.query('image', avatar)
+			.send()
+			.then(res => res.text);
 
-		canvas.addImage(bg, 0, 0, 500, 200)
+		canvas
+			.addTextFont('assets/fonts/quicksand.ttf', 'Quicksand')
+			.addTextFont('assets/fonts/quicksand-bold.ttf', 'Quicksand Bold')
+			.addImage(bg, 0, 0, 600, 200)
 			.save()
 			.beginPath()
 			.moveTo(0, 0)
 			.lineTo(0, 200)
-			.lineTo(300, 200)
-			.lineTo(150, 0)
+			.lineTo(350, 200)
+			.lineTo(250, 0)
 			.closePath()
 			.clip()
-			.setColor('#2C2F33')
+			.setColor('#FFFFFF')
 			.fill()
 			.restore()
-			.addCircle(100, 125, 60)
-			.addCircularImage(body, 100, 125, 60, true)
-			.addBeveledRect(180, 120, 300, 20, 10)
-			.setColor('#2C2F33')
-			.addBeveledRect(180, 120, 300, 20, 10)
+			.setColor(`#${dominant}`)
+			.addRect(0, 0, 8, 200)
 			.restore()
-			.setColor('#B24619')
-			.addBeveledRect(180, 120, progBar, 20, 10)
-			.restore()
-			.setTextAlign('center')
-			.setTextFont(`${this.getTextLength(user.username)}pt Roboto`)
+			.addCircularImage(body, 90, 125, 60, true)
 			.setColor('#FFFFFF')
-			.addText(user.username, 95, 50)
+			.addBeveledRect(177, 117, 306, 26, 16)
 			.restore()
-			.setTextFont('20pt Roboto')
+			.setColor(`#${dominant}`)
+			.addBeveledRect(179, 119, 302, 22, 12)
+			.restore()
+			.setColor('#FFFFFF')
+			.addBeveledRect(180, 120, 300, 20, 10)
+			.restore()
+			.setTextAlign('left')
+			.setTextFont(`20pt Quicksand Bold`)
+			.setColor('#2C2F33')
+			.addText(user.username, 40, 45, 200)
+			.setTextAlign('left')
+			.setTextFont(`8pt Quicksand`)
+			.setColor('#4C4F55')
+			.addText(`#${user.discriminator}`, 40, 59, 50)
+			.restore()
+			.setTextFont('20pt Quicksand')
 			.setTextAlign('left')
 			.addText(`${points} / ${nextLevel}`, 180, 110)
-			.setTextFont('12pt Roboto')
-			.setTextAlign('center')
-			.addText(`Level ${level} (#${rank + 1})`, 230, 158);
-		return msg.channel.sendFile(canvas.toBuffer(), 'profile.png');
-	}
+			.setTextFont('12pt Quicksand')
+			.setTextAlign('left')
+			.addText(`Level ${level}`, 185, 158);
 
-	getTextLength(username) {
-		if (username.length < 10) return 24;
-		else if (username.length < 15) return 18;
-		else if (username.length < 20) return 14;
-		else if (username.length < 25) return 10;
-		else return 6;
+		if (points > 5) canvas
+			.setColor(`#${dominant}`)
+			.addBeveledRect(182, 122, progBar, 16, 20)
+			.restore();
+
+		return msg.channel.sendFile(canvas.toBuffer(), 'profile.png');
 	}
 
 };

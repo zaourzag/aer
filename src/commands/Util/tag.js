@@ -2,7 +2,7 @@
 // derived from https://github.com/KlasaCommunityPlugins/tags
 const { Command, util } = require('klasa');
 const { trimString } = require('../../../lib/util/util');
-const { util: djsUtil } = require('discord.js');
+const { util: djsUtil, Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -15,6 +15,8 @@ module.exports = class extends Command {
 			usageDelim: ' ',
 			aliases: ['t']
 		});
+
+		this.defaultPermissions = FLAGS.MANAGE_MESSAGES;
 	}
 
 	async add(msg, [tag, ...content]) {

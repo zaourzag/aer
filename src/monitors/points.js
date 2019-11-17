@@ -23,7 +23,7 @@ module.exports = class extends Monitor {
 		setTimeout(() => this.cache.delete(key), 45 * 1000);
 
 		// generate new xp
-		const increment = util.random(8, 12);
+		const increment = util.random(3, 8);
 		const newXP = msg.member.settings.get('points') + increment;
 		const newLevel = msg.member.settings.get('level') + 1;
 		const xpNeeded = this.xpNeeded(newLevel);
@@ -46,7 +46,7 @@ module.exports = class extends Monitor {
 			https://i.imgur.com/4geGBzs.png
 		*/
 		const f = x => 100 + Math.min(Math.max(0, 2 * (10 * (((x - 5) / 10 - Math.floor(1 / 2 + (x - 5) / 10)) ** 2) + 10 * Math.floor(x / 10) + x - 2.5)), 2000);
-		return f(level);
+		return Math.ceil(f(level));
 	}
 
 	async init() {

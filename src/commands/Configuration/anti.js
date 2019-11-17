@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			requiredPermissions: ['MANAGE_MESSAGES'],
 			aliases: ['automod'],
 			description: language => language.get('COMMAND_ANTI_DESCRIPTION'),
-			usage: '[invites|duplicates|copypastas|hoisting|unmentionable] [enable|disable]',
+			usage: '[invites|duplicates|copypastas|hoisting|unmentionable|spam] [enable|disable]',
 			usageDelim: ' '
 		});
 
@@ -30,7 +30,7 @@ module.exports = class extends Command {
 			return msg.send(msg.language.get('COMMAND_ANTI_DISPLAY_ONE', type, enabled));
 		} else {
 			const out = [];
-			for (const anti of ['invites', 'duplicates', 'copypastas']) {
+			for (const anti of ['invites', 'duplicates', 'copypastas', 'hoisting', 'unmentionable', 'spam']) {
 				const enabled = msg.guild.settings.get(`mod.anti.${anti}`);
 				out.push(msg.language.get('COMMAND_ANTI_DISPLAY_ONE', anti, enabled));
 			}

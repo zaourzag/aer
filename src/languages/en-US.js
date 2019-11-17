@@ -73,6 +73,17 @@ module.exports = class extends Language {
 			COMMAND_RAID_DISABLE: 'Raid prevention is now **disabled**.',
 			COMMAND_PREFIX_DESCRIPTION: 'Changes the prefix.',
 			COMMAND_PREFIX_SUCCESS: prefix => `Updated this server's prefix to ${code`${prefix}`}.`,
+			COMMAND_AUTOROLE_DESCRIPTION: 'Sets up an automatic role given to members upon join.',
+			COMMAND_AUTOROLE_ADD: name => `Successfully added ${bold`${name}`} to automatically assigned roles.`,
+			COMMAND_AUTOROLE_REMOVE: name => `Successfully removed ${bold`${name}`} from automatically assigned roles.`,
+			COMMAND_AUTOROLE_DISABLE: `Successfully ${bold`disabled`} automatic assigning of roles.`,
+			COMMAND_AUTOROLE_NOADDALL: `The ${code`all`} option can only be used when removing autoroles.`,
+			COMMAND_AUTOROLE_NOROLE_ADD: 'You need to specify which role to add to be automatically assigned',
+			COMMAND_AUTOROLE_NOROLE_REMOVE: 'You need to specify which role you don\'t want to be automatically assigned any longer',
+			COMMAND_AUTOROLE_NOROLE_EXISTS: 'This role is already being automatically assigned',
+			COMMAND_AUTOROLE_NOROLE_WRONG: 'This role isn\'t being automatically assigned',
+			COMMAND_AUTOROLE_LIST: names => `Currently automatically assigning:\n${names}`,
+			COMMAND_AUTOROLE_NOLIST: `Currently not automatically assigning any roles.`,
 
 			// fun commands
 			COMMAND_8BALL_DESCRIPTION: 'Magic 8-Ball, does exactly what the toy does.',
@@ -323,6 +334,7 @@ module.exports = class extends Language {
 			EVENT_RAID_USERS_TITLE: 'Involved users',
 			EVENT_RAID_BANREASON: 'Automatic raid prevention.',
 			EVENT_GLOBALBAN_REASON: 'Globally banned user.',
+			EVENT_AUTOROLE_REASON: 'Autorole - configured to be automatically assigned to each member',
 
 			SETTING_GATEWAY_EXPECTS_GUILD: 'The parameter <Guild> expects either a Guild or a Guild Object.',
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,
