@@ -88,7 +88,7 @@ module.exports = class extends Language {
 			COMMAND_BOTROLE_SET: name => `Now automatically assigning ${bold`${name}`} to bots.`,
 			COMMAND_BOTROLE_DISABLE: 'No longer automatically assigning a role to bots.',
 			COMMAND_BOTROLE_NONE: 'No bot role set up',
-			COMMAND_BOTROLE_DISPLAY: `Bots are currently automatically assigned ${bold`${name}`} upon joining.`,
+			COMMAND_BOTROLE_DISPLAY: name => `Bots are currently automatically assigned ${bold`${name}`} upon joining.`,
 
 			// fun commands
 			COMMAND_8BALL_DESCRIPTION: 'Magic 8-Ball, does exactly what the toy does.',
