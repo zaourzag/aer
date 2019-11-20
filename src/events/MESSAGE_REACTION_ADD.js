@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { Event } = require('klasa');
 
 module.exports = class extends Event {

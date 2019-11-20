@@ -45,7 +45,7 @@ module.exports = class extends Command {
 	async list(msg) {
 		const autoRoles = msg.guild.settings.get('mod.roles.auto');
 		if (!autoRoles.length) return msg.responder.error(msg.language.get('COMMAND_AUTOROLE_NOLIST'));
-		const names = autoRoles.map(id => '- ' + (msg.guild.roles.has(id) && msg.guild.roles.get(id).name) || id).join('\n');
+		const names = autoRoles.map(id => `- ${msg.guild.roles.has(id) && msg.guild.roles.get(id).name}` || id).join('\n');
 		return msg.responder.success(msg.language.get('COMMAND_AUTOROLE_LIST', names));
 	}
 

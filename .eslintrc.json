@@ -2,7 +2,9 @@
 	"extends": "aero",
 	"rules": {
 		"lines-around-comment": "off",
-		"no-unused-expressions": "off"
+		"no-unused-expressions": "off",
+		"no-return-assign": "off",
+		"complexity": "off"
 	},
 	"globals": {
 		"BigInt": true

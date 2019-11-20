@@ -79,10 +79,12 @@ module.exports = class extends Command {
 			.setTextAlign('left')
 			.addText(`Level ${level}`, 185, 158);
 
-		if (points > 5) canvas
-			.setColor(`#${dominant}`)
-			.addBeveledRect(182, 122, progBar, 16, 20)
-			.restore();
+		if (points > 5) {
+			canvas
+				.setColor(`#${dominant}`)
+				.addBeveledRect(182, 122, progBar, 16, 20)
+				.restore();
+		}
 
 		return msg.channel.sendFile(canvas.toBuffer(), 'profile.png');
 	}

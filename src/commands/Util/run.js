@@ -23,7 +23,7 @@ module.exports = class extends Command {
 			.body({ code, language })
 			.send();
 		console.log(res.text);
-		message.edit(`${success} eval successful\n\`\`\`${language}\n${res.json.result}\n\`\`\``);
+		return message.edit(`${success} eval successful\n\`\`\`${language}\n${res.json.result}\n\`\`\``);
 	}
 
-}
+};

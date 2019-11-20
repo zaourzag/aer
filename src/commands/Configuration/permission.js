@@ -44,7 +44,7 @@ module.exports = class extends Command {
 					? success
 					: error
 				: success
-				} ${category}`);
+			} ${category}`);
 			let i = 0;
 			const keys = Object.keys(tree[category]).length;
 			for (const key in tree[category]) {
@@ -53,7 +53,7 @@ module.exports = class extends Command {
 				out.push(`  ${i === keys ? '└──' : '├──'}${tree[category][key]
 					? success
 					: error
-					} ${key}`);
+				} ${key}`);
 			}
 		}
 		return out.join('\n');

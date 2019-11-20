@@ -1,6 +1,5 @@
 const { Command } = require('klasa');
 const req = require('centra-aero');
-const { BRAIN_MEME_ID } = require('../../../lib/util/constants');
 
 module.exports = class extends Command {
 

@@ -13,9 +13,9 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-				}`,
+			}`,
 
-			ERROR_GENERIC: (error) => `An error occurred: ${error}`,
+			ERROR_GENERIC: (err) => `An error occurred: ${err}`,
 
 			ACTIVITY_PLAYING: 'Playing',
 			ACTIVITY_LISTENING: 'Listening to',
@@ -274,7 +274,7 @@ module.exports = class extends Language {
 			COMMAND_REBOOT_DESCRIPTION: 'Reboots the bot.',
 			COMMAND_LOAD: (time, type, name) => `Successfully loaded ${type}: ${name}. (Took: ${time})`,
 			COMMAND_LOAD_FAIL: 'The file does not exist, or an error occurred while loading your file. Please check your console.',
-			COMMAND_LOAD_ERROR: (type, name, error) => `Failed to load ${type}: ${name}. Reason:${util.codeBlock('js', error)}`,
+			COMMAND_LOAD_ERROR: (type, name, err) => `Failed to load ${type}: ${name}. Reason:${util.codeBlock('js', err)}`,
 			COMMAND_LOAD_DESCRIPTION: 'Load a piece from your bot.',
 			COMMAND_PING: 'Ping?',
 			COMMAND_PING_DESCRIPTION: 'Runs a connection test to Discord.',
@@ -330,10 +330,10 @@ module.exports = class extends Language {
 
 			// events
 			EVENT_JOIN_PERSISTREASON: 'Role persistency - member had those roles before leaving.',
-			EVENT_RAID_TITLE: (success, error) => [
+			EVENT_RAID_TITLE: (check, err) => [
 				underline`Possible raid attempt detected.`,
-				`React with ${success} to ban the users.`,
-				`React with ${error} to mark this as a false alarm.`
+				`React with ${check} to ban the users.`,
+				`React with ${err} to mark this as a false alarm.`
 			].join('\n'),
 			EVENT_RAID_PREVENTED: 'Successfully prevented raid',
 			EVENT_RAID_USERS_TITLE: 'Involved users',
@@ -381,7 +381,7 @@ module.exports = class extends Language {
 			COMMANDMESSAGE_MISSING_OPTIONALS: (possibles) => `Missing a required option: (${possibles})`,
 			COMMANDMESSAGE_NOMATCH: (possibles) => `Your option didn't match any of the possibilities: (${possibles})`,
 			// eslint-disable-next-line max-len
-			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join('**, **')}** to abort this prompt.`,
+			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, err, time, abortOptions) => `${tag} | **${err}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join('**, **')}** to abort this prompt.`,
 			// eslint-disable-next-line max-len
 			MONITOR_COMMAND_HANDLER_REPEATING_REPROMPT: (tag, name, time, cancelOptions) => `${tag} | **${name}** is a repeating argument | You have **${time}** seconds to respond to this prompt with additional valid arguments. Type **${cancelOptions.join('**, **')}** to cancel this prompt.`,
 			MONITOR_COMMAND_HANDLER_ABORTED: 'Aborted',

@@ -115,7 +115,7 @@ module.exports = class extends Command {
 				.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
 					? acc + (idx !== 0 ? ', ' : '') + role.name
 					: acc,
-					'');
+				'');
 
 			if (roles.size) {
 				embed.addField(

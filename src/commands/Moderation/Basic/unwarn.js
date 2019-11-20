@@ -1,6 +1,5 @@
 const { Command } = require('klasa');
-const { Permissions: { FLAGS }, MessageEmbed } = require('discord.js');
-const { POSITIVE } = require('../../../../lib/util/constants').color;
+const { Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Command {
 
@@ -34,7 +33,7 @@ module.exports = class extends Command {
 		const warnings = member.settings.get('warnings');
 		if (!warnings.length) return [];
 		const range = /^(?<start>\d)-(?<end>\d)$/;
-		const multiple = /^(\d,)+\d$/
+		const multiple = /^(\d,)+\d$/;
 		if (ids === 'all') {
 			warnings.forEach(warn => warn.active = false);
 			return warnings;
@@ -47,7 +46,7 @@ module.exports = class extends Command {
 		}
 		if (multiple.test(ids)) {
 			ids = ids.split(',').map(id => parseInt(id));
-			warnings.forEach((warn, idx) => { if (ids.includes(idx + 1)) warn.active = false });
+			warnings.forEach((warn, idx) => { if (ids.includes(idx + 1)) warn.active = false; });
 			return warnings;
 		}
 		if (!Number.isNaN(parseInt(ids)) && warnings[ids - 1]) {

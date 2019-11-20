@@ -27,7 +27,7 @@ module.exports = class extends Command {
 		}
 	}
 
-	display() {
+	display(msg) {
 		const role = msg.guild.settings.get(msg.guild.settings.get('mod.roles.bots'));
 		if (!role) return msg.responder.error(msg.language.get('COMMAND_BOTROLE_NONE'));
 		return msg.responder.success(msg.language.get('COMMAND_BOTROLE_DISPLAY', role.name));
