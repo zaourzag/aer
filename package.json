@@ -35,7 +35,7 @@
 		"klasa-member-gateway": "github:dirigeants/klasa-member-gateway#settings",
 		"ksoft.js": "^3.1.2",
 		"limax": "^2.0.0",
-		"mongodb": "^3.3.3",
+		"mongodb": "^3.3.4",
 		"saslprep": "^1.0.3",
 		"tinycolor2": "^1.4.1",
 		"unorm": "^1.6.0",
