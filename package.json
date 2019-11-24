@@ -27,7 +27,7 @@
 		"discord-md-tags": "^0.0.6",
 		"discord.js": "github:discordjs/discord.js#master",
 		"dotenv": "^8.2.0",
-		"drep.js": "^1.1.2",
+		"drep.js": "^1.2.1",
 		"express": "^4.17.1",
 		"fast-html-parser": "^1.0.1",
 		"html-entities": "^1.2.1",
