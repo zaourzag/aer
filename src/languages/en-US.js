@@ -13,7 +13,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (err) => `An error occurred: ${err}`,
 
@@ -173,7 +173,7 @@ module.exports = class extends Language {
 				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
 				`Thank you for using ${this.client.user.username} ♥`
 			],
-			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si for ${code`${reason}`} [[proof](${proof})]`,
+			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si Bans for ${code`${reason}`} [[proof](${proof})]`,
 			COMMAND_INFO_USER_DREPBANNED: (reason) => `${error} ${bold`Banned`} on DiscordRep for ${code`${reason}`}`,
 			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${error} ${bold`Banned`} on Discord.Services for ${code`${reason}`} [[proof](${proof})]`,
 			COMMAND_INFO_USER_CWBANNED: (reason) => `${error} ${bold`Blacklisted`} on ChatWatch for ${code`${reason}`}`,
@@ -419,13 +419,13 @@ module.exports = class extends Language {
 			LOG_ACTION_MEMBERJOINED: 'member joined',
 			LOG_ACTION_MEMBERLEFT: 'member left',
 
-			LOG_ARGS_USER: (tag, mention, id) => `**user:**\n${tag} ${mention} [${id}]`,
-			LOG_ARGS_MEMBER: (name, mention, id) => `**member:**\n${name} ${mention} [${id}]`,
-			LOG_ARGS_USERS: users => `**users:**\n${users}`,
-			LOG_ARGS_MODERATOR: (tag, mention, id) => `**moderator:**\n${tag} ${mention} [${id}]`,
-			LOG_ARGS_REASON: reason => `**reason:**\n${reason}`,
-			LOG_ARGS_DURATION: duration => `**duration:**\n${duration}`,
-			LOG_ARGS_MESSAGE: (content, attachments) => `**message:**\n${content}${attachments.length ? `\n${attachments.join('\n')}` : ''}`,
+			LOG_ARGS_USER: (tag, mention, id) => `**user:** ${tag} ${mention} [${id}]`,
+			LOG_ARGS_MEMBER: (name, mention, id) => `**member:** ${name} ${mention} [${id}]`,
+			LOG_ARGS_USERS: users => `**users:** ${users}`,
+			LOG_ARGS_MODERATOR: (tag, id) => `moderator: ${tag} [${id}]`,
+			LOG_ARGS_REASON: reason => `**reason:** ${reason}`,
+			LOG_ARGS_DURATION: duration => `**duration:** ${duration}`,
+			LOG_ARGS_MESSAGE: (content, attachments) => `**message:** ${content}${attachments.length ? `\n${attachments.join('\n')}` : ''}`,
 			LOG_ARGS_MESSAGES: (oldContent, oldAttachments, newContent, newAttachments) => [
 				'**before:**',
 				oldContent,
