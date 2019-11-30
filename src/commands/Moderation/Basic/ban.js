@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			requiredPermissions: ['BAN_MEMBERS'],
 			aliases: ['b', 'bean', '410', 'yeet', 'banish', 'begone'],
 			description: language => language.get('COMMAND_BAN_DESCRIPTION').join('\n'),
-			usage: '<user  or  users:users> [duration:time] [purge|p|soft|s] [reason:...string]',
+			usage: '<username:membername|user  or  users:users> [duration:time] [purge|p|soft|s] [reason:...string]',
 			usageDelim: ' '
 		});
 
@@ -18,6 +18,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [users, duration, purge = false, reason]) {
+		if (!Array.isArray(users)) users = [users];
 		const bannable = await this.getBannable(msg.member, users);
 		if (!bannable.length) return msg.responder.error(msg.language.get('COMMAND_BAN_NOPERMS', users.length > 1));
 

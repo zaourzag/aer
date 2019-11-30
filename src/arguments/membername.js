@@ -21,6 +21,7 @@ function resolveMember(query, guild) {
 module.exports = class extends Argument {
 
 	async run(arg, possible, msg) {
+		if (!arg) throw 'No member provided.';
 		if (!msg.guild) throw 'This command can only be used inside a guild.';
 		const resUser = await resolveMember(arg, msg.guild);
 		if (resUser) return resUser;

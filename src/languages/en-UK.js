@@ -72,6 +72,7 @@ module.exports = class extends Language {
 			COMMAND_RAID_SUCCESS: channel => `Raid prevention is now **enabled**. Logging raid attempts in ${channel}.`,
 			COMMAND_RAID_DISABLE: 'Raid prevention is now **disabled**.',
 			COMMAND_PREFIX_DESCRIPTION: 'Changes the prefix.',
+			COMMAND_PREFIX_REMINDER: prefix => `Current prefix is ${code`${prefix}`}.`,
 			COMMAND_PREFIX_SUCCESS: prefix => `Updated this server's prefix to ${code`${prefix}`}.`,
 			COMMAND_AUTOROLE_DESCRIPTION: 'Sets up an automatic role given to members upon join.',
 			COMMAND_AUTOROLE_ADD: name => `Successfully added ${bold`${name}`} to automatically assigned roles.`,

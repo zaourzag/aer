@@ -89,7 +89,7 @@ module.exports = class extends Command {
 				return this.handleProgress(msg, c4);
 			})
 			.catch(error => {
-				console.log(error);
+				this.client.console.error(error);
 				c4.reset();
 				msg.reactions.removeAll();
 				this.channels.delete(msg.channel.id);
