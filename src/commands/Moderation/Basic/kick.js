@@ -33,6 +33,7 @@ module.exports = class extends Command {
 			.filter(target => {
 				if (ids.has(target.id)) return false;
 				ids.add(target.id);
+				if (executor.guild.owner.id === executor.id) return executor.id !== target.id;
 				return executor.roles.highest.position > target.roles.highest.position;
 			});
 	}
