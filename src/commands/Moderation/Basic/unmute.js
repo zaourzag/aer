@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const Command = require('../../../../lib/structures/MultiModerationCommand');
 const { Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Command {
@@ -18,24 +18,13 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [users, reason]) {
-		const muteable = await this.getMuteable(msg.member, users);
+		const muteable = await this.getModeratable(msg.member, users, true);
 		if (!muteable.length) return msg.responder.error(msg.language.get('COMMAND_UNMUTE_NOPERMS', users.length > 1));
 
 		await this.executeUnmutes(muteable, reason, msg.guild, msg.author);
-		await this.logUnmute(msg.guild, muteable.map(member => member.user), reason, msg.author);
+		await this.logActions(msg.guild, 'unmute', muteable.map(member => member.user), { reason, moderator: msg.author });
 
 		return msg.responder.success();
-	}
-
-	async getMuteable(executor, targets) {
-		const ids = new Set();
-		return targets
-			.filter(target => {
-				if (ids.has(target.id)) return false;
-				ids.add(target.id);
-				if (executor.guild.owner.id === executor.id) return executor.id !== target.id;
-				return executor.roles.highest.position > target.roles.highest.position;
-			});
 	}
 
 	async executeUnmutes(users, reason, guild, moderator) {
@@ -44,13 +33,6 @@ module.exports = class extends Command {
 			member.unmute(`${moderator.tag} | ${reason || guild.language.get('COMMAND_UNMUTE_NOREASON')}`);
 			this.updateSchedule(member);
 		}
-	}
-
-
-	logUnmute(guild, muteable, reason, moderator) {
-		return muteable.length > 1
-			? guild.log.unmute({ users: muteable, reason, moderator })
-			: guild.log.unmute({ user: muteable[0], reason, moderator });
 	}
 
 	updateSchedule(user) {

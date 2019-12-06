@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const Command = require('../../../../lib/structures/ModerationCommand');
 const { Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Command {
@@ -18,15 +18,11 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [member, id, reason = msg.language.get('COMMAND_UNWARN_NOREASON')]) {
+		const warnable = this.comparePermissions(msg.member, member);
+		if (!warnable) return msg.responder.error(msg.language.get('COMMAND_UNWARN_NOPERMS'));
 		const warnings = this.getWarns(member, id);
 		member.settings.update('warnings', warnings, { arrayAction: 'overwrite' });
-		msg.responder.success();
-		const options = {
-			user: member.user,
-			reason,
-			moderator: msg.author
-		};
-		msg.guild.log.unwarn(options);
+		this.logActions(msg.guild, 'unwarn', [member], { reason, moderator: msg.author });
 	}
 
 	getWarns(member, ids) {

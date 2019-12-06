@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const Command = require('../../../../lib/structures/MultiModerationCommand');
 const { Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Command {
@@ -19,32 +19,24 @@ module.exports = class extends Command {
 
 	async run(msg, [users, duration, purge = false, reason]) {
 		if (!Array.isArray(users)) users = [users];
-		const bannable = await this.getBannable(msg.member, users);
+		const bannable = await this.getModeratable(msg.member, users);
 		if (!bannable.length) return msg.responder.error(msg.language.get('COMMAND_BAN_NOPERMS', users.length > 1));
 
 		const soft = ['soft', 's'].includes(purge);
 		if (duration && soft) return msg.responder.error(msg.language.get('COMMAND_BAN_CONFLICT'));
 
-		const moderator = msg.author;
-
 		await this.executeBans(bannable, duration, reason, purge, soft, msg.guild, moderator);
-		await this.logBans(msg.guild, bannable, duration, reason, soft, moderator);
+
+		const action = bannable.length > 1
+			? 'bulkBan'
+			: duration
+				? 'tempban'
+				: soft
+					? 'softban'
+					: 'ban';
+		await this.logActions(msg.guild, action, bannable, { duration, reason, moderator: msg.author });
 
 		return msg.responder.success();
-	}
-
-	async getBannable(executor, targets) {
-		const ids = new Set();
-		targets.forEach(async target => await executor.guild.members.fetch(target.id).catch(() => null));
-		return targets
-			.filter(target => {
-				const member = executor.guild.members.get(target.id);
-				if (ids.has(target.id)) return false;
-				ids.add(target.id);
-				if (!member) return true;
-				if (executor.guild.owner.id === executor.id) return executor.id !== member.id;
-				return executor.roles.highest.position > member.roles.highest.position;
-			});
 	}
 
 	async executeBans(users, duration, reason, purge, soft, guild, moderator) {
@@ -58,19 +50,6 @@ module.exports = class extends Command {
 			}
 		}
 		if (duration) this.client.schedule.create('endTempban', duration, { data: { users: users.map(user => user.id), guild: guild.id } });
-	}
-
-	logBans(guild, bannable, duration, reason, soft, moderator) {
-		const action = bannable.length > 1
-			? 'bulkBan'
-			: duration
-				? 'tempban'
-				: soft
-					? 'softban'
-					: 'ban';
-		return action === 'bulkBan'
-			? guild.log.bulkBan({ users: bannable, reason, duration, moderator })
-			: guild.log[action]({ user: bannable[0], reason, duration, moderator });
 	}
 
 	updateSchedule(user) {

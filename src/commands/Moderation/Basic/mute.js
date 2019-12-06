@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const Command = require('../../../../lib/structures/MultiModerationCommand');
 const { Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Command {
@@ -18,26 +18,15 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [users, duration, reason]) {
-		const muteable = await this.getMuteable(msg.member, users);
+		const muteable = await this.getModeratable(msg.member, users, true);
 		if (!muteable.length) return msg.responder.error(msg.language.get('COMMAND_MUTE_NOPERMS', users.length > 1));
 
 		const muterole = msg.guild.settings.get('mod.roles.mute') || await msg.guild.createMuteRole();
 
 		await this.executeMutes(muteable, reason, msg.guild, msg.author, muterole, duration);
-		await this.logMute(msg.guild, muteable.map(member => member.user), reason, msg.author, duration);
+		await this.logActions(msg.guild, duration ? 'tempmute' : 'mute', muteable.map(member => member.user), { reason, moderator: msg.author, duration });
 
 		return msg.responder.success();
-	}
-
-	async getMuteable(executor, targets) {
-		const ids = new Set();
-		return targets
-			.filter(target => {
-				if (ids.has(target.id)) return false;
-				ids.add(target.id);
-				if (executor.guild.owner.id === executor.id) return executor.id !== target.id;
-				return executor.roles.highest.position > target.roles.highest.position;
-			});
 	}
 
 	async executeMutes(users, reason, guild, moderator, muterole, duration) {
@@ -47,15 +36,6 @@ module.exports = class extends Command {
 			if (!duration) this.updateSchedule(member);
 		}
 		if (duration) this.client.schedule.create('endTempmute', duration, { data: { users: users.map(user => user.id), guild: guild.id } });
-	}
-
-	logMute(guild, users, reason, moderator, duration) {
-		return guild.log[duration ? 'tempmute' : 'mute']({
-			user: users.length === 1 ? users[0] : null,
-			users: users.length > 1 ? users : null,
-			reason, moderator,
-			duration
-		});
 	}
 
 	updateSchedule(user) {

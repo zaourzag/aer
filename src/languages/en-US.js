@@ -226,6 +226,7 @@ module.exports = class extends Language {
 			COMMAND_UNMUTE_NOREASON: 'no reason specified',
 			COMMAND_WARN_DESCRIPTION: 'Warn one or more users for their actions.',
 			COMMAND_WARN_NOREASON: 'no reason specified',
+			COMMAND_WARN_NOPERMS: multiple => `You cannot warn ${multiple ? 'any of the specified users' : 'the specified user'}.`,
 			COMMAND_WARN_WARNED: reason => `You've been warned for: ${bold`${reason}`}`,
 			COMMAND_WARN_MODERATOR: tag => `Moderator: ${tag}`,
 			COMMAND_LOCK_DESCRIPTION: 'Denies users from writing messages in a channel.',
@@ -236,6 +237,7 @@ module.exports = class extends Language {
 			COMMAND_UNWARN_NOREASON: 'no reason specified',
 			COMMAND_UNWARN_UNWARNED: (reason, pardon) => `Your warn for ${bold`${reason}`} has been pardoned for: ${bold`${pardon}`}`,
 			COMMAND_UNWARN_MODERATOR: tag => `Moderator: ${tag}`,
+			COMMAND_UNWARN_NOPERMS: 'You cannot remove warnings for that user.',
 
 			// core commands
 			COMMAND_BLACKLIST_DESCRIPTION: 'Blacklists or un-blacklists users and guilds from the bot.',

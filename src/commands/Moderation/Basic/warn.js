@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const Command = require('../../../../lib/structures/MultiModerationCommand');
 const { Permissions: { FLAGS }, MessageEmbed } = require('discord.js');
 const { VERY_NEGATIVE } = require('../../../../lib/util/constants').color;
 
@@ -19,7 +19,10 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [members, reason = msg.language.get('COMMAND_WARN_NOREASON')]) {
-		for (const member of members) {
+		const warnable = await this.getModeratable(msg.member, members, true);
+		if (!warnable.length) return msg.responder.error(msg.language.get('COMMAND_WARN_NOPERMS', members.length > 1));
+
+		for (const member of warnable) {
 			member.settings.update('warnings', { reason, moderator: msg.member.id, active: true }, { arrayAction: 'add' });
 			const embed = new MessageEmbed()
 				.setAuthor(msg.guild.name, msg.guild.iconURL())
@@ -29,12 +32,7 @@ module.exports = class extends Command {
 			member.user.send(embed).catch(() => null);
 		}
 		msg.responder.success();
-		const options = {
-			reason,
-			moderator: msg.author
-		};
-		if (members.length > 1) options.users = members.map(member => member.id);
-		else options.user = members[0].user;
+		this.logActions(msg.guild, 'warn', members, { reason, moderator: msg.author });
 		msg.guild.log.warn(options);
 	}
 
