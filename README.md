@@ -42,3 +42,13 @@ If you're taking code from this project, or working on a project inspired by Aer
 **We exclusively own the copyright to all artworks - they shall not be reused without prior written consent from the copyright holder. Further, you're not allowed to use the name of our project or its contributors to endorse your own project, except as stated in the license.**
 
 Feel free to contact us about licensing at licensing@aero.bot
+
+
+## Contributors
+
+You can find all contributors in the package.json and listed below:
+- [Ravy](https://ravy.xyz) (Project Lead, Community Architect)
+- [Rxsto](https://rxsto.me) (Infrastructure Engineer)
+- [Dragonblitz10](https://dragondev.party/) (Software Engineer)
+- [Stitch](https://github.com/Soumil07/) (Software Engineer)
+- Askara, Yuki, and NANI (Emotional Support)
