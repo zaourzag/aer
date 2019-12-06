@@ -16,7 +16,7 @@ If you're currently using a bot like Dyno, Carl, Mee6, or any of the major multi
 
 On its own, Aero is pretty cool. But there's some tools we use to extend this even further. Those are:
 - [The KSoft.Si API](https://api.ksoft.si) - A swiss-army-knife for images, a huge yet transparent global ban list, and a lot of utilities
-- [ChatWatch](https://chatwat.ch) - A join effort between the teams at Aero and KSoft.Si to prevent spam
+- [ChatWatch](https://chatwat.ch) - A joint effort between the teams at Aero and KSoft.Si to prevent spam
 - [DiscordRep](https://discordrep.com) - An online fraud prevention project
 
 Aero isn't built from scratch, there's a few libraries that we used to build Aero. The most important are:
@@ -30,10 +30,10 @@ Aero isn't built from scratch, there's a few libraries that we used to build Aer
 
 Before selfhosting, please look at the LICENSE. Generally, you're allowed to do whatever you want with the bot, as long as you keep all attribution notices in, i.e. don't "sell it as your own".
 
-If you're taking code from this project, or working on a project inspired by Aero, you might be required to credit us. We've written up a few templates to save you some time:
+If you're taking code from this project, or are working on a project inspired by Aero, you might be required to credit us. We've written up a few templates to save you some time:
 
 ### Command
-`Credit goes to [ravy](https://ravy.xyz) from [The Aero Team](https://aero.bot)` (ravy may be replaced by the contributor that wrote the command. If you don't know who did it, it was probably ravy.)
+`Credit goes to [ravy](https://ravy.xyz) from [The Aero Team](https://aero.bot)` (ravy may be replaced by the contributor that wrote the command. If you don't know who did it, it was probably ravy)
 
 ### Idea
 `This project was inspired by [Aero](https://aero.bot).`
