@@ -13,7 +13,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (err) => `An error occurred: ${err}`,
 
@@ -131,6 +131,8 @@ module.exports = class extends Language {
 			COMMAND_PUN_REPLY: pun => `Random pun: **${pun}**`,
 			COMMAND_RATE_DESCRIPTION: 'Rates the mentioned user.',
 			COMMAND_RATE_REPLY: (user, percentage) => `I rate ${user} **${percentage}/100**!`,
+			COMMAND_SETCOLOR_DESCRIPTION: 'Set the colour for a role.',
+			COMMAND_SETCOLOR_INVALIDCOLOR: 'That\'s not a valid colour.',
 			COMMAND_URBAN_DESCRIPTION: 'Searches the urban dictionary for the definition to a search term.',
 			COMMAND_URBAN_MISSINGTERM: 'What would you like to search?',
 			COMMAND_URBAN_MAX: length => `Invalid definition. Only found ${length} possible definitions.`,
