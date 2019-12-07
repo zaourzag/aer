@@ -4,7 +4,8 @@
 		"lines-around-comment": "off",
 		"no-unused-expressions": "off",
 		"no-return-assign": "off",
-		"complexity": "off"
+		"complexity": "off",
+		"no-mixed-operators": "off"
 	},
 	"globals": {
 		"BigInt": true

@@ -32,8 +32,7 @@ module.exports = class extends Command {
 			member.user.send(embed).catch(() => null);
 		}
 		msg.responder.success();
-		this.logActions(msg.guild, 'warn', members, { reason, moderator: msg.author });
-		msg.guild.log.warn(options);
+		return this.logActions(msg.guild, 'warn', members, { reason, moderator: msg.author });
 	}
 
 

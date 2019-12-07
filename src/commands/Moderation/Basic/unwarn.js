@@ -22,7 +22,7 @@ module.exports = class extends Command {
 		if (!warnable) return msg.responder.error(msg.language.get('COMMAND_UNWARN_NOPERMS'));
 		const warnings = this.getWarns(member, id);
 		member.settings.update('warnings', warnings, { arrayAction: 'overwrite' });
-		this.logActions(msg.guild, 'unwarn', [member], { reason, moderator: msg.author });
+		return this.logActions(msg.guild, 'unwarn', [member], { reason, moderator: msg.author });
 	}
 
 	getWarns(member, ids) {

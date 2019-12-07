@@ -5,12 +5,12 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			description: language => language.get('COMMAND_ROLL_DESCRIPTION'),
-			usage: '[how_many_dice:integer{1,100}] [d] [how_many_sides:integer{1,100}]',
+			usage: '[how_many_dice:integer{1,100}] [how_many_sides:integer{1,100}]',
 			usageDelim: ' '
 		});
 	}
 
-	run(msg, [amount = 1, _, sides = 6]) {
+	run(msg, [amount = 1, sides = 6]) {
 		if (amount > 10) return this.aboveTen(msg, amount, sides);
 		return this.belowTen(msg, amount, sides);
 	}
@@ -28,7 +28,6 @@ module.exports = class extends Command {
 			.sort((a, b) => a[0] - b[0])
 			.map(([num, amt]) => `**${num}**: ${amt} times`)
 			.join('\n');
-
 
 
 		return msg.send(`Rolled:\n${out}`);
