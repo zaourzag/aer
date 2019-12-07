@@ -49,6 +49,6 @@ Feel free to contact us about licensing at licensing@aero.bot
 You can find all contributors in the package.json and listed below:
 - [Ravy](https://ravy.xyz) (Project Lead, Community Architect)
 - [Rxsto](https://rxsto.me) (Infrastructure Engineer)
-- [Dragonblitz10](https://dragondev.party/) (Software Engineer)
+- [Dragon](https://dragondev.party/) (Software Engineer)
 - [Stitch](https://github.com/Soumil07/) (Software Engineer)
 - Askara, Yuki, and NANI (Emotional Support)

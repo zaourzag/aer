@@ -25,7 +25,7 @@ module.exports = class extends Command {
 		const soft = ['soft', 's'].includes(purge);
 		if (duration && soft) return msg.responder.error(msg.language.get('COMMAND_BAN_CONFLICT'));
 
-		await this.executeBans(bannable, duration, reason, purge, soft, msg.guild, moderator);
+		await this.executeBans(bannable, duration, reason, purge, soft, msg.guild, msg.author);
 
 		const action = bannable.length > 1
 			? 'bulkBan'
