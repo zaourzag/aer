@@ -32,7 +32,7 @@ module.exports = class extends Command {
 		const description = [];
 		const components = overview.components.filter(comp => !comp.group_id);
 		for (const component of components) {
-			description.push(`${component.status === 'operational' ? success : error} **${component.name}:** ${component.status}`);
+			description.push(`${component.status === 'operational' ? success : error} **${component.name}:** ${component.status.replace(/_/g, ' ')}`);
 		}
 
 		embed.setDescription(description.join('\n'));
