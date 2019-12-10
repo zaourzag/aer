@@ -14,7 +14,7 @@ MEMEGEN_TOKEN=
 # Whether to boot a single shard. For development, you wanna set this to true, for production to false.
 BOOT_SINGLE=
 
-# DiscordRep Token
+# run -api generate in the DiscordRep server (https://discord.gg/kXTj2NR)
 DREP_TOKEN=
 
 
