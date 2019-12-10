@@ -5,17 +5,19 @@ MONGO_PASS=
 # Discord Bot Token
 DISCORD_TOKEN=
 
-
 # KSoft.Si Token (https://api.ksoft.si/)
 KSOFT_TOKEN=
 
 # Meme Image Generation Token (https://imgen.aero.bot/)
 MEMEGEN_TOKEN=
 
+# DiscordRep.com Token (https://discordrep.com/)
+# run -api generate in the DiscordRep server (https://discord.gg/kXTj2NR)
+DREP_TOKEN=
+
 
 # Whether to boot a single shard. For development, you wanna set this to true, for production to false.
 BOOT_SINGLE=
-
 
 ## Only needed in Production:
 
