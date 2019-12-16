@@ -1,7 +1,17 @@
+const { hostname } = require('os');
+const stage = process.env.NODE_ENV === 'production'
+	? hostname().includes('staging')
+		? 'staging'
+		: 'production'
+	: 'development';
+
 module.exports = {
-	prefix: 'a!',
-	devPrefix: 'ad!',
-	production: process.env.NODE_ENV === 'production',
+	prefix: {
+		production: 'a.',
+		staging: 's.',
+		development: 'd.'
+	}[stage],
+	stage,
 	inviteURL: 'https://get.aero.bot',
 	supportServer: 'https://discord.gg/7fv73Sw',
 	repoURL: 'https://git.aero.bot/aero',
