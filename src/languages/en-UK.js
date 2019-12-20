@@ -13,7 +13,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (err) => `An error occurred: ${err}`,
 
@@ -176,17 +176,17 @@ module.exports = class extends Language {
 				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
 				`Thank you for using ${this.client.user.username} ♥`
 			],
-			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si Bans for ${code`${reason}`} [[proof](${proof})]`,
-			COMMAND_INFO_USER_DREPBANNED: (reason) => `${error} ${bold`Banned`} on DiscordRep for ${code`${reason}`}`,
-			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${error} ${bold`Banned`} on Discord.Services for ${code`${reason}`} [[proof](${proof})]`,
+			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si Bans for ${code`${reason}`} ⎾[proof](${proof})⏌`,
+			COMMAND_INFO_USER_DREPBANNED: (reason, score) => `${error} ${bold`Banned`} on DiscordRep for ${code`${reason}`} ⎾rep: ${score}⏌`,
+			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${error} ${bold`Banned`} on Discord.Services for ${code`${reason}`} ⎾[proof](${proof})⏌`,
 			COMMAND_INFO_USER_CWBANNED: (reason) => `${error} ${bold`Blacklisted`} on ChatWatch for ${code`${reason}`}`,
-			COMMAND_INFO_USER_KSOFTCLEAN: `${success} Not banned on KSoft.Si`,
-			COMMAND_INFO_USER_DREPCLEAN: `${success} Not banned on DiscordRep`,
-			COMMAND_INFO_USER_DSERVICESCLEAN: `${success} Not banned on Discord.Services`,
-			COMMAND_INFO_USER_CWCLEAN: `${success} Not blacklisted on ChatWatch`,
+			COMMAND_INFO_USER_BANSCLEAN: `${success} Not banned on KSoft.Si or Discord.Services`,
 			COMMAND_INFO_USER_DREPSCORE: (score, int) => `${int === 0 ? unspecified : int < 0 ? error : success} Reputation of ${bold`${score.toString()}`} on DiscordRep`,
 			COMMAND_INFO_USER_CWSCORE: (score) => `${score === 50 ? unspecified : score > 50 ? error : success} Spam likeliness of ${bold`${score.toString()}%`} on ChatWatch`,
+			COMMAND_INFO_USER_CWWHITELISTED: `${success} **Whitelisted** on ChatWatch`,
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
+			COMMAND_REMIND_DESCRIPTION: 'Create a reminder.',
+			COMMAND_REMIND_REPLY: when => `I will remind you in ${when}.`,
 
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',
@@ -199,6 +199,10 @@ module.exports = class extends Language {
 			COMMAND_SOCIAL_TOGGLE_SOCIAL: enabled => `There, **${enabled ? 'enable' : 'disable'}d** the economy system in this server.`,
 			COMMAND_SOCIAL_TOGGLE_LEVELS: enabled => `There, level up messages in this server are now **${enabled ? 'enable' : 'disable'}d**.`,
 			COMMAND_SOCIAL_STATUS: enabled => `The economy system is **${enabled ? 'enable' : 'disable'}d** in this server.`,
+			COMMAND_REP_DESCRIPTION: 'Reward nice or helpful users with some virtual love c:',
+			COMMAND_REP_NOSELF: 'You may not upvote yourself.',
+			COMMAND_REP_COOLDOWN: time => `You've recently upvoted a user. You can upvote again in ${time}`,
+			COMMAND_REP_REPLY: user => `Successfully upvoted **${user}**.`,
 
 			// mod commands
 			COMMAND_BAN_DESCRIPTION: [
@@ -346,6 +350,7 @@ module.exports = class extends Language {
 			EVENT_GLOBALBAN_REASON: 'Globally banned user.',
 			EVENT_AUTOROLE_REASON: 'Autorole - configured to be automatically assigned to each member upon joining.',
 			EVENT_BOTROLE_REASON: 'Botrole - configured to be automatically assigned to each bot upon joining.',
+			EVENT_PERSPECTIVE_DELETEREASON: 'Identified as toxic by Perspective.',
 
 			SETTING_GATEWAY_EXPECTS_GUILD: 'The parameter <Guild> expects either a Guild or a Guild Object.',
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,
