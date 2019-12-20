@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			aliases: ['user', 'role', 'i'],
 			description: language => language.get('COMMAND_INFO_DESCRIPTION'),
 			requiredPermissions: ['EMBED_LINKS', 'VIEW_AUDIT_LOG'],
-			usage: '[server|role:rolename|user:membername|userID:str{17,18}]'
+			usage: '[server|user:membername|role:rolename|userID:str{17,18}]'
 		});
 
 		this.timestamp = new Timestamp('MMMM d YYYY');
@@ -84,58 +84,79 @@ module.exports = class extends Command {
 		];
 	}
 
-	async run(msg, [arg]) {
+	async run(msg, [arg = msg.author]) {
 		if (/^\d{17,18}$/.test(arg)) arg = await this.client.users.fetch(arg);
+
+		if (arg === this.client.user.id) return this.botinfo(msg);
+		if (arg.id === this.client.user.id) return this.botinfo(msg);
 		if (arg instanceof User) return this.userinfo(msg, arg);
 		if (arg instanceof GuildMember) return this.userinfo(msg, arg.user);
 		if (arg instanceof Role) return this.roleinfo(msg, arg);
 		if (msg.guild && arg === 'server') return this.serverinfo(msg);
 		if (msg.guild && arg === msg.guild.id) return this.serverinfo(msg);
-		return this.botinfo(msg);
 	}
 
 	async userinfo(msg, user) {
-		const member = msg.guild ? await msg.guild.members.fetch(user).catch(() => null) : null;
-		const creator = member && (member.joinedTimestamp - msg.guild.createdTimestamp) < 3000;
-		const embed = new MessageEmbed()
+		let embed = new MessageEmbed();
+		embed = await this._addBaseData(msg, user, embed);
+		embed = await this._addMemberData(msg, user, embed);
+		embed = await this._addSecurity(msg, user, embed);
+		return msg.sendEmbed(embed);
+	}
+
+	async _addBaseData(msg, user, embed) {
+		return embed
 			.setAuthor(`${user.tag} [${user.id}]`, user.avatarURL())
 			.setThumbnail(user.avatarURL())
 			.setDescription(msg.language.get('COMMAND_INFO_USER_DISCORDJOIN', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt)));
-		// add guild specific info if in a guild
-		if (member) {
-			embed.description += msg.language.get(
-				creator ? 'COMMAND_INFO_USER_GUILDRCEATE' : 'COMMAND_INFO_USER_GUILDJOIN',
-				msg.guild.name,
-				this.timestamp.display(member.joinedAt),
-				Duration.toNow(member.joinedAt));
+	}
 
-			const roles = member.roles.sorted((a, b) => b.position - a.position);
-			const roleString = roles
-				.array()
-				.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
-					? acc + (idx !== 0 ? ', ' : '') + role.name
-					: acc,
+	async _addMemberData(msg, user, embed) {
+		const member = msg.guild ? await msg.guild.members.fetch(user).catch(() => null) : null;
+		if (!member) return embed;
+
+		const creator = member && (member.joinedTimestamp - msg.guild.createdTimestamp) < 3000;
+
+		embed.description += msg.language.get(
+			creator ? 'COMMAND_INFO_USER_GUILDRCEATE' : 'COMMAND_INFO_USER_GUILDJOIN',
+			msg.guild.name,
+			this.timestamp.display(member.joinedAt),
+			Duration.toNow(member.joinedAt));
+
+		const roles = member.roles.sorted((a, b) => b.position - a.position);
+		const roleString = roles
+			.array()
+			.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
+				? acc + (idx !== 0 ? ', ' : '') + role.name
+				: acc,
 				'');
 
-			if (roles.size) {
-				embed.addField(
-					`• Role${roles.size > 2 ? `s (${roles.size - 1})` : roles.size === 2 ? '' : 's'}`,
-					roleString.length ? roleString : msg.language.get('COMMAND_INFO_USER_NOROLES')
-				);
-			}
-
-			const warnings = member.settings.get('warnings');
-			if (warnings.length) {
-				for (const { moderator } of warnings) await this.client.users.fetch(moderator);
-				embed.addField(
-					`• Warnings (${warnings.filter(warn => warn.active).length})`,
-					warnings.map((warn, idx) => `${idx + 1}. ${!warn.active ? '~~' : ''}**${warn.reason}** | ${this.client.users.get(warn.moderator).tag}${!warn.active ? '~~' : ''}`)
-				);
-			}
+		if (roles.size) {
+			embed.addField(
+				`• Role${roles.size > 2 ? `s (${roles.size - 1})` : roles.size === 2 ? '' : 's'}`,
+				roleString.length ? roleString : msg.language.get('COMMAND_INFO_USER_NOROLES')
+			);
 		}
+
+		const warnings = member.settings.get('warnings');
+		if (warnings.length) {
+			for (const { moderator } of warnings) await this.client.users.fetch(moderator);
+			embed.addField(
+				`• Warnings (${warnings.filter(warn => warn.active).length})`,
+				warnings.map((warn, idx) => `${idx + 1}. ${!warn.active ? '~~' : ''}**${warn.reason}** | ${this.client.users.get(warn.moderator).tag}${!warn.active ? '~~' : ''}`)
+			);
+		}
+
+		const toxicity = member.settings.get('stats.toxicity');
+		embed.addField('• Statistics', `${member.settings.get('stats.messages')} messages ${toxicity !== 0 ? `with an average toxicity of ${Math.round(toxicity * 100)}%` : ''} sent`)
+		return embed;
+	}
+
+	async _addSecurity(msg, user, embed) {
 		const KSoftBan = await this.client.ksoft.bans.info(user.id);
 		const DRepBan = await this.client.drep.ban(user.id);
 		const DRepScore = await this.client.drep.rep(user.id).then(res => res.reputation);
+		const fancyScore = DRepScore === 0 ? '±0' : DRepScore > 0 ? `+${DRepScore}` : DRepScore;
 		const DServicesBan = DServicesBans.get(user.id);
 		const CWProfile = await this.client.chatwatch.profile(user.id);
 		const rating = KSoftBan || CWProfile.blacklisted
@@ -148,24 +169,24 @@ module.exports = class extends Command {
 		embed.addField(`• Trust (${rating})`, [
 			KSoftBan
 				? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason, KSoftBan.proof)
-				: msg.language.get('COMMAND_INFO_USER_KSOFTCLEAN'),
-			DServicesBan
-				? msg.language.get('COMMAND_INFO_USER_DSERVICESBANNED', DServicesBan.reason, DServicesBan.proof)
-				: msg.language.get('COMMAND_INFO_USER_DSERVICESCLEAN'),
-			CWProfile.blacklisted
-				? msg.language.get('COMMAND_INFO_USER_CWBANNED', CWProfile.blacklisted_reason)
-				: msg.language.get('COMMAND_INFO_USER_CWCLEAN'),
-			msg.language.get('COMMAND_INFO_USER_CWSCORE', CWProfile.score),
+				: DServicesBan
+					? msg.language.get('COMMAND_INFO_USER_DSERVICESBANNED', DServicesBan.reason, DServicesBan.proof)
+					: msg.language.get('COMMAND_INFO_USER_BANSCLEAN'),
+			CWProfile.whitelisted
+				? msg.language.get('COMMAND_INFO_USER_CWWHITELISTED')
+				: CWProfile.blacklisted
+					? msg.language.get('COMMAND_INFO_USER_CWBANNED', CWProfile.blacklisted_reason)
+					: msg.language.get('COMMAND_INFO_USER_CWSCORE', CWProfile.score),
 			DRepBan.banned
-				? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason)
-				: msg.language.get('COMMAND_INFO_USER_DREPCLEAN'),
-			msg.language.get('COMMAND_INFO_USER_DREPSCORE', DRepScore === 0 ? '±0' : DRepScore > 0 ? `+${DRepScore}` : DRepScore, DRepScore)
+				? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason, fancyScore)
+				: msg.language.get('COMMAND_INFO_USER_DREPSCORE', fancyScore, DRepScore)
 		].join('\n'));
 
 		DRepBan.banned || KSoftBan || DServicesBans.has(user.id) || CWProfile.blacklisted || CWProfile.score > 80
 			? embed.setColor(VERY_NEGATIVE)
 			: embed.setColor(POSITIVE);
-		return msg.sendEmbed(embed);
+
+		return embed;
 	}
 
 	roleinfo(msg, role) {
@@ -196,12 +217,14 @@ module.exports = class extends Command {
 	async serverinfo(msg) {
 		const { guild } = msg;
 		const [bots, humans] = guild.members.partition(member => member.user.bot);
+		const toxicity = guild.settings.get('stats.toxicity');
 		const embed = new MessageEmbed()
 			.setAuthor(`${guild.name} [${guild.id}]`, guild.iconURL())
 			.addField('• Created', `${this.timestamp.display(guild.createdAt)} (${Duration.toNow(guild.createdAt)} ago)`)
 			.addField('• Members', `${humans.size} human${humans.size === 1 ? '' : 's'}, ${bots.size} bot${bots.size === 1 ? '' : 's'}`, true)
 			.addField('• Voice region', this.regions[msg.guild.region], true)
 			.addField('• Owner', `${guild.owner.user.tag} ${guild.owner.toString()} [${guild.owner.id}]`)
+			.addField('• Statistics', `${guild.settings.get('stats.messages')} messages ${toxicity !== 0 ? `with an average toxicity of ${Math.round(toxicity * 100)}%` : ''} sent`)
 			.addField('• Security', [
 				`Verification level: ${this.verificationLevels[msg.guild.verificationLevel]}`,
 				`Explicit filter: ${this.filterLevels[msg.guild.explicitContentFilter]}`
