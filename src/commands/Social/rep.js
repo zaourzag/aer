@@ -25,7 +25,6 @@ module.exports = class extends Command {
 		await user.settings.update('stats.reputation.total', total + 1);
 
 		const individual = user.settings.get('stats.reputation.individual');
-		console.log(individual)
 		if (!individual.includes(msg.author.id)) user.settings.update('stats.reputation.individual', msg.author.id, { arrayAction: 'add' });
 
 		return msg.responder.success(msg.language.get('COMMAND_REP_REPLY', user.username));

@@ -23,7 +23,6 @@ module.exports = class extends Command {
 		const message = channel.messages.get(_id);
 		if (!message) return msg.responder.error(msg.language.get('COMMAND_REACTIONROLE_NOMSG'));
 		await message.react(emote);
-		console.log(emote);
 		return msg.responder.success();
 	}
 

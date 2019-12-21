@@ -13,7 +13,6 @@ module.exports = class extends Monitor {
 			ignoreEdits: false,
 			ignoreOthers: false
 		});
-		console.log('copypasta.constructor')
 		this.copypastas = this.readCopypastas();
 	}
 

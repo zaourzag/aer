@@ -22,7 +22,6 @@ module.exports = class extends Command {
 			.path('eval')
 			.body({ code, language })
 			.send();
-		console.log(res.text);
 		return message.edit(`${success} eval successful\n\`\`\`${language}\n${res.json.result}\n\`\`\``);
 	}
 
