@@ -39,7 +39,7 @@ module.exports = class extends Command {
 	}
 
 	updateSchedule(user) {
-		const unmuteTask = this.client.schedule.tasks.find(task => task.data.users.includes(user.id) && task.taskName === 'endTempmute');
+		const unmuteTask = this.client.schedule.tasks.find(task => task.taskName === 'endTempmute' && task.data.users.includes(user.id));
 		if (!unmuteTask) return;
 		const { time, data } = unmuteTask;
 		this.client.schedule.delete(unmuteTask.id);

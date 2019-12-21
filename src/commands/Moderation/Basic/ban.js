@@ -53,7 +53,7 @@ module.exports = class extends Command {
 	}
 
 	updateSchedule(user) {
-		const unbanTask = this.client.schedule.tasks.find(task => task.data.users.includes(user.id) && task.taskName === 'endTempban');
+		const unbanTask = this.client.schedule.tasks.find(task => task.taskName === 'endTempban' && task.data.users.includes(user.id));
 		if (!unbanTask) return;
 		const { time, data } = unbanTask;
 		this.client.schedule.delete(unbanTask.id);
