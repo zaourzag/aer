@@ -1,6 +1,6 @@
 const { Command, Duration, Timestamp } = require('klasa');
 const { MessageEmbed, GuildMember, User, Role, Permissions: { FLAGS } } = require('discord.js');
-const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success }, DServicesBans } = require('../../../lib/util/constants');
+const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success }, DServicesBans, badges } = require('../../../lib/util/constants');
 const req = require('centra-aero');
 
 module.exports = class extends Command {
@@ -98,30 +98,47 @@ module.exports = class extends Command {
 
 	async userinfo(msg, user) {
 		let embed = new MessageEmbed();
-		embed = await this._addBaseData(msg, user, embed);
+		embed = await this._addBaseData(user, embed);
+		embed = await this._addBadges(user, embed);
 		embed = await this._addMemberData(msg, user, embed);
 		embed = await this._addSecurity(msg, user, embed);
 		return msg.sendEmbed(embed);
 	}
 
-	async _addBaseData(msg, user, embed) {
+	async _addBaseData(user, embed) {
 		return embed
 			.setAuthor(`${user.tag} [${user.id}]`, user.avatarURL())
-			.setThumbnail(user.avatarURL())
-			.setDescription(msg.language.get('COMMAND_INFO_USER_DISCORDJOIN', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt)));
+			.setThumbnail(user.avatarURL());
+	}
+
+	async _addBadges(user, embed) {
+		const bitfield = user.settings.get('badges');
+		const out = badges.filter((_, idx) => bitfield & (1 << idx));
+		if (!out.length) return embed;
+
+		embed.setDescription(out.map(badge => `${badge.icon} ${badge.title}`).join('\n'));
+		return embed;
 	}
 
 	async _addMemberData(msg, user, embed) {
 		const member = msg.guild ? await msg.guild.members.fetch(user).catch(() => null) : null;
-		if (!member) return embed;
-
 		const creator = member && (member.joinedTimestamp - msg.guild.createdTimestamp) < 3000;
 
-		embed.description += msg.language.get(
-			creator ? 'COMMAND_INFO_USER_GUILDRCEATE' : 'COMMAND_INFO_USER_GUILDJOIN',
-			msg.guild.name,
-			this.timestamp.display(member.joinedAt),
-			Duration.toNow(member.joinedAt));
+		const statistics = [
+			msg.language.get('COMMAND_INFO_USER_DISCORDJOIN', this.timestamp.display(user.createdAt), Duration.toNow(user.createdAt))
+		];
+
+		if (member) {
+			statistics.push(msg.language.get(
+				creator ? 'COMMAND_INFO_USER_GUILDRCEATE' : 'COMMAND_INFO_USER_GUILDJOIN',
+				msg.guild.name,
+				this.timestamp.display(member.joinedAt),
+				Duration.toNow(member.joinedAt)));
+			statistics.push(`${member.settings.get('stats.messages')} messages sent`);
+		}
+
+		embed.addField('• Statistics', statistics.join('\n'));
+		if (!member) return embed;
 
 		const roles = member.roles.sorted((a, b) => b.position - a.position);
 		const roleString = roles
@@ -147,8 +164,6 @@ module.exports = class extends Command {
 			);
 		}
 
-		const toxicity = member.settings.get('stats.toxicity');
-		embed.addField('• Statistics', `${member.settings.get('stats.messages')} messages ${toxicity !== 0 ? `with an average toxicity of ${Math.round(toxicity * 100)}%` : ''} sent`)
 		return embed;
 	}
 

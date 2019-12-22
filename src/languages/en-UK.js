@@ -164,8 +164,8 @@ module.exports = class extends Language {
 			// misc commands
 			COMMAND_INFO_DESCRIPTION: 'Get information about a user, role, the server, or this bot.',
 			COMMAND_INFO_USER_DISCORDJOIN: (joinedAt, joinDuration) => `Joined Discord on ${joinedAt} (${joinDuration} ago)`,
-			COMMAND_INFO_USER_GUILDJOIN: (guild, joinedAt, joinDuration) => `\nJoined ${guild} on ${joinedAt} (${joinDuration} ago)`,
-			COMMAND_INFO_USER_GUILDRCEATE: (guild, createdAt, createdDuration) => `\nCreated ${guild} on ${createdAt} (${createdDuration} ago)`,
+			COMMAND_INFO_USER_GUILDJOIN: (guild, joinedAt, joinDuration) => `Joined ${guild} on ${joinedAt} (${joinDuration} ago)`,
+			COMMAND_INFO_USER_GUILDRCEATE: (guild, createdAt, createdDuration) => `Created ${guild} on ${createdAt} (${createdDuration} ago)`,
 			COMMAND_INFO_USER_NOROLES: 'none',
 			COMMAND_INFO_BOT: () => [
 				`${this.client.user.username} is a bot for intuitive community management.`,
@@ -187,6 +187,9 @@ module.exports = class extends Language {
 			COMMAND_HASTEBIN_DESCRIPTION: 'Upload code or text to hastebin.',
 			COMMAND_REMIND_DESCRIPTION: 'Create a reminder.',
 			COMMAND_REMIND_REPLY: when => `I will remind you in ${when}.`,
+			COMMAND_REDEEMKEY_NOEXIST: "This key doesn't exist or has already been redeemed.",
+			COMMAND_REDEEMKEY_DESCRIPTION: 'Redeem a key for a badge.',
+			COMMAND_CREATEKEY_DESCRIPTION: 'Create a key to redeem for a badge',
 
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',
