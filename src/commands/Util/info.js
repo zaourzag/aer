@@ -137,6 +137,12 @@ module.exports = class extends Command {
 			statistics.push(`${member.settings.get('stats.messages')} messages sent`);
 		}
 
+		const totalRep = user.settings.get('stats.reputation.total');
+		if (totalRep) {
+			const individualRep = user.settings.get('stats.reputation.individual').length;
+			statistics.push(`+${totalRep} rep (${individualRep} individual upvoter${individualRep === 1 ? '' : 's'})`);
+		}
+
 		embed.addField('• Statistics', statistics.join('\n'));
 		if (!member) return embed;
 
