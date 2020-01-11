@@ -1,6 +1,6 @@
 const { Permissions: { FLAGS } } = require('discord.js');
 const { Command } = require('klasa');
-const { error, success } = require('../../../lib/util/constants').emojis;
+const { error, success, unspecified } = require('../../../lib/util/constants').emojis;
 
 module.exports = class extends Command {
 
@@ -8,7 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['perms', 'permissions'],
 			runIn: ['text'],
-			usage: '[allow|deny|show|remove|clear] [member:member|roleid:role|rolename:rolename|everyone] [permission:string]',
+			usage: '[allow|deny|show|remove|clear] [member:membername|roleid:role|rolename:rolename|everyone] [permission:string]',
 			usageDelim: ' ',
 			description: language => language.get('COMMAND_PERMS_DESCRIPTION')
 		});
@@ -22,7 +22,7 @@ module.exports = class extends Command {
 		if (action === 'show') {
 			if (!target) target = message.member;
 			const tree = await this.client.permissions.handle({ action, message, target });
-			return message.send(this.buildOverview(tree));
+			return message.send(this.buildOverview(tree, target, message.language));
 		}
 
 		if (['allow', 'deny', 'remove'].includes(action) && (!target || !permission)) throw message.language.get('COMMAND_PERMS_MISSING');
@@ -35,16 +35,21 @@ module.exports = class extends Command {
 		return message.responder.success(message.language.get(`COMMAND_PERMS_SUCCESS_${action.toUpperCase()}`, permission, target));
 	}
 
-	buildOverview(tree) {
+	buildOverview(tree, target, lang) {
 		const out = [];
+		const name = target === 'everyone'
+			? 'everyone'
+			: target.name || target.displayName;
+
+		out.push(lang.get('COMMAND_PERMS_SHOW', name));
 		for (const category in tree) {
 			if (category === 'admin') continue;
 			out.push(`${typeof tree[category]['*'] === 'boolean'
 				? tree[category]['*']
 					? success
 					: error
-				: success
-			} ${category}`);
+				: unspecified
+				} ${category}`);
 			let i = 0;
 			const keys = Object.keys(tree[category]).length;
 			for (const key in tree[category]) {
@@ -53,7 +58,7 @@ module.exports = class extends Command {
 				out.push(`  ${i === keys ? '└──' : '├──'}${tree[category][key]
 					? success
 					: error
-				} ${key}`);
+					} ${key}`);
 			}
 		}
 		return out.join('\n');

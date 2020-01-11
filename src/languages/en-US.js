@@ -41,6 +41,7 @@ module.exports = class extends Language {
 				`Allow admins to use all commands: ${code`${prefix}perms allow @Admins *`}`
 			],
 			COMMAND_PERMS_MISSING: 'Invalid usage: expecting a target and a permission.',
+			COMMAND_PERMS_SHOW: name => `Permissions for **${name}**:`,
 			COMMAND_PERMS_SUCCESS_ALLOW: (permission, target) => `Granted ${code`${permission}`} to ${target.displayName || target.username || target}`,
 			COMMAND_PERMS_SUCCESS_DENY: (permission, target) => `Denied ${code`${permission}`} from ${target.displayName || target.username || target}`,
 			COMMAND_PERMS_SUCCESS_REMOVE: (permission, target) => `Unset ${code`${permission}`} for ${target.displayName || target.username || target}`,

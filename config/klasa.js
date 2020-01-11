@@ -1,4 +1,3 @@
-const { host, port } = require('./mongodb');
 const { prefix, stage, owners } = require('./aero');
 const db = {
 	production: 'aero',
@@ -6,7 +5,7 @@ const db = {
 	development: 'aero-dev'
 }[stage];
 
-const { MONGO_USER: user, MONGO_PASS: pass } = process.env;
+const { MONGO_USER: user, MONGO_PASS: pass, MONGO_HOST: host, MONGO_PORT: port } = process.env;
 
 module.exports = {
 	commandEditing: true,

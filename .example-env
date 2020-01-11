@@ -1,6 +1,8 @@
 # MongoDB credentials
 MONGO_USER=
 MONGO_PASS=
+MONGO_HOST=
+MONGO_PORT=
 
 # Discord Bot Token
 DISCORD_TOKEN=
@@ -8,24 +10,12 @@ DISCORD_TOKEN=
 # KSoft.Si Token (https://api.ksoft.si/)
 KSOFT_TOKEN=
 
-# Meme Image Generation Token (https://imgen.aero.bot/)
+# Meme Image Generation Token (https://memes.aero.bot/)
 MEMEGEN_TOKEN=
 
 # DiscordRep.com Token (https://discordrep.com/)
 # run -api generate in the DiscordRep server (https://discord.gg/kXTj2NR)
 DREP_TOKEN=
 
-
-# Whether to boot a single shard. For development, you wanna set this to true, for production to false.
-BOOT_SINGLE=
-
-## Only needed in Production:
-
-# The status probes API will listen here
-PROBES_API_PORT=
-
-# WebSocket URL to Aether
-WS_URL=
-
-# Chatwatch Token
-CHATWATCH_TOKEN=
+# Whether to boot a single shard. Only set to false when running kubernetes.
+BOOT_SINGLE="true"
