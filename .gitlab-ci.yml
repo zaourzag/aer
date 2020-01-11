@@ -19,7 +19,7 @@ build:
 
 stage:
   stage: stage
-  image: lwolf/helm-kubectl-docker:v152_213
+  image: lwolf/helm-kubectl-docker:latest
   before_script:
     - mkdir -p /etc/deploy
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
@@ -31,7 +31,7 @@ stage:
 
 deploy:
   stage: deploy
-  image: lwolf/helm-kubectl-docker:v152_213
+  image: lwolf/helm-kubectl-docker:latest
   before_script:
     - mkdir -p /etc/deploy
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
