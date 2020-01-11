@@ -25,7 +25,7 @@ stage:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl config use-context default
   script:
-    - kubectl -n aero-staging patch statefulset aero-staging -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"aero-staging\",\"image\":\"${IMAGE}\"}]}}}}"
+    - kubectl -n aero patch statefulset aero-staging -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"aero-staging\",\"image\":\"${IMAGE}\"}]}}}}"
   only:
     - develop
 
