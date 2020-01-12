@@ -28,7 +28,7 @@ module.exports = class extends Command {
 			(message.guild
 				? message.guild.shardID
 				: 0) + 1,
-			this.client.options.totalShardCount
+			this.client.options.shardCount
 		).join('\n');
 		const embed = new MessageEmbed()
 			.setAuthor(this.client.user.username, this.client.user.displayAvatarURL({ format: 'png', size: 2048 }), this.client.config.repoURL)
