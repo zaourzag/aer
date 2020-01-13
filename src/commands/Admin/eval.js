@@ -1,6 +1,6 @@
 const { Command, Stopwatch, Type, util } = require('klasa');
 const { inspect } = require('util');
-const req = require('centra-aero'); /* eslint-disable-line no-unused-vars */
+const req = require('@aero/centra'); /* eslint-disable-line no-unused-vars */
 
 module.exports = class extends Command {
 

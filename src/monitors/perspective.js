@@ -1,5 +1,5 @@
 const { Monitor } = require('klasa');
-const req = require('centra-aero');
+const req = require('@aero/centra');
 const { PerspectiveAPI } = require('../../lib/util/constants').url;
 
 module.exports = class extends Monitor {

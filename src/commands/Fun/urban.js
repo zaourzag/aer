@@ -1,6 +1,6 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const req = require('centra-aero');
+const req = require('@aero/centra');
 
 module.exports = class extends Command {
 

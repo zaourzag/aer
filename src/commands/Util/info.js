@@ -1,7 +1,7 @@
 const { Command, Duration, Timestamp } = require('klasa');
 const { MessageEmbed, GuildMember, User, Role, Permissions: { FLAGS } } = require('discord.js');
 const { color: { VERY_NEGATIVE, POSITIVE }, emojis: { error, success }, DServicesBans, badges } = require('../../../lib/util/constants');
-const req = require('centra-aero');
+const req = require('@aero/centra');
 
 module.exports = class extends Command {
 

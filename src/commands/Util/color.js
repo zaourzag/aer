@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const req = require('centra-aero');
+const req = require('@aero/centra');
 const color = require('tinycolor2');
 
 const toTitleCase = str => str.charAt(0).toUpperCase() + str.slice(1);

@@ -1,5 +1,5 @@
 const { Command } = require('klasa');
-const req = require('centra-aero');
+const req = require('@aero/centra');
 const { bold } = require('discord-md-tags');
 
 module.exports = class extends Command {
