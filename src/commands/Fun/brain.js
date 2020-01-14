@@ -1,24 +1,16 @@
-const { Command } = require('klasa');
-const req = require('@aero/centra');
+const MemeGenerationCommand = require('../../../lib/structures/MemeGenerationCommand');
 
-module.exports = class extends Command {
+module.exports = class extends MemeGenerationCommand {
 
 	constructor(...args) {
-		super(...args, {
-			cooldown: 3,
-			description: language => language.get('COMMAND_BRAIN_DESCRIPTION'),
-			usage: '<panel1:str> <panel2:str> <panel3:str> <panel4:str>',
-			usageDelim: ', '
-		});
-	}
-
-	async run(msg, [...sentences]) {
-		const { body } = await req(this.client.config.memegenURL)
-			.header('Authorization', process.env.MEMEGEN_TOKEN)
-			.path('brain')
-			.query('text', sentences.join(', '))
-			.send();
-		return msg.channel.sendFile(body);
+		const textValidator = text => text.split(',').length === 4;
+		const textValidatorResponse = 'Please enter the text of the 4 panels seperated by commas.';
+		super({
+			name: 'brain',
+			text: true,
+			textValidator,
+			textValidatorResponse
+		}, ...args);
 	}
 
 };
