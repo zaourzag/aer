@@ -15,7 +15,6 @@ module.exports = class extends Monitor {
 
 	async run(msg) {
 		if (!msg.guild || !msg.guild.settings.get('social.enabled') || !msg.guild.me.permissions.has(['SEND_MESSAGES'])) return;
-
 		// cache
 		const key = `${msg.guild.id}.${msg.author.id}`;
 		if (this.cache.has(key)) return;
@@ -41,10 +40,10 @@ module.exports = class extends Monitor {
 
 	xpNeeded(level) {
 		/*
-			Fancy curve; makes intervals of 5 levels in which the exp slowly increase, then a big jump.
-			https://www.desmos.com/calculator/e9vblu1gwf
-			https://i.imgur.com/4geGBzs.png
-		*/
+		 * Fancy curve; makes intervals of 5 levels in which the exp slowly increase, then a big jump.
+		 * https://www.desmos.com/calculator/e9vblu1gwf
+		 * https://i.imgur.com/4geGBzs.png
+		 */
 		/* eslint-disable no-mixed-operators */
 		/* eslint-disable id-length */
 		const f = x => 100 + Math.min(Math.max(0, 2 * (10 * (((x - 5) / 10 - Math.floor(1 / 2 + (x - 5) / 10)) ** 2) + 10 * Math.floor(x / 10) + x - 2.5)), 2000);
