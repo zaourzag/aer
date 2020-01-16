@@ -20,7 +20,7 @@ module.exports = class extends Event {
 			if (reactionRole.messageid === data.message_id && reactionRole.emoteid === data.emoji.id) {
 				const member = guild.members.get(data.user_id)
 				const role = guild.roles.get(reactionRole.roleid)
-				member.roles.add(role, guild.language.get('COMMAND_REACTIONROLE_ROLEUPDATE_REASON'))
+				member.roles.remove(role, guild.language.get('COMMAND_REACTIONROLE_ROLEUPDATE_REASON'))
 				return true
 			}
 		});

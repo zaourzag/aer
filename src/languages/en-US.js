@@ -81,7 +81,7 @@ module.exports = class extends Language {
 			COMMAND_AUTOROLE_DISABLE: `Successfully ${bold`disabled`} automatic assigning of roles.`,
 			COMMAND_AUTOROLE_NOADDALL: `The ${code`all`} option can only be used when removing autoroles.`,
 			COMMAND_AUTOROLE_NOROLE_ADD: 'You need to specify which role to add to be automatically assigned',
-			COMMAND_AUTOROLE_NOROLE_REMOVE: 'You need to specify which role you don\'t want to be automatically assigned any longer',
+			COMMAND_AUTOROLE_NOROLE_REMOVE: 'You need to specify which role you don\'t want automatically assigned any longer',
 			COMMAND_AUTOROLE_NOROLE_EXISTS: 'This role is already being automatically assigned',
 			COMMAND_AUTOROLE_NOROLE_WRONG: 'This role isn\'t being automatically assigned',
 			COMMAND_AUTOROLE_LIST: names => `Currently automatically assigning:\n${names}`,
@@ -340,6 +340,12 @@ module.exports = class extends Language {
 				`• using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
+			COMMAND_REACTIONROLE_NOMSG: (messageid) => `Could not find message with id: \`${messageid}\``,
+			COMMAND_REACTIONROLE_ROLE_EXIST: 'That reaction role is already active.',
+			COMMAND_REACTIONROLE_ROLE_ADDED: 'The reaction role has been added.',
+			COMMAND_REACTIONROLE_ROLE_REMOVED: 'The reaction role has been removed.',
+			COMMAND_REACTIONROLE_ROLE_NOEXIST: 'That message does not have a reaction role with the specified parameters.',
+			COMMAND_REACTIONROLE_ROLEUPDATE_REASON: 'Reaction Roles - User added or removed their reaction.',
 
 			// events
 			EVENT_JOIN_PERSISTREASON: 'Role persistency - member had those roles before leaving.',
