@@ -340,11 +340,12 @@ module.exports = class extends Language {
 				`• using Node.js ${processVersion}, Discord.js v${discordVersion}, and Klasa v${klasaVersion}.`
 			],
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
-			COMMAND_REACTIONROLE_NOMSG: (messageid) => `Could not find message with id: \`${messageid}\``,
+			COMMAND_REACTIONROLE_DESCRIPTION: 'Adds a reaction to a message which grants and removes a role.',
+			COMMAND_REACTIONROLE_ROLE_UNSPECIFIED: 'Please specify a role to be added.',
 			COMMAND_REACTIONROLE_ROLE_EXIST: 'That reaction role is already active.',
 			COMMAND_REACTIONROLE_ROLE_ADDED: 'The reaction role has been added.',
 			COMMAND_REACTIONROLE_ROLE_REMOVED: 'The reaction role has been removed.',
-			COMMAND_REACTIONROLE_ROLE_NOEXIST: 'That message does not have a reaction role with the specified parameters.',
+			COMMAND_REACTIONROLE_NOMSG: (messageid) => `Could not find message with id: \`${messageid}\``,
 			COMMAND_REACTIONROLE_ROLEUPDATE_REASON: 'Reaction Roles - User added or removed their reaction.',
 
 			// events
