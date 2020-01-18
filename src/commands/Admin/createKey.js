@@ -16,7 +16,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [id]) {
-		let out = [];
+		const out = [];
 		for (let i = 0; i < 3; i++) {
 			const str = base32(randomBytes(3).readUIntLE(0, 3));
 			out.push(str);

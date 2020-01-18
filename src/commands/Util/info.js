@@ -94,6 +94,8 @@ module.exports = class extends Command {
 		if (arg instanceof Role) return this.roleinfo(msg, arg);
 		if (msg.guild && arg === 'server') return this.serverinfo(msg);
 		if (msg.guild && arg === msg.guild.id) return this.serverinfo(msg);
+
+		return false;
 	}
 
 	async userinfo(msg, user) {
@@ -152,7 +154,7 @@ module.exports = class extends Command {
 			.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
 				? acc + (idx !== 0 ? ', ' : '') + role.name
 				: acc,
-				'');
+			'');
 
 		if (roles.size) {
 			embed.addField(

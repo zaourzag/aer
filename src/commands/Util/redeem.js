@@ -16,11 +16,11 @@ module.exports = class extends Command {
 	async run(msg, [key]) {
 		key = key.replace(/-/g, '');
 
-		const found = this.client.settings.get('keys').find(k => k.key === key);
+		const found = this.client.settings.get('keys').find(item => item.key === key);
 
 		if (!found) return msg.responder.error(msg.language.get('COMMAND_REDEEMKEY_NOEXIST'));
 
-		const newKeys = this.client.settings.get('keys').filter(k => k.key !== key);
+		const newKeys = this.client.settings.get('keys').filter(item => item.key !== key);
 		this.client.settings.update('keys', newKeys, { arrayAction: 'overwrite' });
 		msg.author.settings.update('badges', msg.author.settings.get('badges') | (1 << found.id));
 

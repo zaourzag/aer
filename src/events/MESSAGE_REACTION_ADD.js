@@ -26,6 +26,7 @@ module.exports = class extends Event {
 				member.roles.add(role, guild.language.get('COMMAND_REACTIONROLE_ROLEUPDATE_REASON'));
 				return true;
 			}
+			return false;
 		});
 	}
 
