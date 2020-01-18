@@ -10,9 +10,10 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			enabled: true,
-			runIn: ['text'],
+			runIn: ['text', 'news'],
 			requiredPermissions: ['MANAGE_ROLES'],
 			aliases: ['rero', 'reactionroles'],
+			quotedStringSupport: true,
 			description: language => language.get('COMMAND_REACTIONROLE_DESCRIPTION'),
 			usage: '<add|remove> [channel:channel] <messageid:string{17,18}> <emote:emoji> [role:rolename]',
 			usageDelim: ' '
