@@ -31,7 +31,7 @@ module.exports = class extends Command {
 		const filter = (item) => item.messageID === reactionRole.messageID
 			&& item.emoteID === reactionRole.emoteID;
 
-		const reactionRoles = msg.guild.settings.get('mod.roles.reac	tionRoles');
+		const reactionRoles = msg.guild.settings.get('mod.roles.reactionRoles');
 
 		if (action === 'add') {
 			if (!role) return msg.responder.error('COMMAND_REACTIONROLE_ROLE_UNSPECIFIED');
