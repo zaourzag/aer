@@ -1,6 +1,6 @@
 /*
  * Author: William Johnstone <william@endevrr.com>
- * Credit example: Credit goes to [William Johnstone]. (c) [The Aero Team](https://aero.bot) 2020
+ * Credit example: Credit goes to [William Johnstone](https://endevrr.com). (c) [The Aero Team](https://aero.bot) 2020
  */
 const { Event } = require('klasa');
 
