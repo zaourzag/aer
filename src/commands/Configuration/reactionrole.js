@@ -37,7 +37,7 @@ module.exports = class extends Command {
 		const reactionRoles = msg.guild.settings.get('mod.roles.reactionRoles');
 
 		if (action === "add") {
-			if (!role) return msg.responder.error('COMMAND_REACTIONROLE_ROLE_NOEXIST');
+			if (!role) return msg.responder.error('COMMAND_REACTIONROLE_ROLE_UNSPECIFIED');
 			await channel.messages.fetch(messageID).then(message => {
 				const equalReactionRoles = reactionRoles.filter(item => filter(item))
 
