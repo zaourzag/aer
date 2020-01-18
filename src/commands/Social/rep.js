@@ -18,7 +18,7 @@ module.exports = class extends Command {
 		if (Date.now() - msg.author.settings.get('lastReputationTimestamp') < TIME.HOUR * 12) {
 			return msg.responder.error(msg.language.get('COMMAND_REP_COOLDOWN', Duration.toNow(msg.author.settings.get('lastReputationTimestamp') + (TIME.HOUR * 12))));
 		}
-
+		await msg.author.settings.sync();
 		await msg.author.settings.update('lastReputationTimestamp', Date.now());
 
 		const total = user.settings.get('stats.reputation.total');

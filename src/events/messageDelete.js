@@ -10,7 +10,7 @@ module.exports = class extends Event {
 	}
 
 	async run(msg) {
-		if (!msg.guild || msg.author.bot) return false;
+		if (!msg.guild || !msg.guild.log || msg.author.bot) return false;
 		return msg.guild.log.messageDeleted({ user: msg.author, message: msg });
 	}
 
