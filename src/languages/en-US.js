@@ -363,6 +363,7 @@ module.exports = class extends Language {
 			COMMAND_REPORT_ARG_PROOF_INVALID: 'This is not a valid imgur URL or image.',
 			COMMAND_REPORT_SUCCESS: 'Your report has been sent. Thanks for keeping Discord safe and sound!',
 			COMMAND_REPORT_CANCELLED: 'Canceled report.',
+			COMMAND_REPORT_ONGOING: 'Please finish your current report first. If you made an error, just type "cancel" to stop the report and try again.',
 
 			// events
 			EVENT_JOIN_PERSISTREASON: 'Role persistency - member had those roles before leaving.',

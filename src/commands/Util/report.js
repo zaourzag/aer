@@ -12,9 +12,13 @@ module.exports = class extends Command {
 			usageDelim: ' ',
 			quotedStringSupport: true
 		});
+
+		this.channels = new Set();
 	}
 
 	async run(msg, [user, reason, proof]) {
+		if (this.channels.has(msg.channel.id)) return;
+		this.channels.add(msg.channel.id);
 		if (!user) {
 			user = await this.ask(msg, this.validateUser, this.parseUser, {
 				question: msg.language.get('COMMAND_REPORT_ARG_USER_QUESTION'),
@@ -22,6 +26,7 @@ module.exports = class extends Command {
 				invalid: msg.language.get('COMMAND_REPORT_ARG_USER_INVALID')
 			}).catch((reason) => {
 				msg.responder.error(reason, true);
+				this.channels.delete(msg.channel.id);
 				return null
 			});
 			if (!user) return;
@@ -34,6 +39,7 @@ module.exports = class extends Command {
 				invalid: msg.language.get('COMMAND_REPORT_ARG_REASON_INVALID')
 			}).catch((reason) => {
 				msg.responder.error(reason, true);
+				this.channels.delete(msg.channel.id);
 				return null
 			});
 			if (!reason) return;
@@ -47,6 +53,7 @@ module.exports = class extends Command {
 					invalid: msg.language.get('COMMAND_REPORT_ARG_PROOF_INVALID')
 				}).catch((reason) => {
 					msg.responder.error(reason, true);
+					this.channels.delete(msg.channel.id);
 					return null
 				});
 				if (!proof) return;
@@ -66,6 +73,7 @@ module.exports = class extends Command {
 			.setReason(reason, proof);
 
 		const res = await this.client.ksoft.bans.add(ban);
+		this.channels.delete(msg.channel.id);
 		if (!res.success) return msg.responder.error(res.message);
 		return msg.responder.success(msg.language.get('COMMAND_REPORT_SUCCESS'));
 	}
