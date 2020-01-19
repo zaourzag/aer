@@ -513,7 +513,7 @@ const COMMAND_8BALL_ANSWERS = [
 
 
 const LEVEL_MESSAGES = [
-	"Hey, **{user}**, you levelled up! You're now level {level}!",
+	"Hey, **{user}**, you leveled up! You're now level {level}!",
 	"You've been doing excellent, **{user}**. Here's a level up! You're now level {level}!",
 	"Oh come on, you're not hacking, are you **{user}**? You're level {level} already!",
 	"Oh, how time flies, **{user}**. You're already level {level}!",
