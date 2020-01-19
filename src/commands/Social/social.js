@@ -38,7 +38,7 @@ module.exports = class extends Command {
 	}
 
 	async run(msg) {
-		const enabled = msg.guild.settings.get('social,enabled');
+		const enabled = msg.guild.settings.get('social.enabled');
 		return msg.send(msg.language.get('COMMAND_SOCIAL_STATUS', enabled));
 	}
 
