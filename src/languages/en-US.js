@@ -13,7 +13,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (err) => `An error occurred: ${err}`,
 
@@ -347,6 +347,22 @@ module.exports = class extends Language {
 			COMMAND_REACTIONROLE_ROLE_REMOVED: 'The reaction role has been removed.',
 			COMMAND_REACTIONROLE_NOMSG: (messageid) => `Could not find message with id: \`${messageid}\``,
 			COMMAND_REACTIONROLE_ROLEUPDATE_REASON: 'Reaction Roles - User added or removed their reaction.',
+			COMMAND_REPORT_DESCRIPTION: [
+				'Reports a user to the global ban list at KSoft.Si.',
+				'Use only for serious issues; false reports or reporting personal issues may get you blacklisted.',
+				'If you pass in a reason directly, please use quotes around it.'
+			].join('\n'),
+			COMMAND_REPORT_ARG_USER_QUESTION: 'Whom do you want to report (either user ID or mention)?',
+			COMMAND_REPORT_ARG_USER_TIMEOUT: 'You did not provide a user in time.',
+			COMMAND_REPORT_ARG_USER_INVALID: 'Please enter a valid user ID or mention.',
+			COMMAND_REPORT_ARG_REASON_QUESTION: 'Why do you want to report this user? (Please keep it short and understandable. If explanation is needed, contact a KSoft admin.)',
+			COMMAND_REPORT_ARG_REASON_TIMEOUT: 'You did not provide a report reason in time.',
+			COMMAND_REPORT_ARG_REASON_INVALID: 'Please write out a reason, pictures and similar cannot be used due to technical reasons.',
+			COMMAND_REPORT_ARG_PROOF_QUESTION: 'Please provide proof in the form of an image, either as an attachment or an imgur URL.',
+			COMMAND_REPORT_ARG_PROOF_TIMEOUT: 'You did not provide valid proof in time.',
+			COMMAND_REPORT_ARG_PROOF_INVALID: 'This is not a valid imgur URL or image.',
+			COMMAND_REPORT_SUCCESS: 'Your report has been sent. Thanks for keeping Discord safe and sound!',
+			COMMAND_REPORT_CANCELLED: 'Canceled report.',
 
 			// events
 			EVENT_JOIN_PERSISTREASON: 'Role persistency - member had those roles before leaving.',

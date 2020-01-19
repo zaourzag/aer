@@ -4,18 +4,21 @@ MONGO_PASS=
 MONGO_HOST=
 MONGO_PORT=
 
-# Discord Bot Token
+# Discord Bot token
 DISCORD_TOKEN=
 
-# KSoft.Si Token (https://api.ksoft.si/)
+# KSoft.Si token (https://api.ksoft.si/)
 KSOFT_TOKEN=
 
-# Meme Image Generation Token (https://memes.aero.bot/)
+# Meme Image Generation token (https://memes.aero.bot/)
 MEMEGEN_TOKEN=
 
-# DiscordRep.com Token (https://discordrep.com/)
+# DiscordRep.com token (https://discordrep.com/)
 # run -api generate in the DiscordRep server (https://discord.gg/kXTj2NR)
 DREP_TOKEN=
+
+# Imgur token (https://imgur.com)
+IMGUR_TOKEN=
 
 # Whether to boot a single shard. Only set to false when running kubernetes.
 BOOT_SINGLE="true"
