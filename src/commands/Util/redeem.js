@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
 		const newKeys = this.client.settings.get('keys').filter(item => item.key !== key);
 		this.client.settings.update('keys', newKeys, { arrayAction: 'overwrite' });
-		msg.author.settings.update('badges', msg.author.settings.get('badges') | (1 << found.id));
+		msg.author.settings.update('badges', msg.author.settings.get('badges') | (1 << found.id)); /* eslint-disable-line no-bitwise */
 
 		return msg.responder.success(`Successfully redeemed ${badges[found.id].icon} ${badges[found.id].title}`);
 	}

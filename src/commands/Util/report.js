@@ -17,19 +17,19 @@ module.exports = class extends Command {
 	}
 
 	async run(msg, [user, reason, proof]) {
-		if (this.channels.has(msg.channel.id)) return;
+		if (this.channels.has(msg.channel.id)) return false;
 		this.channels.add(msg.channel.id);
 		if (!user) {
 			user = await this.ask(msg, this.validateUser, this.parseUser, {
 				question: msg.language.get('COMMAND_REPORT_ARG_USER_QUESTION'),
 				timeout: msg.language.get('COMMAND_REPORT_ARG_USER_TIMEOUT'),
 				invalid: msg.language.get('COMMAND_REPORT_ARG_USER_INVALID')
-			}).catch((reason) => {
-				msg.responder.error(reason, true);
+			}).catch((err) => {
+				msg.responder.error(err, true);
 				this.channels.delete(msg.channel.id);
-				return null
+				return null;
 			});
-			if (!user) return;
+			if (!user) return false;
 		}
 
 		if (!reason) {
@@ -37,12 +37,12 @@ module.exports = class extends Command {
 				question: msg.language.get('COMMAND_REPORT_ARG_REASON_QUESTION'),
 				timeout: msg.language.get('COMMAND_REPORT_ARG_REASON_TIMEOUT'),
 				invalid: msg.language.get('COMMAND_REPORT_ARG_REASON_INVALID')
-			}).catch((reason) => {
-				msg.responder.error(reason, true);
+			}).catch((err) => {
+				msg.responder.error(err, true);
 				this.channels.delete(msg.channel.id);
-				return null
+				return null;
 			});
-			if (!reason) return;
+			if (!reason) return false;
 		}
 
 		if (!proof) {
@@ -51,12 +51,12 @@ module.exports = class extends Command {
 					question: msg.language.get('COMMAND_REPORT_ARG_PROOF_QUESTION'),
 					timeout: msg.language.get('COMMAND_REPORT_ARG_PROOF_TIMEOUT'),
 					invalid: msg.language.get('COMMAND_REPORT_ARG_PROOF_INVALID')
-				}).catch((reason) => {
-					msg.responder.error(reason, true);
+				}).catch((err) => {
+					msg.responder.error(err, true);
 					this.channels.delete(msg.channel.id);
-					return null
+					return null;
 				});
-				if (!proof) return;
+				if (!proof) return false;
 			} else {
 				proof = this.parseProof(msg);
 			}
@@ -97,8 +97,8 @@ module.exports = class extends Command {
 				} else {
 					reject(timeout);
 				}
-			})
-		})
+			});
+		});
 	}
 
 	async validateUser(msg) {
@@ -158,7 +158,6 @@ module.exports = class extends Command {
 			.then(data => data.json);
 		if (!res.success) throw 'Failed uploading to imgur.';
 		return res.data.link;
-
 	}
 
 };

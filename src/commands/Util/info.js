@@ -115,7 +115,7 @@ module.exports = class extends Command {
 
 	async _addBadges(user, embed) {
 		const bitfield = user.settings.get('badges');
-		const out = badges.filter((_, idx) => bitfield & (1 << idx));
+		const out = badges.filter((_, idx) => bitfield & (1 << idx)); /* eslint-disable-line no-bitwise */
 		if (!out.length) return embed;
 
 		embed.setDescription(out.map(badge => `${badge.icon} ${badge.title}`).join('\n'));
