@@ -177,6 +177,8 @@ module.exports = class extends Language {
 				`If you like what we're doing, please share ${this.client.user.username} with your pals!`,
 				`Thank you for using ${this.client.user.username} ♥`
 			],
+			COMMAND_INFO_USER_WARNINGS: 'Warnings',
+			COMMAND_INFO_USER_STATISTICS: 'Statistics',
 			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si Bans for ${code`${reason}`} ⎾[proof](${proof})⏌`,
 			COMMAND_INFO_USER_DREPBANNED: (reason, score) => `${error} ${bold`Banned`} on DiscordRep for ${code`${reason}`} ⎾rep: ${score}⏌`,
 			COMMAND_INFO_USER_DREPNEUTRAL: `${unspecified} No reputation on DiscordRep yet`,

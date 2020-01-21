@@ -145,7 +145,7 @@ module.exports = class extends Command {
 			statistics.push(`+${totalRep} rep (${individualRep} individual upvoter${individualRep === 1 ? '' : 's'})`);
 		}
 
-		embed.addField('• Statistics', statistics.join('\n'));
+		embed.addField(`• ${msg.language.get('COMMAND_INFO_USER_STATISTICS')}`, statistics.join('\n'));
 		if (!member) return embed;
 
 		const roles = member.roles.sorted((a, b) => b.position - a.position);
@@ -167,7 +167,7 @@ module.exports = class extends Command {
 		if (warnings.length) {
 			for (const { moderator } of warnings) await this.client.users.fetch(moderator);
 			embed.addField(
-				`• Warnings (${warnings.filter(warn => warn.active).length})`,
+				`• ${msg.language.get('COMMAND_INFO_USER_WARNINGS')} (${warnings.filter(warn => warn.active).length})`,
 				warnings.map((warn, idx) => `${idx + 1}. ${!warn.active ? '~~' : ''}**${warn.reason}** | ${this.client.users.get(warn.moderator).tag}${!warn.active ? '~~' : ''}`)
 			);
 		}
