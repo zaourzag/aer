@@ -112,7 +112,7 @@ module.exports = class extends Command {
 	}
 
 	validateReason(msg) {
-		return !!msg.content;
+		return !cancel.test(msg.content);
 	}
 
 	validateProof(msg) {
