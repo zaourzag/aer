@@ -179,6 +179,7 @@ module.exports = class extends Language {
 			],
 			COMMAND_INFO_USER_KSOFTBANNED: (reason, proof) => `${error} ${bold`Banned`} on KSoft.Si Bans for ${code`${reason}`} ⎾[proof](${proof})⏌`,
 			COMMAND_INFO_USER_DREPBANNED: (reason, score) => `${error} ${bold`Banned`} on DiscordRep for ${code`${reason}`} ⎾rep: ${score}⏌`,
+			COMMAND_INFO_USER_DREPNEUTRAL: `${unspecified} No reputation on DiscordRep yet`,
 			COMMAND_INFO_USER_DSERVICESBANNED: (reason, proof) => `${error} ${bold`Banned`} on Discord.Services for ${code`${reason}`} ⎾[proof](${proof})⏌`,
 			COMMAND_INFO_USER_BANSCLEAN: `${success} Not banned on KSoft.Si or Discord.Services`,
 			COMMAND_INFO_USER_DREPSCORE: (score, int) => `${int === 0 ? unspecified : int < 0 ? error : success} Reputation of ${bold`${score.toString()}`} on DiscordRep`,

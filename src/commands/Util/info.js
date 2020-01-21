@@ -208,7 +208,9 @@ module.exports = class extends Command {
 			msg.language.get(cwRating, CWProfile.blacklisted_reason),
 			DRepBan.banned
 				? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason, fancyScore)
-				: msg.language.get('COMMAND_INFO_USER_DREPSCORE', fancyScore, DRepScore)
+				: DRepScore === 0
+					? msg.language.get('COMMAND_INFO_USER_DREPNEUTRAL')
+					: msg.language.get('COMMAND_INFO_USER_DREPSCORE', fancyScore, DRepScore)
 		].join('\n'));
 
 		DRepBan.banned || KSoftBan || DServicesBans.has(user.id) || CWProfile.blacklisted || CWProfile.score > 80
