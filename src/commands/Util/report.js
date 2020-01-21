@@ -20,7 +20,7 @@ module.exports = class extends Command {
 		if (this.channels.has(msg.channel.id)) return false;
 		this.channels.add(msg.channel.id);
 		if (!user) {
-			user = await this.ask(msg, this.validateUser, this.parseUser, {
+			user = await this.ask(msg, this.validateUser.bind(this), this.parseUser.bind(this), {
 				question: msg.language.get('COMMAND_REPORT_ARG_USER_QUESTION'),
 				timeout: msg.language.get('COMMAND_REPORT_ARG_USER_TIMEOUT'),
 				invalid: msg.language.get('COMMAND_REPORT_ARG_USER_INVALID')
@@ -105,7 +105,7 @@ module.exports = class extends Command {
 		if (!msg.content) return false;
 		if (msg.mentions.users.size > 0) return true;
 		if (/^(\d{17,19})$/.test(msg.content)) {
-			const user = await this.client.users.fetch(msg.content).catch(() => false);
+			const user = await this.client.users.fetch(msg.content);
 			return !!user;
 		}
 		return false;
@@ -123,7 +123,7 @@ module.exports = class extends Command {
 	parseUser(msg) {
 		return msg.mentions.users.size
 			? msg.mentions.users.first()
-			: this.client.users.get(msg.content);
+			: msg.client.users.get(msg.content);
 	}
 
 	parseReason(msg) {
