@@ -154,7 +154,7 @@ module.exports = class extends Command {
 			.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
 				? acc + (idx !== 0 ? ', ' : '') + role.name
 				: acc,
-			'');
+				'');
 
 		if (roles.size) {
 			embed.addField(
@@ -183,23 +183,29 @@ module.exports = class extends Command {
 		const DServicesBan = DServicesBans.get(user.id);
 		const CWProfile = await this.client.chatwatch.profile(user.id);
 		const rating = KSoftBan || CWProfile.blacklisted
-			? 'very low'
-			: DRepBan.banned || DRepScore < 0 || DServicesBans.has(user.id) || CWProfile.score > 80
-				? 'low'
+			? 'COMMAND_INFO_TRUST_VERYLOW'
+			: DRepBan.banned || DRepScore < 0 || DServicesBans.has(user.id) || CWProfile.score > 50
+				? 'COMMAND_INFO_TRUST_LOW'
 				: this.client.owners.has(user) || CWProfile.whitelisted
-					? 'very high'
-					: 'high';
-		embed.addField(`• Trust (${rating})`, [
+					? 'COMMAND_INFO_TRUST_VERYHIGH'
+					: 'COMMAND_INFO_TRUST_HIGH';
+		const cwRating = CWProfile.whitelisted
+			? 'COMMAND_INFO_USER_CWWHITELISTED'
+			: CWProfile.blacklisted
+				? 'COMMAND_INFO_USER_CWBANNED'
+				: CWProfile.score < 50
+					? 'COMMAND_INFO_USER_CWGOOD'
+					: CWProfile.score === 50
+						? 'COMMAND_INFO_USER_CWNEUTRAL'
+						: 'COMMAND_INFO_USER_CWBAD';
+
+		embed.addField(`• Trust (${msg.language.get(rating)})`, [
 			KSoftBan
 				? msg.language.get('COMMAND_INFO_USER_KSOFTBANNED', KSoftBan.reason, KSoftBan.proof)
 				: DServicesBan
 					? msg.language.get('COMMAND_INFO_USER_DSERVICESBANNED', DServicesBan.reason, DServicesBan.proof)
 					: msg.language.get('COMMAND_INFO_USER_BANSCLEAN'),
-			CWProfile.whitelisted
-				? msg.language.get('COMMAND_INFO_USER_CWWHITELISTED')
-				: CWProfile.blacklisted
-					? msg.language.get('COMMAND_INFO_USER_CWBANNED', CWProfile.blacklisted_reason)
-					: msg.language.get('COMMAND_INFO_USER_CWSCORE', CWProfile.score),
+			msg.language.get(cwRating, CWProfile.blacklisted_reason),
 			DRepBan.banned
 				? msg.language.get('COMMAND_INFO_USER_DREPBANNED', DRepBan.reason, fancyScore)
 				: msg.language.get('COMMAND_INFO_USER_DREPSCORE', fancyScore, DRepScore)
