@@ -149,12 +149,22 @@ module.exports = class extends Command {
 		if (!member) return embed;
 
 		const roles = member.roles.sorted((a, b) => b.position - a.position);
+		let spacer = false;
 		const roleString = roles
 			.array()
-			.reduce((acc, role, idx) => acc.length + role.name.length < 1010 && role.id !== msg.guild.id
-				? acc + (idx !== 0 ? ', ' : '') + role.name
-				: acc,
-				'');
+			.filter(role => role.id !== msg.guild.id)
+			.reduce((acc, role, idx, arr) => {
+				if (acc.length + role.name.length < 1010)
+					if (role.name === '⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯') {
+						spacer = true;
+						return acc + '\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n';
+					} else {
+						const comma = (((idx !== 0) && (!spacer)) ? ', ' : '');
+						spacer = false;
+						return acc + comma + role.name;
+					}
+				else return acc;
+			}, '');
 
 		if (roles.size) {
 			embed.addField(
