@@ -86,7 +86,7 @@ module.exports = class extends Command {
 		return new Promise((resolve, reject) => {
 			collector.on('collect', async message => {
 				if (await validator(message)) collector.stop('success');
-				if (cancel.test(message.content)) collector.stop('cancelled');
+				else if (cancel.test(message.content)) collector.stop('cancelled');
 				else msg.responder.error(invalid, true);
 			});
 			collector.on('end', (collected, reason) => {
@@ -112,7 +112,7 @@ module.exports = class extends Command {
 	}
 
 	validateReason(msg) {
-		return msg.content;
+		return !!msg.content;
 	}
 
 	validateProof(msg) {
