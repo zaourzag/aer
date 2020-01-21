@@ -13,7 +13,7 @@ module.exports = class extends Language {
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix)
 				? `es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(', ')}`
 				: ` in this guild is set to: \`${prefix}\``
-			}`,
+				}`,
 
 			ERROR_GENERIC: (err) => `An error occurred: ${err}`,
 
@@ -361,7 +361,7 @@ module.exports = class extends Language {
 			COMMAND_REPORT_ARG_PROOF_QUESTION: 'Please provide proof in the form of an image, either as an attachment or an imgur URL.',
 			COMMAND_REPORT_ARG_PROOF_TIMEOUT: 'You did not provide valid proof in time.',
 			COMMAND_REPORT_ARG_PROOF_INVALID: 'This is not a valid imgur URL or image.',
-			COMMAND_REPORT_SUCCESS: 'Your report has been sent. Thanks for keeping Discord safe and sound!',
+			COMMAND_REPORT_SUCCESS: 'Your report has been sent. Thanks for keeping Discord safe and sound! *This is a service powered by api.ksoft.si.*',
 			COMMAND_REPORT_CANCELLED: 'Cancelled report.',
 			COMMAND_REPORT_ONGOING: 'Please finish your current report first. If you made an error, just type "cancel" to stop the report and try again.',
 
