@@ -201,6 +201,8 @@ module.exports = class extends Language {
 			COMMAND_REDEEMKEY_NOEXIST: "This key doesn't exist or has already been redeemed.",
 			COMMAND_REDEEMKEY_DESCRIPTION: 'Redeem a key for a badge.',
 			COMMAND_CREATEKEY_DESCRIPTION: 'Create a key to redeem for a badge',
+			COMMAND_LYRICS_FAILED: url => `Too many characters to display, check out the lyrics on KSoft: ${url}`,
+			COMMAND_LYRICS_DESCRIPTION: 'Fetches lyrics for a song from api.ksoft.si',
 
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',
