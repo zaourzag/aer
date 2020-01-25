@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			requiredPermissions: ['MANAGE_MESSAGES'],
 			aliases: ['automod'],
 			description: language => language.get('COMMAND_ANTI_DESCRIPTION'),
-			usage: '[invites|duplicates|copypastas|hoisting|unmentionable|toxicity] [enable|disable]',
+			usage: '[invites|duplicates|copypastas|toxicity|hoisting|unmentionable] [enable|disable]',
 			usageDelim: ' '
 		});
 
@@ -30,9 +30,18 @@ module.exports = class extends Command {
 			return msg.send(msg.language.get('COMMAND_ANTI_DISPLAY_ONE', type, enabled));
 		} else {
 			const out = [];
-			for (const anti of ['invites', 'duplicates', 'copypastas', 'hoisting', 'unmentionable', 'spam']) {
+			out.push(msg.language.get('COMMAND_ANTI_DISPLAY_DIVIDER_CHAT'))
+			out.push('');
+			for (const anti of ['invites', 'duplicates', 'copypastas', 'toxicity']) {
 				const enabled = msg.guild.settings.get(`mod.anti.${anti}`);
-				out.push(msg.language.get('COMMAND_ANTI_DISPLAY_ONE', anti, enabled));
+				out.push(msg.language.get('COMMAND_ANTI_DISPLAY_ALL_CHAT', anti, enabled));
+			}
+			out.push('');
+			out.push(msg.language.get('COMMAND_ANTI_DISPLAY_DIVIDER_USERS'))
+			out.push('');
+			for (const anti of ['unmentionable', 'hoisting']) {
+				const enabled = msg.guild.settings.get(`mod.anti.${anti}`);
+				out.push(msg.language.get('COMMAND_ANTI_DISPLAY_ALL_USERS', anti, enabled));
 			}
 			return msg.send(out.join('\n'));
 		}
