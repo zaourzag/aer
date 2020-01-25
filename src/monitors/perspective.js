@@ -15,7 +15,7 @@ module.exports = class extends Monitor {
 	}
 
 	async run(msg) {
-		if (!msg.guild || !msg.guild.settings.get('mod.anti.spam') || this.client.owners.has(msg.author)) return;
+		if (!msg.guild || !msg.guild.settings.get('mod.anti.toxicity') || this.client.owners.has(msg.author)) return;
 		const scores = await req(PerspectiveAPI, 'POST')
 			.path('comments:analyze')
 			.query('key', process.env.PERSPECTIVE_TOKEN)

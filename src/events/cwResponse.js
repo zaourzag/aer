@@ -11,7 +11,7 @@ module.exports = class extends Event {
 
 	async run(data) {
 		const guild = this.client.guilds.get(data.message.guild);
-		if (!guild || !guild.settings.get('mod.anti.spam')) return;
+		if (!guild || !guild.settings.get('mod.anti.toxicity')) return;
 		if (data.scores.overall > 85) {
 			guild.channels
 				.get(data.message.channel).messages
