@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			requiredPermissions: ['MANAGE_MESSAGES'],
 			aliases: ['automod'],
 			description: language => language.get('COMMAND_ANTI_DESCRIPTION'),
-			usage: '[invites|duplicates|copypastas|toxicity|hoisting|unmentionable] [enable|disable]',
+			usage: `[${[...args[0].client.gateways.get('guilds').schema.get('mod.anti').keys()].join('|')}] [enable|disable]`,
 			usageDelim: ' '
 		});
 
