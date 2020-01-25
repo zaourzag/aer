@@ -21,6 +21,7 @@ module.exports = class extends Command {
 		const warnable = this.comparePermissions(msg.member, member);
 		if (!warnable) return msg.responder.error(msg.language.get('COMMAND_UNWARN_NOPERMS'));
 		const warnings = this.getWarns(member, id);
+		await member.settings.sync();
 		member.settings.update('warnings', warnings, { arrayAction: 'overwrite' });
 		return this.logActions(msg.guild, 'unwarn', [member], { reason, moderator: msg.author });
 	}

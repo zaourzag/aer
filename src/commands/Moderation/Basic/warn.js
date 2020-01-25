@@ -23,6 +23,7 @@ module.exports = class extends Command {
 		if (!warnable.length) return msg.responder.error(msg.language.get('COMMAND_WARN_NOPERMS', members.length > 1));
 
 		for (const member of warnable) {
+			await member.settings.sync();
 			member.settings.update('warnings', { reason, moderator: msg.member.id, active: true }, { arrayAction: 'add' });
 			const embed = new MessageEmbed()
 				.setAuthor(msg.guild.name, msg.guild.iconURL())

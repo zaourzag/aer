@@ -16,6 +16,7 @@ module.exports = class extends Monitor {
 		if (!msg.guild) return;
 		for (const obj of [msg.author, msg.member, msg.guild]) {
 			const cur = obj.settings.get('stats.messages');
+			await obj.settings.sync();
 			obj.settings.update('stats.messages', cur + 1);
 		}
 	}

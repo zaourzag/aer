@@ -27,6 +27,8 @@ module.exports = class extends Monitor {
 		const newLevel = msg.member.settings.get('level') + 1;
 		const xpNeeded = this.xpNeeded(newLevel);
 
+		await msg.guild.settings.sync();
+
 		if (newXP >= xpNeeded) {
 			await msg.member.settings.update([['points', newXP - xpNeeded], ['level', newLevel]]);
 			if (msg.guild.settings.get('social.levelupMessages')) {

@@ -22,6 +22,7 @@ module.exports = class extends Command {
 			out.push(str);
 		}
 		await msg.author.send(`Key for ${badges[id].icon} ${badges[id].title}: \`${out.join('-')}\``);
+		await this.client.settings.sync();
 		await this.client.settings.update('keys', { id, key: out.join('') });
 		return msg.responder.success();
 	}

@@ -22,6 +22,7 @@ module.exports = class extends Command {
 		await msg.author.settings.update('lastReputationTimestamp', Date.now());
 
 		const total = user.settings.get('stats.reputation.total');
+		await user.settings.sync();
 		await user.settings.update('stats.reputation.total', total + 1);
 
 		const individual = user.settings.get('stats.reputation.individual');

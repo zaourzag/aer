@@ -39,6 +39,7 @@ module.exports = class extends Monitor {
 
 		for (const obj of [msg.member, msg.author, msg.guild]) {
 			const messages = obj.settings.get('stats.messages');
+			await obj.settings.sync();
 			if (messages === 0) { obj.settings.update('stats.toxicity', TOXICITY); } else {
 				const prev = obj.settings.get('stats.toxicity');
 				const updated = ((prev * messages) + TOXICITY) / (messages + 1);

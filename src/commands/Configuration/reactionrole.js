@@ -33,13 +33,14 @@ module.exports = class extends Command {
 
 		const reactionRoles = msg.guild.settings.get('mod.roles.reactionRoles');
 
+		await msg.guild.settings.sync();
+
 		if (action === 'add') {
 			if (!role) return msg.responder.error('COMMAND_REACTIONROLE_ROLE_UNSPECIFIED');
 			await channel.messages.fetch(messageID).then(message => {
 				const equalReactionRoles = reactionRoles.filter(item => filter(item));
 
 				if (equalReactionRoles.length > 0) return msg.responder.error(msg.language.get('COMMAND_REACTIONROLE_ROLE_EXIST'));
-
 				msg.guild.settings.update('mod.roles.reactionRoles', reactionRole, { arrayAction: 'add' });
 				message.react(emote.id);
 				return msg.responder.success(msg.language.get('COMMAND_REACTIONROLE_ROLE_ADDED'));

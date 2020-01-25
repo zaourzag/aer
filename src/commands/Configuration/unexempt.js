@@ -22,6 +22,7 @@ module.exports = class extends Command {
 			: target instanceof Role
 				? 'roles'
 				: 'channels';
+		await msg.guild.settings.sync();
 		await msg.guild.settings.update(`mod.ignored.${type}`, target, { arrayAction: 'remove' });
 		return msg.responder.success();
 	}

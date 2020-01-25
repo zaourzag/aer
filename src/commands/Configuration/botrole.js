@@ -22,6 +22,7 @@ module.exports = class extends Command {
 			await msg.guild.settings.reset('mod.roles.bots');
 			return msg.responder.success(msg.language.get('COMMAND_BOTROLE_DISABLE', role.name));
 		} else {
+			await msg.guild.settings.sync();
 			await msg.guild.settings.update('mod.roles.bots', role.id);
 			return msg.responder.success(msg.language.get('COMMAND_BOTROLE_SET', role.name));
 		}

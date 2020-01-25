@@ -11,6 +11,7 @@ module.exports = class extends Event {
 	}
 
 	async run(member) {
+		await member.settings.sync();
 		member.settings.update('persistRoles', member.roles.keyArray(), { arrayAction: 'overwrite' });
 		if (member.nickname) member.settings.update('persistNick', member.nickname);
 		const { guild, user } = member;

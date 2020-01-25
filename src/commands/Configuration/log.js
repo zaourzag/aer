@@ -19,6 +19,7 @@ module.exports = class extends Command {
 
 	async run(msg, [type, channel]) {
 		if (!channel) return this.displayLogs(msg, type);
+		await msg.guild.settings.sync();
 		await msg.guild.settings.update(`logs.${type}.channel`, channel);
 		const hook = await channel.createWebhook(`${this.client.user.username} Log: ${type}`,
 			{ avatar: this.client.user.displayAvatarURL(), reason: msg.language.get('COMMAND_LOG_REASON') });

@@ -25,6 +25,7 @@ module.exports = class extends Command {
 		const autoRoles = msg.guild.settings.get('mod.roles.auto');
 		if (autoRoles.includes(role.id)) return this.noRole(msg, 'EXISTS');
 
+		await msg.guild.settings.sync();
 		await msg.guild.settings.update('mod.roles.auto', role.id, { arrayAction: 'add' });
 		return msg.responder.success(msg.language.get('COMMAND_AUTOROLE_ADD', role.name));
 	}
@@ -37,6 +38,7 @@ module.exports = class extends Command {
 		} else {
 			const autoRoles = msg.guild.settings.get('mod.roles.auto');
 			if (!autoRoles.includes(role.id)) return this.noRole(msg, 'WRONG');
+			await msg.guild.settings.sync();
 			await msg.guild.settings.update('mod.roles.auto', role.id, { arrayAction: 'remove' });
 			return msg.responder.success(msg.language.get('COMMAND_AUTOROLE_REMOVE', role.name));
 		}

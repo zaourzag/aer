@@ -18,7 +18,7 @@ module.exports = class extends Command {
 			return msg.send(msg.language.get('COMMAND_DAILY_COOLDOWN', Duration.toNow(member.settings.get('lastDailyTimestamp') + (TIME.HOUR * 12))));
 		}
 		const balance = this.client.config.dailyPoints;
-
+		await msg.member.settings.sync();
 		await msg.member.settings.update([['balance', msg.member.settings.get('balance') + balance], ['lastDailyTimestamp', Date.now()]]);
 		if (msg.flagArgs.remind || msg.flagArgs.reminder || msg.flagArgs.remindme) {
 			await this.client.schedule.create('reminder', Date.now() + (TIME.HOUR * 12), {

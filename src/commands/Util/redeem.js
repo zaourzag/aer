@@ -21,6 +21,7 @@ module.exports = class extends Command {
 		if (!found) return msg.responder.error(msg.language.get('COMMAND_REDEEMKEY_NOEXIST'));
 
 		const newKeys = this.client.settings.get('keys').filter(item => item.key !== key);
+		await this.client.settings.sync();
 		this.client.settings.update('keys', newKeys, { arrayAction: 'overwrite' });
 		msg.author.settings.update('badges', msg.author.settings.get('badges') | (1 << found.id)); /* eslint-disable-line no-bitwise */
 

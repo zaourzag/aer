@@ -22,6 +22,7 @@ module.exports = class extends Command {
 			await msg.guild.settings.reset('raid.channel');
 			return msg.responder.success(msg.language.get('COMMAND_RAID_DISABLE'));
 		}
+		await msg.guild.settings.sync();
 		await msg.guild.settings.update('raid.channel', channel);
 		return msg.responder.success(msg.language.get('COMMAND_RAID_SUCCESS', channel));
 	}

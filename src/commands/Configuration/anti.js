@@ -20,6 +20,7 @@ module.exports = class extends Command {
 	async run(msg, [type, action]) {
 		if (!action) return this.displaySettings(msg, type);
 		if (!type) return msg.responder.error('COMMAND_ANTI_NOTYPE');
+		await msg.guild.settings.sync();
 		await msg.guild.settings.update(`mod.anti.${type}`, action === 'enable');
 		return msg.responder.success(msg.language.get('COMMAND_ANTI_SUCCESS', type, action === 'enable', ['hoisting', 'unmentionable'].includes(type)));
 	}
