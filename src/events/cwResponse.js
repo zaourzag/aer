@@ -5,7 +5,9 @@ module.exports = class extends Event {
 	constructor(...args) {
 		super(...args, {
 			enabled: true,
-			once: false
+			once: false,
+			emitter: 'chatwatch',
+			name: 'response'
 		});
 	}
 
