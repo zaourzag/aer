@@ -12,7 +12,7 @@ module.exports = class extends Monitor {
 		});
 	}
 
-	run(msg) {
+	async run(msg) {
 		if (!msg.guild) return;
 		for (const obj of [msg.author, msg.member, msg.guild]) {
 			const cur = obj.settings.get('stats.messages');
