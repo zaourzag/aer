@@ -19,6 +19,7 @@ module.exports = class extends Command {
 			.setTitle(track.name)
 			.setDescription(track.artist.name)
 			.setURL(track.url)
+			.setThumbnail(track.artwork)
 			.setColor(msg.guild ? msg.guild.me.displayColor : 'ffaabb')
 			.setFooter(msg.language.get('COMMAND_KSOFT_POWEREDBY'));
 

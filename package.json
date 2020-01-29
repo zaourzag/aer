@@ -23,7 +23,7 @@
 		"@aero/chatwatch": "^1.2.1",
 		"@aero/dbio": "^1.0.0",
 		"@aero/drep": "^1.2.8",
-		"@aero/ksoft": "^3.1.4",
+		"@aero/ksoft": "^3.1.5",
 		"breadtags": "^2.1.0",
 		"canvas": "^2.6.1",
 		"canvas-constructor": "^3.1.0",
