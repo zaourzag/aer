@@ -22,7 +22,7 @@ On its own, Aero is pretty cool. But there's some tools we use to extend this ev
 Aero isn't built from scratch, there's a few libraries that we used to build Aero. The most important are:
 - [Klasa](https://klasa.js.org) - An object-oriented framework around discord.js which saves us from writing all the basics
 - [discord.js](https://discord.js.org) - A powerful and easy to use wrapper around the Discord API
-- [centra](https://git.aero.bot/forks/centra) - A powerful wrapper around http.request with a beautiful syntax
+- [centra](https://github.com/ethanent/centra) - A powerful wrapper around http.request with a beautiful syntax
 - [MongoDB](https://www.mongodb.com/) - A general purpose, document-based, distributed NoSQL database
 
 
