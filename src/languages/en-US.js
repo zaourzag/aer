@@ -209,6 +209,7 @@ module.exports = class extends Language {
 			COMMAND_LYRICS_DESCRIPTION: 'Fetches lyrics for a song from api.ksoft.si',
 			COMMAND_POLL_TOO_MANY_OPTIONS: 'The maximum amount of options is **10**',
 			COMMAND_POLL_TOO_FEW_OPTIONS: 'The minimum amount of options required is **2**',
+			COMMAND_POLL_EMBED_FOOTER: 'React to one of the emotes below to vote.',
 
 			// social commands
 			COMMAND_DAILY_DESCRIPTION: 'Claim your daily points! Add --reminder to be reminded in 12h.',

@@ -11,18 +11,7 @@ module.exports = class extends Command {
             aliases: ['poll'],
             requiredPermissions: ['EMBED_LINKS']
         });
-        this.numbers = {
-            1: poll.one,
-            2: poll.two,
-            3: poll.three,
-            4: poll.four,
-            5: poll.five,
-            6: poll.six,
-            7: poll.seven,
-            8: poll.eight,
-            9: poll.nine,
-            10: poll.ten
-        }
+        this.numbers = poll
     }
 
     async run(msg, [options]) {
@@ -35,9 +24,9 @@ module.exports = class extends Command {
         }
         const embed = new MessageEmbed()
             .setColor(msg.guild ? msg.guild.me.displayColor : 'random')
-            .setFooter('React to one of the emotes below to vote.');
+            .setFooter(msg.language.get('COMMAND_POLL_EMBED_FOOTER'));
         for (let idx = 0; idx < opt.length; idx++)
-            embed.setDescription(opt.map((option, idx) => `${idx + 1}. ${option}`).join(`\n`));
+            embed.setDescription(opt.map((option, idx) => `${idx + 1}. ${option}`).join('\n'));
 
         msg.channel.sendEmbed(embed).then(async message => {
             for (let i = 0; i < opt.length; i++) {
