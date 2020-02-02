@@ -22,27 +22,26 @@ module.exports = class extends Command {
             8: poll.eight,
             9: poll.nine,
             10: poll.ten
-        };
+        }
     }
 
     async run(msg, [options]) {
-        const opt = options.split(', ');
-        if (options.length > 10) {
-            return msg.send('The maximum amount of options is **10**');
+        const opt = options.split(/,\s*/);
+        if (opt.length > 10) {
+            return msg.send(msg.language.get('COMMAND_POLL_TOO_MANY_OPTIONS'));
         }
-        if (options.length < 2) {
-            return msg.send('The minimum amount of options required is **2**');
+        if (opt.length < 2) {
+            return msg.send(msg.language.get('COMMAND_POLL_TOO_FEW_OPTIONS'));
         }
         const embed = new MessageEmbed()
-            .setTitle(`${this.client.user.username} poll`)
-            .setColor(msg.guild ? msg.guild.me.displayColor : 'ffaabb')
-            .setFooter(`React to one of the emotes below to vote.`);
-        for (let i = 0; i < opt.length; i++);
-        embed.setDescription(opt.map((option, i) => `${i + 1}. ${option}`).join(`\n`));
+            .setColor(msg.guild ? msg.guild.me.displayColor : 'random')
+            .setFooter('React to one of the emotes below to vote.');
+        for (let idx = 0; idx < opt.length; idx++)
+            embed.setDescription(opt.map((option, idx) => `${idx + 1}. ${option}`).join(`\n`));
 
         msg.channel.sendEmbed(embed).then(async message => {
             for (let i = 0; i < opt.length; i++) {
-                await message.react(`${this.numbers[i + 1]}`);
+                await message.react(this.numbers[i + 1]);
             }
         });
     }
