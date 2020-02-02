@@ -1,5 +1,6 @@
 const { Command } = require('klasa');
 const { MessageEmbed } = require('discord.js');
+const { poll } = require('../../../lib/util/constants');
 
 module.exports = class extends Command {
 
@@ -10,11 +11,22 @@ module.exports = class extends Command {
             aliases: ['poll'],
             requiredPermissions: ['EMBED_LINKS']
         });
+        this.numbers = {
+            1: poll.one,
+            2: poll.two,
+            3: poll.three,
+            4: poll.four,
+            5: poll.five,
+            6: poll.six,
+            7: poll.seven,
+            8: poll.eight,
+            9: poll.nine,
+            10: poll.ten
+        };
     }
 
     async run(msg, [options]) {
         const opt = options.split(', ');
-        this.numbers = { 1: '1️⃣', 2: '2️⃣', 3: '3️⃣', 4: '4️⃣', 5: '5️⃣', 6: '6️⃣', 7: '7️⃣', 8: '8️⃣', 9: '9️⃣', 10: '🔟'};
         if (options.length > 10) {
             return msg.send('The maximum amount of options is **10**');
         }
