@@ -38,7 +38,7 @@ If you're taking code from this project, or are working on a project inspired by
 ### Idea
 `This project was inspired by [Aero](https://aero.bot).`
 
-### Images/Avatars/Icons/Namess
+### Images/Avatars/Icons/Names
 **We exclusively own the copyright to all artworks - they shall not be reused without prior written consent from the copyright holder. Further, you're not allowed to use the name of our project or its contributors to endorse your own project, except as stated in the license.**
 
 Feel free to contact us about licensing at licensing@aero.bot
