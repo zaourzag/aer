@@ -18,10 +18,13 @@ module.exports = class extends Command {
         if (options.length > 10) {
             return msg.send('The maximum amount of options is **10**');
         }
+        if (options.length < 2) {
+            return msg.send('The minimum amount of options required is **2**');
+        }
         const embed = new MessageEmbed()
             .setTitle(`${this.client.user.username} poll`)
             .setColor(msg.guild ? msg.guild.me.displayColor : 'ffaabb')
-            .setFooter(`Poll created by ${msg.author.tag}`);
+            .setFooter(`React to one of the emotes below to vote.`);
         for (let i = 0; i < opt.length; i++);
         embed.setDescription(opt.map((option, i) => `${i + 1}. ${option}`).join(`\n`));
 
