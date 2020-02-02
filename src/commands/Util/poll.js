@@ -11,7 +11,7 @@ module.exports = class extends Command {
             aliases: ['poll'],
             requiredPermissions: ['EMBED_LINKS']
         });
-        this.numbers = poll
+        this.numbers = poll;
     }
 
     async run(msg, [options]) {
