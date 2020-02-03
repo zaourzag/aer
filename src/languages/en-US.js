@@ -16,7 +16,7 @@ module.exports = class extends Language {
 			COMMAND_CHOICE_REPLY: choices => `I think you should go with "${choices[Math.floor(Math.random() * choices.length)]}"`,
 			COMMAND_CHUCKNORRIS_DESCRIPTION: 'Sends a random Chuck Norris joke.',
 			COMMAND_CHUCKNORRIS_EXTENDEDHELP: 'Powered by https://api.chucknorris.io',
-
+            COMMAND_JOKE_DESCRIPTION: 'What do you call a cow with two legs?,Lean beef.',
 			// games
 			COMMAND_GAME_CHALLENGE: (user) => `${user}, do you accept this challenge?`,
 			COMMAND_GAME_OCCURING: 'Only one game may be occuring per channel.',
