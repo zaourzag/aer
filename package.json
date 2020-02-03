@@ -20,10 +20,10 @@
 	},
 	"dependencies": {
 		"@aero/centra": "^1.0.1",
-		"@aero/chatwatch": "^1.2.1",
-		"@aero/dbio": "^1.0.0",
+		"@aero/chatwatch": "^1.2.2",
+		"@aero/dbio": "^1.0.2",
 		"@aero/drep": "^1.2.8",
-		"@aero/ksoft": "^3.1.5",
+		"@aero/ksoft": "^3.1.6",
 		"@aero/xkcd": "^1.0.0",
 		"breadtags": "^2.1.0",
 		"canvas": "^2.6.1",
