@@ -7,8 +7,9 @@ module.exports = class extends Command {
 	constructor(...args) {
 		super(...args, {
 			aliases: ['joke'],
-			description: language => language.get('COMMAND_joke_DESCRIPTION')
+			description: language => language.get('COMMAND_JOKE_DESCRIPTION')
 		});
+
 	}
 
 	async run(msg) {
