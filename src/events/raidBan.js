@@ -14,7 +14,7 @@ module.exports = class extends Event {
 		message.edit(message.language.get('EVENT_RAID_PREVENTED'), message.guild.constructMessage());
 		for (const raider of message.guild.raiderCache.values()) {
 			message.guild.modCache.add(raider);
-			message.guild.ban(raider, { days: 1, reason: message.language.get('EVENT_RAID_BANREASON') }).catch(noop);
+			message.guild.members.ban(raider, { days: 1, reason: message.language.get('EVENT_RAID_BANREASON') }).catch(noop);
 		}
 		message.guild.log.bulkBan({ users: [...message.guild.raiderCache.values()], moderator, reason: 'Automatic raid prevention' });
 		message.guild.raidReset();
