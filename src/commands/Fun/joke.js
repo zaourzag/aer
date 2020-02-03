@@ -1,14 +1,19 @@
-const req = require('@aero/centra')
-const Discord = require("discord.js")
-async
-if (command === "joke"){
-let getjoke - async () => {let response = await req('https://official-joke-api.appspot.com/random_joke').send().then(res => res.json) ;
+const { Command } = require('klasa');
+const req = require('@aero/centra');
+const { bold } = require('discord-md-tags');
 
-let joke = response.data 
-return joke
+module.exports = class extends Command {
 
-}{
-let jokevalue = await getjoke();
-msg.reply(`here's your joke \n $jokevalue.setup \n \n $jokevalue.punchline`);
+	constructor(...args) {
+		super(...args, {
+			aliases: ['yomama'],
+			description: language => language.get('COMMAND_YOMAMMA_DESCRIPTION')
+		});
+	}
 
-}
+	async run(msg) {
+		const { json } = await req('https://official-joke-api.appspot.com/random_joke').send();
+		return msg.sendMessage(bold`📢  joke: \n  *${joke.setup}* \n \n ${joke.punchline}`);
+	}
+
+};
