@@ -6,8 +6,8 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['yomama'],
-			description: language => language.get('COMMAND_YOMAMMA_DESCRIPTION')
+			aliases: ['joke'],
+			description: language => language.get('COMMAND_joke_DESCRIPTION')
 		});
 	}
 
