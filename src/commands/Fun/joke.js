@@ -6,7 +6,6 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-		
 			description: language => language.get('COMMAND_JOKE_DESCRIPTION')
 		});
 
